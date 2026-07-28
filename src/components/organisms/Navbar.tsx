@@ -60,32 +60,27 @@ export default function Navbar() {
       key: "tech",
       label: "Tech Solutions",
       items: [
-        "Ready-to-Use IT Products",
-        "Custom App Development",
-        "Software & Cloud Licensing",
-      ].map((label) => ({
-        label,
-        // path: `/tech-solutions?type=${serviceToSlug(label)}`,
-        path: `/service`,
-      })),
+        { label: "Ready-to-Use IT Products", path: "/product" },
+        { label: "Custom App Development", path: "/app-development" },
+        { label: "Software & Cloud Licensing", path: "/certification" },
+      ],
     },
     {
       key: "advisory",
       label: "Advisory Support",
       items: [
-        "Support Advisory",
-        "Implementation & Support",
-        "IT Talent Placement",
-      ].map((label) => ({
-        label,
-        // path: `/tech-solutions?type=${serviceToSlug(label)}`,
-        path: `/service`,
-      })),
+        { label: "Support Advisory", path: "/tech-advisory" },
+        { label: "Implementation & Support", path: "/implementation-support" },
+        { label: "IT Talent Placement", path: "/talent-placement" },
+      ],
     },
     {
       key: "insights",
       label: "Insights",
-      items: [{ label: "Blogs", path: "/blog" }],
+      items: [
+        { label: "Case Studies", path: "/case-study" },
+        { label: "Article", path: "/article" },
+      ],
     },
   ];
 
