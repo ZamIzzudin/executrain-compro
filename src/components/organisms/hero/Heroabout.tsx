@@ -2,9 +2,9 @@
 
 "use client";
 
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { useAssetContext } from "@/components/AssetProvider";
+import { useAssetContext } from "@/layouts/AssetProvider";
 
 export default function HeroAbout() {
   const { getStaticAsset } = useAssetContext();
@@ -22,11 +22,11 @@ export default function HeroAbout() {
     >
       <div className="flex flex-col gap-5 items-start max-w-full">
         <div className="font-[500] flex gap-3">
-          <Link className="opacity-50" href="/">
+          <Link className="opacity-50" to="/">
             Home
           </Link>
           <ChevronRight />
-          <Link href="/contact">About</Link>
+          <Link to="/contact">About</Link>
         </div>
         <div className="pb-10 border-b space-y-4">
           <h1 className="text-4xl font-semibold">About Us</h1>

@@ -31,7 +31,6 @@ export default function AboutSection() {
         <ServiceCard />
       </div>
       <div className="space-y-5">
-        <PartnerList />
         <TechList />
       </div>
     </section>
@@ -53,7 +52,14 @@ export function AboutDetailSection() {
 export function AboutSectionMini() {
   return (
     <section className="min-w-[98dvw] max-w-[99dvw] grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] gap-10 py-[5%]">
-      <PartnerList />
+      <TechList />
+    </section>
+  );
+}
+
+export function AboutSectionFlat() {
+  return (
+    <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] gap-10 py-[5%]">
       <TechList />
     </section>
   );
@@ -161,7 +167,7 @@ function ServiceCard() {
       <span className="text-xs text-gray-600 block">WHAT WE CAN DO</span>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex flex-col">
-          <img src={AboutA} alt="microsoft logo" />
+          <img src={AboutA} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500 max-w-[80%]">
               Building Real Skills
@@ -173,7 +179,7 @@ function ServiceCard() {
           </div>
         </div>
         <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex flex-col">
-          <img src={AboutB} alt="microsoft logo" />
+          <img src={AboutB} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500">
               Easing Everyday Work
@@ -185,7 +191,7 @@ function ServiceCard() {
           </div>
         </div>
         <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex flex-col">
-          <img src={AboutC} alt="microsoft logo" />
+          <img src={AboutC} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500">
               Reliable IT Consulting
@@ -201,10 +207,10 @@ function ServiceCard() {
   );
 }
 
-function PartnerList() {
+function TechList() {
   return (
     <div className="space-y-3">
-      <span className="text-xs text-gray-600 block">OUR PARTNER</span>
+      <span className="text-xs text-gray-600 block">TECHNOLOGY BEHIND US</span>
       <div className="flex flex-wrap justify-evenly gap-4">
         <div className="min-h-[100px] flex items-center">
           <img src={Microsoft} alt="microsoft logo" />
@@ -219,14 +225,6 @@ function PartnerList() {
           <img src={Pearson} alt="microsoft logo" />
         </div>
       </div>
-    </div>
-  );
-}
-
-function TechList() {
-  return (
-    <div className="space-y-3">
-      <span className="text-xs text-gray-600 block">TECHNOLOGY WE USE</span>
       <div className="flex flex-wrap justify-evenly gap-1">
         <div className="min-h-[100px] flex items-center">
           <img src={Power} alt="microsoft logo" />
