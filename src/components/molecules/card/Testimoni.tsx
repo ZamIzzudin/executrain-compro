@@ -1,0 +1,42 @@
+/** @format */
+import { type TestimoniProps } from "@/utils/types/testimoni";
+
+interface CompProps {
+  data: TestimoniProps;
+}
+
+export default function TestimoniCard({ data }: CompProps) {
+  return (
+    <div className="flex flex-col justify-between h-full">
+      {/* Quote Text */}
+      <p className="text-[15px] md:text-[16px] text-[#333] leading-relaxed mb-6">
+        &quot;{data?.testimonial}&quot;
+      </p>
+
+      {/* Profile Section */}
+      <div className="flex items-center gap-4">
+        {/* Avatar with red accent */}
+        <div className="relative w-[50px] h-[50px] flex-shrink-0">
+          <div
+            className="w-full h-full rounded-lg bg-gray-200"
+            style={{
+              backgroundImage: `url(${data?.photo?.url || ""})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
+
+        {/* Info Text */}
+        <div className="flex flex-col items-start">
+          <span className="font-bold text-[#111] text-[14px]">
+            {data?.person_name}
+          </span>
+          <span className="text-[12px] text-[#888] text-start">
+            {data?.person_title}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
