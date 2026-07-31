@@ -25,14 +25,10 @@ import Mission from "@/assets/v2/about-5.png";
 
 export default function AboutSection() {
   return (
-    <section className="min-w-[98dvw] max-w-[99dvw] grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] gap-10 py-[5%] bg-gradient-to-b from-white from-70% to-primary-100">
-      <div className="space-y-5">
-        <AboutCard />
-        <ServiceCard />
-      </div>
-      <div className="space-y-5">
-        <TechList />
-      </div>
+    <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] gap-10 py-[5%] bg-gradient-to-b from-white from-70% to-primary-100 space-y-5">
+      <ServiceCard />
+      <AboutCard />
+      <TechList />
     </section>
   );
 }
@@ -165,8 +161,8 @@ function ServiceCard() {
   return (
     <div className="bg-[#ECECEC] p-6 space-y-3 rounded-xl drop-shadow-md">
       <span className="text-xs text-gray-600 block">WHAT WE CAN DO</span>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex flex-col">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center items-center flex">
           <img src={AboutA} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500 max-w-[80%]">
@@ -178,7 +174,7 @@ function ServiceCard() {
             </p>
           </div>
         </div>
-        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex flex-col">
+        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex items-center">
           <img src={AboutB} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500">
@@ -190,7 +186,7 @@ function ServiceCard() {
             </p>
           </div>
         </div>
-        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex flex-col">
+        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex items-center">
           <img src={AboutC} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500">

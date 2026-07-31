@@ -36,3 +36,111 @@ body {
 .pause-animation:hover {
   animation-play-state: paused;
 }
+
+/* Global SearchBar variants */
+.search-bar-default {
+  /* Default styling: standard gray border, white background */
+}
+
+.search-bar-glass.ant-input-affix-wrapper,
+.search-bar-glass.ant-input-affix-wrapper:hover,
+.search-bar-glass.ant-input-affix-wrapper-focused {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(8px);
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.search-bar-glass input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Global FilterDropdown variants */
+.filter-dropdown-primary .ant-select-selector {
+  background-color: #be0f34 !important;
+  border-color: #be0f34 !important;
+  border-radius: 9999px !important;
+}
+
+.filter-dropdown-primary .ant-select-selection-placeholder,
+.filter-dropdown-primary .ant-select-selection-item {
+  color: #ffffff !important;
+}
+
+.filter-dropdown-primary .ant-select-arrow {
+  color: #ffffff !important;
+}
+
+/* Popup dropdown items: consistent styling for all FilterDropdown instances */
+.filter-dropdown-popup .ant-select-item {
+  color: #1f2937 !important;
+}
+
+.filter-dropdown-popup .ant-select-item-option-active:not(.ant-select-item-option-selected) {
+  background-color: #f5f5f5 !important;
+}
+
+.filter-dropdown-popup .ant-select-item-option-selected {
+  color: #be0f34 !important;
+  font-weight: 600;
+  background-color: #fbe6ea !important;
+}
+
+/* Legacy class support: freetrial-category-select -> filter-dropdown-primary */
+.freetrial-category-select .ant-select-arrow {
+  color: #ffffff !important;
+}
+
+.freetrial-category-popup .ant-select-item {
+  color: #1f2937 !important;
+}
+
+.freetrial-category-popup .ant-select-item-option-active:not(.ant-select-item-option-selected) {
+  background-color: #f5f5f5 !important;
+}
+
+.freetrial-category-popup .ant-select-item-option-selected {
+  color: #be0f34 !important;
+  font-weight: 600;
+  background-color: #fbe6ea !important;
+}
+
+/* Legacy class support: catalog-filter-* */
+.catalog-filter-input.ant-input-affix-wrapper,
+.catalog-filter-input.ant-input-affix-wrapper:hover,
+.catalog-filter-input.ant-input-affix-wrapper-focused {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(8px);
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.catalog-filter-input input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.catalog-filter-select .ant-select-selector {
+  background-color: #be0f34 !important;
+  border-color: #be0f34 !important;
+}
+
+.catalog-filter-select .ant-select-selection-placeholder,
+.catalog-filter-select .ant-select-selection-item {
+  color: #ffffff !important;
+}
+
+.catalog-filter-select .ant-select-arrow {
+  color: #ffffff !important;
+}
+
+.catalog-filter-popup .ant-select-item {
+  color: #1f2937 !important;
+}
+
+.catalog-filter-popup .ant-select-item-option-active:not(.ant-select-item-option-selected) {
+  background-color: #f5f5f5 !important;
+}
+
+.catalog-filter-popup .ant-select-item-option-selected {
+  color: #be0f34 !important;
+  font-weight: 600;
+  background-color: #fbe6ea !important;
+}

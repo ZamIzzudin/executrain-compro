@@ -13,6 +13,7 @@ export interface ServiceData {
     public_id: string;
     url: string;
   };
+  slug:string;
   created_at: Date;
   updated_at: Date;
 }

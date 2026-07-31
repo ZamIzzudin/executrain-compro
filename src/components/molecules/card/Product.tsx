@@ -8,19 +8,30 @@ import { Tooltip } from "antd";
 
 import HeroBG from "@/assets/banner.jpg";
 
-import { type ProductProps } from "@/utils/types/strategic-solution";
+export interface ProductCardData {
+  _id: string;
+  product_name: string;
+  product_category: string;
+  skill_level: string;
+  max_participant: number;
+  banner?: {
+    public_id: string;
+    url: string;
+  };
+}
 
 export default function ProductCard({
   data,
+  basePath = "/strategic-solution",
 }: Readonly<{
-  data: ProductProps;
+  data: ProductCardData;
+  basePath?: string;
 }>) {
   const navigate = useNavigate();
-  const isITTraining = data?.product_category?.toLowerCase() === "it_training";
 
   return (
     <div
-      onClick={() => navigate(`/strategic-solution/${data._id}`)}
+      onClick={() => navigate(`${basePath}/${data._id}`)}
       className="rounded-4xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] cursor-pointer"
     >
       <div className="h-36 md:h-48 bg-slate-100 overflow-hidden rounded-4xl">
@@ -31,22 +42,18 @@ export default function ProductCard({
         />
       </div>
       <div className="p-5 space-y-2">
-        {isITTraining && (
-          <div className="flex gap-3 items-center">
-            <div className="flex items-center gap-1">
-              <Users size={14} color="#BE0F34" />
-              <span className="text-sm font-medium">
-                {data?.max_participant}
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <AwardIcon size={14} color="#BE0F34" />
-              <span className="text-sm capitalize font-medium">
-                {data?.skill_level?.replace("_", " ").toLowerCase() || "-"}
-              </span>
-            </div>
+        <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-1">
+            <Users size={14} color="#BE0F34" />
+            <span className="text-sm font-medium">{data?.max_participant}</span>
           </div>
-        )}
+          <div className="flex items-center gap-1">
+            <AwardIcon size={14} color="#BE0F34" />
+            <span className="text-sm capitalize font-medium">
+              {data?.skill_level?.replace("_", " ").toLowerCase() || "-"}
+            </span>
+          </div>
+        </div>
         <div className="flex justify-between items-start">
           <Tooltip placement="top" title={data?.product_name || "-"}>
             <h3 className="text-base font-medium text-left max-w-full truncate">

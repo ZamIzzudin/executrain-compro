@@ -35,7 +35,7 @@ export default function TestimoniList() {
   }, [testimonial]);
 
   return (
-    <section className="mb-10 w-full space-y-10 bg-gradient-to-b from-white from-50% to-gray-200 pb-10">
+    <section className="my-10 w-full space-y-10 pb-10">
       <div className="text-black w-full">
         {/* Center-aligned Heading */}
         <h2 className="w-full font-semibold text-4xl text-center text-[#111] mb-12 leading-8 md:leading-13">

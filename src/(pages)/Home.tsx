@@ -20,9 +20,9 @@ export default function Home() {
       <GallerySlider data={gallery} isLoading={galleryLoading} />
       <AboutSection />
       <FrameworkBanner />
-      <TestimoniList />
       <ServiceList />
       <PartnerList data={partner} isLoading={partnerLoading} />
+      <TestimoniList />
       <CTA />
     </section>
   );
