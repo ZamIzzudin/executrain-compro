@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CatalogList from "@/components/organisms/CatalogList";
 import CTA from "@/components/organisms/CTA";
-import CatalogFilter from "@/components/molecules/CatalogFilter";
+import CatalogFilter from "@/components/molecules/filter/CatalogFilter";
 
 const FRAMEWORK_LIST = [
   "CyberSecurity Framework",

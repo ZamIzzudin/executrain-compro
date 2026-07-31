@@ -4,7 +4,7 @@
 
 import { useState, type ReactNode } from "react";
 
-import ProductCard from "../molecules/card/Product";
+import CourseCard from "../molecules/card/Course";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
 
@@ -49,7 +49,7 @@ export default function CatalogList({
     }
     return products.slice(0, 3).map((each: FreeTrialProductProps) => (
       <StaggerItem key={each._id} direction="up">
-        <ProductCard data={each} basePath="/free-trial" />
+        <CourseCard data={each} basePath="/free-trial" />
       </StaggerItem>
     ));
   };
@@ -57,9 +57,7 @@ export default function CatalogList({
   return (
     <section className="px-[7%] lg:px-[10%] w-full">
       <FadeInUp delay={0.1} duration={0.5}>
-        <h2 className="font-semibold text-[28px] md:text-[36px] mb-5 capitalize">
-          {name}
-        </h2>
+        <h2 className="font-semibold text-2xl mb-5 capitalize">{name}</h2>
       </FadeInUp>
 
       {/* Product Grid */}

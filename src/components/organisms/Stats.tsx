@@ -1,4 +1,4 @@
-import CountUp from "../atoms/countup";
+import CountUp from "../atoms/Countup";
 
 import { useAssetContext } from "@/layouts/AssetProvider";
 

@@ -3,7 +3,7 @@
 
 import React from "react";
 
-import CountUp from "../atoms/countup";
+import CountUp from "../atoms/Countup";
 import { PartnerLogoSkeleton } from "./Skeleton";
 import { FadeInUp, FadeInDown } from "../atoms/Motion";
 

@@ -4,7 +4,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 
-import ProductCard from "../molecules/card/Product";
+import ProductCard from "../molecules/card/Course";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
 
@@ -75,9 +75,7 @@ export default function FreeTrialList() {
   return (
     <section className="px-[7%] lg:px-[10%] py-[5%] w-full">
       <FadeInUp delay={0.1} duration={0.5}>
-        <h2 className="font-semibold text-[28px] md:text-[36px] mb-5">
-          Class Catalog
-        </h2>
+        <h2 className="font-semibold text-2xl mb-5">Class Catalog</h2>
       </FadeInUp>
 
       {/* Search & Filter */}

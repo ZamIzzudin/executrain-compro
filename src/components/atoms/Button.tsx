@@ -14,7 +14,7 @@ const bgColor = {
 
 const textColor = {
   primary: "text-white",
-  default: "text-black",
+  default: "text-black text-primary-500",
   disable: "text-slate-500",
   "outline-white": "text-white",
   "outline-primary": "text-primary-500",

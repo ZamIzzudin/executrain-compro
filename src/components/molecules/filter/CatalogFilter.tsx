@@ -2,8 +2,8 @@
 
 "use client";
 
-import SearchBar from "../atoms/SearchBar";
-import FilterDropdown from "../atoms/FilterDropdown";
+import SearchBar from "../../atoms/SearchBar";
+import FilterDropdown from "../../atoms/FilterDropdown";
 
 const CATEGORIES: { label: string; value?: string }[] = [
   { label: "All Categories" },

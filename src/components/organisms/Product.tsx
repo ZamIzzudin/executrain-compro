@@ -4,7 +4,7 @@
 
 import { useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
-import ProductCard from "../molecules/card/Product";
+import CourseCard from "../molecules/card/Course";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
 
@@ -36,7 +36,7 @@ export default function ProductList({
         ) : (
           data.map((each: ProductProps, index: number) => (
             <StaggerItem key={index} direction="up">
-              <ProductCard data={each} />
+              <CourseCard data={each} />
             </StaggerItem>
           ))
         )}
