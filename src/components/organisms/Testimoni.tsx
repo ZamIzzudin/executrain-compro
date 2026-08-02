@@ -38,7 +38,7 @@ export default function TestimoniList() {
     <section className="my-10 w-full space-y-10 pb-10">
       <div className="text-black w-full">
         {/* Center-aligned Heading */}
-        <h2 className="w-full font-semibold text-4xl text-center text-[#111] mb-12 leading-8 md:leading-13">
+        <h2 className="w-full font-semibold text-2xl md:text-3xl lg:text-4xl text-center text-[#111] mb-8 md:mb-12 leading-8 md:leading-13">
           What They Say About Us
         </h2>
 

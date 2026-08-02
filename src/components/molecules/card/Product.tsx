@@ -15,7 +15,10 @@ export default function ProductCard({
   const navigate = useNavigate();
 
   return (
-    <div className="rounded-4xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] cursor-pointer">
+    <div
+      onClick={() => navigate(`${basePath}/${data._id}`)}
+      className="rounded-4xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] cursor-pointer"
+    >
       <div className="h-36 md:h-48 bg-slate-100 overflow-hidden rounded-4xl">
         <img
           src={data?.banner?.url || HeroBG}
@@ -47,7 +50,7 @@ export default function ProductCard({
           <Button
             label="View Project Detail"
             icon={<ArrowRightIcon />}
-            onClick={() => navigate(basePath)}
+            onClick={() => navigate(`${basePath}/${data._id}`)}
           />
         </div>
       </div>

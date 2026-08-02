@@ -25,7 +25,7 @@ import Mission from "@/assets/v2/about-5.png";
 
 export default function AboutSection() {
   return (
-    <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] gap-10 py-[5%] bg-gradient-to-b from-white from-70% to-primary-100 space-y-5">
+    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%] bg-gradient-to-b from-white from-70% to-primary-100 space-y-5">
       <ServiceCard />
       <AboutCard />
       <TechList />
@@ -35,7 +35,7 @@ export default function AboutSection() {
 
 export function AboutDetailSection() {
   return (
-    <section className="min-w-[98dvw] max-w-[99dvw] grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] gap-10 py-[5%] items-center">
+    <section className="w-full grid grid-cols-1 md:grid-cols-2 px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%] items-center">
       <div className="space-y-5">
         <AboutDetailCard />
         <VisionCard />
@@ -47,7 +47,7 @@ export function AboutDetailSection() {
 
 export function AboutSectionMini() {
   return (
-    <section className="min-w-[98dvw] max-w-[99dvw] grid grid-cols-1 md:grid-cols-2 px-[7%] lg:px-[10%] gap-10 py-[5%]">
+    <section className="w-full grid grid-cols-1 md:grid-cols-2 px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%]">
       <TechList />
     </section>
   );
@@ -55,7 +55,7 @@ export function AboutSectionMini() {
 
 export function AboutSectionFlat() {
   return (
-    <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] gap-10 py-[5%]">
+    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%]">
       <TechList />
     </section>
   );
@@ -146,9 +146,9 @@ function AwardCard() {
         ].map((each: string) => (
           <div
             key={each}
-            className="flex gap-3 text-primary-500 text-sm items-center shadow-lg border border-gray-200 px-4 py-3 rounded-full"
+            className="flex gap-3 text-primary-500 text-sm items-center shadow-lg border border-gray-200 px-4 py-3 rounded-lg md:rounded-full"
           >
-            <AwardIcon size={20} />
+            <AwardIcon size={20} className="shrink-0" />
             <p className="text-black">{each}</p>
           </div>
         ))}

@@ -23,7 +23,7 @@ export default function CTA() {
 
   return (
     <div className="w-full bg-gradient-to-b from-white to-primary-100 px-[5%] md:px-[7%] lg:px-[10%] text-center pb-[5%] flex flex-col items-center">
-      <h2 className="text-[32px] font-semibold">Ready to Train Your Team?</h2>
+      <h2 className="text-2xl md:text-[32px] font-semibold">Ready to Train Your Team?</h2>
       <p className="text-[14px] md:text-[16px] text-gray-600 mb-4">
         Get the full proposal and training details by clicking the button below.
       </p>

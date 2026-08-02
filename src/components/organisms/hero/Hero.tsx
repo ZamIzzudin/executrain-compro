@@ -37,7 +37,7 @@ export default function Hero() {
   }, [heroVideo, heroBackground]);
 
   return (
-    <div className="relative min-w-[99dvw] min-h-[105dvh] text-white flex items-end justify-start py-[50%] md:py-[7%] lg:py-[10%] px-[5%] md:px-[7%] lg:px-[10%] overflow-hidden">
+    <div className="relative w-full min-h-[85dvh] md:min-h-[105dvh] text-white flex items-end justify-start py-[30%] md:py-[7%] lg:py-[10%] px-[5%] md:px-[7%] lg:px-[10%] overflow-hidden">
       {/* Video Background with poster for seamless load (no image flash) */}
       <video
         ref={videoRef}

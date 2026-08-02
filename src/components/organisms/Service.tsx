@@ -34,7 +34,7 @@ export default function ServiceList() {
 
   if (isLoading) {
     return (
-      <div className="px-[7%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh]">
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] py-[5%] text-center w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh]">
         <h2 className="font-semibold text-[32px] md:text-[40px] lg:text-[49px] leading-10 md:leading-15">
           Our Business Solutions
         </h2>
@@ -53,7 +53,7 @@ export default function ServiceList() {
   return (
     <div className="pt-[3%] text-center w-full min-h-[30dvh] md:min-h-[50dvh]">
       <FadeInUp delay={0.1} duration={0.5}>
-        <h2 className="font-semibold text-[32px]">Our Business Solutions</h2>
+        <h2 className="font-semibold text-2xl md:text-[32px]">Our Business Solutions</h2>
       </FadeInUp>
       <FadeInUp delay={0.2} duration={0.5}>
         <h3 className="text-base text-gray-600">
@@ -71,7 +71,7 @@ export default function ServiceList() {
           id="service-detail"
           className="pt-5 px-[5%] md:px-[7%] lg:px-[10%] w-full"
         >
-          <div className="flex gap-2 items-center justify-center border-t pt-4 border-gray-300">
+          <div className="flex flex-wrap gap-2 items-center justify-center border-t pt-4 border-gray-300">
             {services.map((each: any) => {
               const isSelected = selected?._id === each._id;
 

@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#242424] ">
-      <div className="min-w-[98dvw] max-w-[99dvw] text-white grid grid-cols-1 md:grid-cols-3 px-[7%] lg:px-[10%] py-[3%] gap-10">
+      <div className="w-full text-white grid grid-cols-1 md:grid-cols-3 px-[5%] md:px-[7%] lg:px-[10%] py-[3%] gap-10">
         <div className="flex flex-col space-y-10 items-start md:items-start">
           <Link to="/">
             <img src="./logo.png" alt="logo" className="w-30 lg:w-50 h-auto" />

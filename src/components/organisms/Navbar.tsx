@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -18,6 +18,20 @@ export default function Navbar() {
   const [isInsightsOpen, setIsInsightsOpen] = useState(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Pages without a hero should always show a solid navbar
+  const noHeroMatches = [
+    useMatch("/free-trial/:id"),
+    useMatch("/strategic-solution/:id"),
+    useMatch("/product/:id"),
+    useMatch("/app-development/:id"),
+    useMatch("/certification/:id"),
+    useMatch("/article/:id"),
+    useMatch("/case-study/:id"),
+    useMatch("/contact"),
+  ];
+  const isNoHeroPage = noHeroMatches.some(Boolean);
+  const showSolid = isScrolled || isNoHeroPage;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +104,7 @@ export default function Navbar() {
         {/* Navbar */}
         <div
           className={`flex justify-between text-white items-center px-[3%] md:px-[7%] lg:px-[3%] py-2 transition-all duration-300 ${
-            isScrolled
+            showSolid
               ? "bg-[#be0f34] shadow-lg backdrop-blur-md"
               : "bg-primary-500 md:bg-transparent"
           }`}
@@ -99,7 +113,7 @@ export default function Navbar() {
             <img
               src="/logo.png"
               alt="logo"
-              className={`duration-300 py-3 h-auto ${isScrolled ? "w-[60px] lg:w-[120px]" : "w-[120px] lg:w-[200px]"}`}
+              className={`duration-300 py-3 h-auto ${showSolid ? "w-[60px] lg:w-[120px]" : "w-[120px] lg:w-[200px]"}`}
             />
           </Link>
 

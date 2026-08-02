@@ -48,7 +48,7 @@ export default function Certification() {
         description="At our company, we offer top-notch software and licensing services, partnering with industry giants like Microsoft and Google."
         path="/certification"
       />
-      <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] py-[5%] items-center">
+      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] items-center">
         <FadeInUp delay={0.2} duration={0.5} className="text-center">
           <h3 className="text-base">
             Here are some{" "}
@@ -88,9 +88,9 @@ export default function Certification() {
           backgroundPosition: "center",
         }}
       >
-        <div className="text-white">
-          <span className="text-base">FAQ & COMPLIANCE GUIDE</span>
-          <h4 className="text-3xl font-semibold">Before You Commit.</h4>
+        <div className="text-white mb-4 lg:mb-0">
+          <span className="text-xs md:text-base">FAQ & COMPLIANCE GUIDE</span>
+          <h4 className="text-xl md:text-3xl font-semibold">Before You Commit.</h4>
         </div>
         <div className="h-full flex items-end w-full col-span-2">
           <div className="w-full flex flex-col gap-3">

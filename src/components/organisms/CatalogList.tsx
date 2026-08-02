@@ -49,13 +49,13 @@ export default function CatalogList({
     }
     return products.slice(0, 3).map((each: FreeTrialProductProps) => (
       <StaggerItem key={each._id} direction="up">
-        <CourseCard data={each} basePath="/free-trial" />
+        <CourseCard data={each} basePath="/strategic-solution" />
       </StaggerItem>
     ));
   };
 
   return (
-    <section className="px-[7%] lg:px-[10%] w-full">
+    <section className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
       <FadeInUp delay={0.1} duration={0.5}>
         <h2 className="font-semibold text-2xl mb-5 capitalize">{name}</h2>
       </FadeInUp>

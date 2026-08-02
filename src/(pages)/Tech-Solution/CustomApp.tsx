@@ -28,13 +28,13 @@ export default function CustomApp() {
         description="We specialize in designing and building applications that are uniquely tailored to your organization's needs."
         path="/app-development"
       />
-      <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] pt-[5%] items-center">
-        <div className="bg-[#ECECEC] p-6 space-y-5 rounded-xl drop-shadow-md ">
+      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] items-center">
+        <div className="bg-[#ECECEC] p-5 md:p-6 space-y-5 rounded-xl drop-shadow-md ">
           <div className="space-y-2">
             <span className="text-xs text-gray-600 block">WHAT WE BUILD</span>
-            <h3 className="text-xl font-semibold">Development Capabilities </h3>
+            <h3 className="text-lg md:text-xl font-semibold">Development Capabilities </h3>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 flex-col flex">
               <img src={AboutA} alt="microsoft logo" className="w-[30%]" />
               <h2 className="font-semibold text-primary-500">Web Platforms</h2>
@@ -71,7 +71,7 @@ export default function CustomApp() {
         </div>
       </section>
 
-      <section className="min-w-[98dvw] max-w-[99dvw] px-[7%] lg:px-[10%] py-[5%] items-center">
+      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] items-center">
         <FadeInUp delay={0.2} duration={0.5} className="text-center">
           <h3 className="text-base">
             Here are some{" "}
@@ -102,7 +102,7 @@ export default function CustomApp() {
       </section>
 
       <section className="pb-[5%]">
-        <ProductList name="Our Finished Works Catalog" type={"it_training"}>
+        <ProductList name="Our Finished Works Catalog" type={"it_training"} basePath="/app-development">
           <ProductFilter
             techValue={tech}
             deployValue={deployment}

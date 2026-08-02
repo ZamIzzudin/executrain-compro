@@ -32,11 +32,11 @@ export function servicesToNavFormat(services: any[]) {
   }));
 }
 
-export const formatDate = (date?: string | Date) => {
+export const formatDate = (date: Date | number = new Date()) => {
   if (!date) return "-";
   return new Date(date).toLocaleDateString("id-ID", {
+    month: "short",
     day: "numeric",
-    month: "long",
     year: "numeric",
   });
 };

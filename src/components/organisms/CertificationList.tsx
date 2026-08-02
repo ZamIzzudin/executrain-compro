@@ -50,17 +50,17 @@ export default function CertificationList({
     }
     return products.slice(0, 6).map((each: FreeTrialProductProps) => (
       <StaggerItem key={each._id} direction="up">
-        <ProductCard data={each} basePath="/free-trial" />
+        <ProductCard data={each} basePath="/certification" />
       </StaggerItem>
     ));
   };
 
   return (
-    <section className="px-[7%] lg:px-[10%] w-full">
+    <section className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
       <FadeInUp
         delay={0.1}
         duration={0.5}
-        className="flex items-center justify-between mb-5"
+        className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-5"
       >
         <h2 className="font-semibold text-2xl capitalize">{name}</h2>
         {children}
