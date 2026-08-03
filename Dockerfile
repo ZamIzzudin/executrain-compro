@@ -3,9 +3,14 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies (use ci for reproducible installs)
+# Install dependencies.
+# NOTE: npm install (not npm ci) because this project depends on
+# platform-specific optional packages (rolldown/tailwindcss native bindings,
+# @emnapi/*) that differ between the Windows host where the lockfile is
+# committed and the Alpine build container. npm install resolves the correct
+# Alpine/linux variants, while npm ci would fail on the missing entries.
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm install --no-audit --no-fund
 
 # Copy source and build.
 # VITE_API_BASE_URL is baked into the bundle at build time.
