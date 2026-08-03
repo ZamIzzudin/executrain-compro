@@ -8,17 +8,12 @@ import CertificationList from "@/components/organisms/CertificationList";
 import CertificationFilter from "@/components/molecules/filter/CertificationFIlter";
 import CTA from "@/components/organisms/CTA";
 
-import { useAssetContext } from "@/layouts/AssetProvider";
-
 import Tableu from "@/assets/dummy/tableu.png";
 import Pearson from "@/assets/dummy/pearson.png";
 import Microsoft from "@/assets/dummy/microsoft.png";
 import Google from "@/assets/dummy/google.png";
 
 export default function Certification() {
-  const { getStaticAsset } = useAssetContext();
-  const bannerPlain = getStaticAsset("banner_plain");
-
   const [tech, setTech] = useState<string | undefined>(undefined);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -83,14 +78,16 @@ export default function Certification() {
       <div
         className="px-[5%] md:px-[7%] lg:px-[10%] w-full py-5 grid grid-cols-1 lg:grid-cols-3 items-center"
         style={{
-          backgroundImage: `url('${bannerPlain}'), url('./statHero.jpg')`,
+          backgroundImage: `linear-gradient(#242424CC, #242424CC), url('./statHero.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         <div className="text-white mb-4 lg:mb-0">
           <span className="text-xs md:text-base">FAQ & COMPLIANCE GUIDE</span>
-          <h4 className="text-xl md:text-3xl font-semibold">Before You Commit.</h4>
+          <h4 className="text-xl md:text-3xl font-semibold">
+            Before You Commit.
+          </h4>
         </div>
         <div className="h-full flex items-end w-full col-span-2">
           <div className="w-full flex flex-col gap-3">

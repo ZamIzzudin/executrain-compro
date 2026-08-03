@@ -11,6 +11,7 @@ export interface SearchBarProps {
   placeholder?: string;
   variant?: SearchBarVariant;
   className?: string;
+  label?: string;
 }
 
 const VARIANT_CLASS: Record<SearchBarVariant, string> = {
@@ -25,16 +26,30 @@ export default function SearchBar({
   placeholder = "Search...",
   variant = "default",
   className = "",
+  label,
 }: Readonly<SearchBarProps>) {
-  return (
+  const renderInput = (inputClass: string) => (
     <Input
       allowClear
       size="large"
       placeholder={placeholder}
-      prefix={<SearchIcon size={16} className="text-slate-400" />}
+      suffix={<SearchIcon size={16} className="text-slate-400" />}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className={`${VARIANT_CLASS[variant]} rounded-full! ${className}`}
+      className={`${VARIANT_CLASS[variant]} rounded-full! ${inputClass}`}
     />
   );
+
+  if (label) {
+    return (
+      <div className={className}>
+        <label className="text-xs font-medium mb-1.5 block opacity-80">
+          {label}
+        </label>
+        {renderInput("w-full")}
+      </div>
+    );
+  }
+
+  return renderInput(className);
 }

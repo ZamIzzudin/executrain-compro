@@ -37,31 +37,34 @@ export default function ArticleFilter({
   onSortChange,
 }: Readonly<ArticleFilterProps>) {
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center w-full max-w-4xl">
+    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-start w-full max-w-4xl">
       <SearchBar
+        label="Search"
         value={searchValue}
         onChange={onSearchChange}
         placeholder="Search for article..."
         variant="glass"
-        className="catalog-filter-input flex-1"
+        className="flex-1"
       />
 
       <FilterDropdown
+        label="Category"
         value={categoryValue}
         onChange={onCategoryChange}
         options={CATEGORIES}
         placeholder="All Categories"
         variant="primary"
-        className="catalog-filter-select w-full md:w-52"
+        className="w-full md:w-52"
       />
 
       <FilterDropdown
+        label="Sort"
         value={sortValue}
         onChange={onSortChange}
         options={SORT}
         placeholder="Newest First"
         variant="primary"
-        className="catalog-filter-select w-full md:w-52"
+        className="w-full md:w-52"
       />
     </div>
   );

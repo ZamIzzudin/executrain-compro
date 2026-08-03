@@ -7,8 +7,10 @@ import {
 import CustomCard from "@/components/molecules/card/Custom";
 import CTA from "@/components/organisms/CTA";
 
-import AboutA from "@/assets/v2/about-1.png";
-import HeroBG from "@/assets/banner.jpg";
+import AboutA from "@/assets/v2/about-2.png";
+import AboutB from "@/assets/v2/about-6.png";
+import MatrixA from "@/assets/dummy/matrix-1.png";
+import MatrixB from "@/assets/dummy/matrix-2.png";
 
 export default function TalentPlacement() {
   const data = [
@@ -75,7 +77,7 @@ export default function TalentPlacement() {
             </div>
             <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
               <div className="items-center grid grid-cols-6 gap-5">
-                <img src={AboutA} alt="microsoft logo" />
+                <img src={AboutB} alt="microsoft logo" />
                 <div className="col-span-5">
                   <h2 className="font-semibold text-primary-500">On-Call</h2>
                   <h2 className="font-semibold">Basis</h2>
@@ -102,13 +104,13 @@ export default function TalentPlacement() {
             <span className="text-xs text-gray-600 block">
               1ST LEVEL TALENT MATRIX
             </span>
-            <img src={HeroBG} alt="" />
+            <img src={MatrixA} alt="" />
           </div>
           <div className="space-y-5">
             <span className="text-xs text-gray-600 block">
               2ND LEVEL TALENT MATRIX
             </span>
-            <img src={HeroBG} alt="" />
+            <img src={MatrixB} alt="" />
           </div>
         </div>
       </section>
@@ -135,7 +137,7 @@ export default function TalentPlacement() {
           ))}
         </StaggerContainer>
       </section>
-      <CTA />
+      <CTA title="Need These Kind Of Services?" cta="Consult Now!" />
     </section>
   );
 }

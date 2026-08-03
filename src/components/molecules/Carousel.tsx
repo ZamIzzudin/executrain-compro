@@ -3,7 +3,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 
 export interface CarouselSlide {
   image: string;
@@ -71,17 +71,17 @@ export default function Carousel({
             type="button"
             onClick={prev}
             aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center shadow-md transition-colors"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-2xl bg-primary-500/70 hover:bg-white text-white flex items-center justify-center shadow-md transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ArrowLeft className="w-5 h-5" />
           </button>
           <button
             type="button"
             onClick={next}
             aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center shadow-md transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-2xl bg-primary-500/70 hover:bg-white text-white flex items-center justify-center shadow-md transition-colors"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5" />
           </button>
         </>
       )}

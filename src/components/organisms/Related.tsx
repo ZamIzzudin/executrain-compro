@@ -14,7 +14,8 @@ import { type FreeTrialProductProps } from "@/utils/types/free-trial";
 export default function RelatedList({
   type,
   name,
-}: Readonly<{ type: string; name: string; children?: ReactNode }>) {
+  basePath = "/product",
+}: Readonly<{ type: string; name: string; basePath?: string; children?: ReactNode }>) {
   const { data, isLoading } = useProductFiltered({
     page: 1,
     product_category: type,
@@ -44,7 +45,7 @@ export default function RelatedList({
     }
     return products.slice(0, 3).map((each: FreeTrialProductProps) => (
       <StaggerItem key={each._id} direction="up">
-        <CourseCard data={each} basePath="/product" />
+        <CourseCard data={each} basePath={basePath} />
       </StaggerItem>
     ));
   };

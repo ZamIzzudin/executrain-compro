@@ -10,6 +10,7 @@ import {
   ArrowRight,
   Award,
   Flag,
+  Info,
 } from "lucide-react";
 
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
@@ -154,7 +155,10 @@ export default function CourseCatalogDetail() {
 
             <div className="bg-white p-5 rounded-2xl">
               <div className="pb-3 border-b border-gray-200">
-                <p className="text-xs text-gray-400 mb-1">Class Category</p>
+                <p className="text-sm mb-1 flex gap-2 items-center">
+                  <Info size={14} className="text-primary-500" />
+                  Class Category
+                </p>
                 <span className="inline-block text-xs font-medium bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                   ● {categoryLabel.replaceAll("_", " ")}
                 </span>
@@ -225,7 +229,11 @@ export default function CourseCatalogDetail() {
           </div>
         </div>
       </div>
-      <RelatedList type="it_training" name="Related Courses" />
+      <RelatedList
+        type="it_training"
+        name="Related Courses"
+        basePath="/strategic-solution"
+      />
     </section>
   );
 }

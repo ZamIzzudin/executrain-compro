@@ -23,14 +23,15 @@ export default function CertificationFilter({
   onTechChange,
 }: Readonly<CatalogFilterProps>) {
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center max-w-4xl">
+    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-start max-w-4xl">
       <FilterDropdown
+        label="Category"
         value={techValue}
         onChange={onTechChange}
         options={TECH}
         placeholder="All Category"
         variant="primary"
-        className="catalog-filter-select w-full md:w-52"
+        className="w-full md:w-52"
       />
     </div>
   );

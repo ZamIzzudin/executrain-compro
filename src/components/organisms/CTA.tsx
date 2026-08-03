@@ -8,7 +8,15 @@ import { useSocmed } from "@/services/socmed/hook";
 import { buildWhatsAppLink, WHATSAPP_TEMPLATES } from "@/utils/helper";
 import { PhoneIcon } from "lucide-react";
 
-export default function CTA() {
+export default function CTA({
+  title = "Ready to Train Your Team?",
+  description = "Get the full proposal and training details by clicking the button below.",
+  cta = "Request Proposal",
+}: Readonly<{
+  title?: string;
+  description?: string;
+  cta?: string;
+}>) {
   const navigate = useNavigate();
 
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
@@ -23,9 +31,9 @@ export default function CTA() {
 
   return (
     <div className="w-full bg-gradient-to-b from-white to-primary-100 px-[5%] md:px-[7%] lg:px-[10%] text-center pb-[5%] flex flex-col items-center">
-      <h2 className="text-2xl md:text-[32px] font-semibold">Ready to Train Your Team?</h2>
+      <h2 className="text-2xl md:text-[32px] font-semibold">{title}</h2>
       <p className="text-[14px] md:text-[16px] text-gray-600 mb-4">
-        Get the full proposal and training details by clicking the button below.
+        {description}
       </p>
       {socmedLoading ? (
         <Button label="Loading..." rounded type="disable" />
@@ -36,7 +44,7 @@ export default function CTA() {
           label={
             <div className="flex gap-2">
               <PhoneIcon size={14} />
-              <span>Request Proposal</span>
+              <span>{cta}</span>
             </div>
           }
           rounded

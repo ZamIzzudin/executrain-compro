@@ -15,28 +15,22 @@ export default function ContactUs() {
   const email =
     socmedData.find((each: SocmedDataProps) => each.socmed_name === "GMAIL")
       ?.socmed_link || "sales@executrain.co.id";
-  const location = socmedData.find(
-    (each: SocmedDataProps) => each.socmed_name === "LOCATION",
-  )?.socmed_link;
 
   const CONTACT_INFO = [
     {
       icon: Phone,
       label: whatsapp ? `+ ${whatsapp}` : "+ 62-8129-2506-850",
       href: whatsapp ? `tel:${whatsapp}` : "tel:+6281292506850",
-      highlighted: true,
     },
     {
       icon: Mail,
       label: email,
       href: `mailto:${email}`,
-      highlighted: false,
     },
     {
       icon: MapPin,
-      label: location || "Setiabudi Atrium, 2nd Floor - Suite 203",
+      label: "Setiabudi Atrium, 2nd Floor - Suite 203",
       href: undefined,
-      highlighted: false,
     },
   ];
 
@@ -62,41 +56,41 @@ export default function ContactUs() {
   };
 
   return (
-    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[8%] grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[15%] grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
       {/* Left column */}
       <div>
-        <img src="/logo.png" alt="ExecuTrain" className="h-10 md:h-12 mb-8" />
+        <img
+          src="/logogray.png"
+          alt="ExecuTrain"
+          className="h-10 md:h-12 mb-8"
+        />
 
-        <h1 className="text-2xl md:text-3xl font-bold mb-2">Contact Us</h1>
-        <p className="text-sm md:text-base text-gray-500 mb-6">
+        <h1 className="text-2xl md:text-3xl font-semibold mb-2">Contact Us</h1>
+        <p className="text-sm text-gray-500 mb-6">
           Ready to elevate your team's performance?
         </p>
 
-        <div className="bg-gray-50 rounded-2xl p-5">
-          <p className="text-xs font-semibold tracking-wide text-gray-400 mb-3">
+        <div className="bg-[#ECECEC] rounded-2xl p-5">
+          <p className="text-xs tracking-wide text-gray-400 mb-3">
             GET IN TOUCH
           </p>
           <div className="flex flex-col gap-3">
-            {CONTACT_INFO.map(({ icon: Icon, label, href, highlighted }) =>
+            {CONTACT_INFO.map(({ icon: Icon, label, href }) =>
               href ? (
                 <a
                   key={label}
                   href={href}
-                  className={`flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors ${
-                    highlighted
-                      ? "border border-primary-500 text-primary-500 bg-primary-50/40"
-                      : "bg-white text-gray-700"
-                  }`}
+                  className={`flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors border border-primary-500 bg-white`}
                 >
-                  <Icon className="w-4 h-4 shrink-0" />
+                  <Icon className="w-4 h-4 shrink-0 text-primary-500" />
                   {label}
                 </a>
               ) : (
                 <div
                   key={label}
-                  className="flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium bg-white text-gray-700"
+                  className="flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium bg-white border border-primary-500"
                 >
-                  <Icon className="w-4 h-4 shrink-0" />
+                  <Icon className="w-4 h-4 shrink-0 text-primary-500" />
                   {label}
                 </div>
               ),
@@ -126,7 +120,7 @@ export default function ContactUs() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={each.name}
-                  className="w-9 h-9 rounded-lg bg-primary-500 text-white flex items-center justify-center hover:bg-primary-600 transition-colors"
+                  className="w-9 h-9 rounded-xl bg-primary-500 text-white flex items-center justify-center hover:bg-primary-600 transition-colors p-2"
                 >
                   <img src={each.icon} alt={each.name || `socmed ${index}`} />
                 </a>

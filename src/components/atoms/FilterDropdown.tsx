@@ -18,6 +18,7 @@ export interface FilterDropdownProps {
   placeholder?: string;
   variant?: FilterDropdownVariant;
   className?: string;
+  label?: string;
 }
 
 const VARIANT_CLASS: Record<FilterDropdownVariant, string> = {
@@ -50,14 +51,15 @@ export default function FilterDropdown({
   placeholder = "All",
   variant = "default",
   className = "",
+  label,
 }: Readonly<FilterDropdownProps>) {
-  const select = (
+  const renderSelect = (selectClass: string) => (
     <Select
       size="large"
       value={value}
       onChange={(val: string | undefined) => onChange(val)}
       placeholder={placeholder}
-      className={`${VARIANT_CLASS[variant]} rounded-full! ${className}`}
+      className={`${VARIANT_CLASS[variant]} rounded-full! ${selectClass}`}
       popupClassName={POPUP_CLASS}
       options={options.map((opt) => ({
         label: opt.label,
@@ -68,8 +70,25 @@ export default function FilterDropdown({
     />
   );
 
-  if (variant === "primary") {
-    return <ConfigProvider theme={primaryTheme}>{select}</ConfigProvider>;
+  const select = renderSelect(label ? "w-full" : className);
+
+  const content =
+    variant === "primary" ? (
+      <ConfigProvider theme={primaryTheme}>{select}</ConfigProvider>
+    ) : (
+      select
+    );
+
+  if (label) {
+    return (
+      <div className={className}>
+        <label className="text-xs font-medium mb-1.5 block opacity-80">
+          {label}
+        </label>
+        {content}
+      </div>
+    );
   }
-  return select;
+
+  return content;
 }

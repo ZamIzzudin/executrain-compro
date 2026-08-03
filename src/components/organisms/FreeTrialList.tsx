@@ -79,8 +79,9 @@ export default function FreeTrialList() {
       </FadeInUp>
 
       {/* Search & Filter */}
-      <div className="flex flex-col md:flex-row gap-4 items-center mb-8">
+      <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-start mb-8">
         <SearchBar
+          label="Search"
           value={search}
           onChange={setSearch}
           placeholder="Search class..."
@@ -89,6 +90,7 @@ export default function FreeTrialList() {
         />
 
         <FilterDropdown
+          label="Category"
           value={category}
           onChange={(value) => {
             setCategory(value);

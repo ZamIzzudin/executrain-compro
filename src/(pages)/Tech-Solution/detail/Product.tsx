@@ -6,8 +6,10 @@ import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import { useProductDetail } from "@/services/strategic-solution/hook";
 import Carousel from "@/components/molecules/Carousel";
 
-import HeroBG from "@/assets/banner.jpg";
-import AboutA from "@/assets/v2/about-1.png";
+import CaraouselA from "@/assets/v2/caraousel-1.jpg";
+import CaraouselB from "@/assets/v2/caraousel-2.jpg";
+import OnPremise from "@/assets/v2/onpremise.png";
+import Cloud from "@/assets/v2/cloud.png";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -50,7 +52,7 @@ export default function ProductDetail() {
           )}
           <div className="space-y-2">
             <p className="text-xs tracking-wide text-gray-400">TECH STACK</p>
-            <div className="space-x-3">
+            <div className="flex flex-wrap gap-2">
               <span className="inline-block text-xs font-medium bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                 Power Apps
               </span>
@@ -116,19 +118,19 @@ export default function ProductDetail() {
               <Carousel
                 slides={[
                   {
-                    image: HeroBG,
+                    image: CaraouselB,
                     title: "Automated Letter Sending",
                     description:
                       "Schedule and dispatch correspondence automatically with templates and tracking.",
                   },
                   {
-                    image: HeroBG,
+                    image: CaraouselA,
                     title: "Smart Assignment",
                     description:
                       "Route incoming letters to the right person or department instantly.",
                   },
                   {
-                    image: HeroBG,
+                    image: CaraouselB,
                     title: "Real-time Status Tracking",
                     description:
                       "Monitor the exact location and processing status of any letter at a glance.",
@@ -153,10 +155,10 @@ export default function ProductDetail() {
             <p className="text-xs tracking-wide text-gray-400 mb-1">
               DEPLOYMENT OPTIONS
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 flex-col flex">
                 <div className="items-center flex gap-2">
-                  <img src={AboutA} alt="microsoft logo" className="h-10" />
+                  <img src={OnPremise} alt="microsoft logo" className="h-10" />
                   <div>
                     <h2 className="font-semibold text-primary-500 text-sm">
                       On-Premise
@@ -171,7 +173,7 @@ export default function ProductDetail() {
               </div>
               <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 flex-col flex">
                 <div className="items-center flex gap-2">
-                  <img src={AboutA} alt="microsoft logo" className="h-10" />
+                  <img src={Cloud} alt="microsoft logo" className="h-10" />
                   <div>
                     <h2 className="font-semibold text-primary-500 text-sm">
                       Cloud
@@ -194,7 +196,7 @@ export default function ProductDetail() {
             <p className="text-base text-gray-500 mb-4">
               Chat our sales for detailed information
             </p>
-            <div className="space-x-2">
+            <div className="flex flex-wrap gap-2">
               <a
                 href={product.link || "#"}
                 target={product.link ? "_blank" : undefined}

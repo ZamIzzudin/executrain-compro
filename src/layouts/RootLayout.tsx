@@ -1,13 +1,25 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AssetProvider } from "./AssetProvider";
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
 
 import { PhoneIcon } from "lucide-react";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
+  return null;
+}
+
 export default function RootLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
+      <ScrollToTop />
       <AssetProvider>
         <Navbar />
         <main className="flex-1 mt-[-7%] overflow-x-hidden">

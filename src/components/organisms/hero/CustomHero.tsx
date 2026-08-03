@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { useAssetContext } from "@/layouts/AssetProvider";
 
 export default function CustomHero({
   title,
@@ -21,15 +20,11 @@ export default function CustomHero({
   banner?: string;
   children?: ReactNode;
 }>) {
-  const { getStaticAsset } = useAssetContext();
-
-  const bannerPlain = getStaticAsset("banner_plain");
-
   return (
     <div
       className="w-full min-h-[55dvh] md:min-h-[70dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%] py-20 md:py-0"
       style={{
-        backgroundImage: `url('${bannerPlain}'), url(${banner})`,
+        backgroundImage: `linear-gradient(#242424CC, #242424CC), url(${banner})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

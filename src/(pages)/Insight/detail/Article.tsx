@@ -6,7 +6,7 @@ import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import { useProductDetail } from "@/services/strategic-solution/hook";
 import { formatDate } from "@/utils/helper";
 
-import HeroBG from "@/assets/banner.jpg";
+import Article from "@/assets/v2/article.jpg";
 
 const CATEGORY_LABEL: Record<string, string> = {
   DATA_ANALYTICS: "Data Analytics",
@@ -91,7 +91,9 @@ export default function ArticleDetail() {
               innovation practices.
             </p>
             <br />
-            <h4>Why Professional Training Matters</h4>
+            <h4 className="font-semibold text-xl">
+              Why Professional Training Matters
+            </h4>
             <br />
             <p>
               Organizations that prioritize learning create environments where
@@ -110,8 +112,11 @@ export default function ArticleDetail() {
               teams are capable of delivering consistent results while
               maintaining high standards across departments.
             </p>
-            <h4>Adapting to Technological Change</h4>
-            <br />{" "}
+            <br />
+            <h4 className="font-semibold text-xl">
+              Adapting to Technological Change
+            </h4>
+            <br />
             <p>
               Technology continues to reshape industries at an unprecedented
               pace. Artificial intelligence, automation, cloud computing,
@@ -136,8 +141,8 @@ export default function ArticleDetail() {
               OUR RELATED PRODUCT
             </p>
             <div className="p-3 bg-white rounded-2xl flex gap-2 items-center flex-col">
-              <div className="flex gap-2 items-center">
-                <img alt="" src={HeroBG} className="h-15 w-15 rounded-xl" />
+              <div className="flex gap-3 items-center">
+                <img alt="" src={Article} className="h-15 w-15 rounded-xl" />
                 <div className="space-y-1">
                   <span className="inline-block text-xs bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                     {categoryLabel.replaceAll("_", " ")}
@@ -169,8 +174,12 @@ export default function ArticleDetail() {
                   key={index + 1}
                   className="p-3 bg-white rounded-2xl flex gap-3 items-center flex-col"
                 >
-                  <div className="flex gap-2 items-center">
-                    <img alt="" src={HeroBG} className="h-15 w-15 rounded-xl" />
+                  <div className="flex gap-3 items-center">
+                    <img
+                      alt=""
+                      src={Article}
+                      className="h-15 w-15 rounded-xl"
+                    />
                     <div className="space-y-1">
                       <span className="inline-block text-xs bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                         ● Corporate Training

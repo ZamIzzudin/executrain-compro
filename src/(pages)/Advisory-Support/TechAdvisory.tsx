@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { useAssetContext } from "@/layouts/AssetProvider";
 
 import CTA from "@/components/organisms/CTA";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, CheckCircleIcon } from "lucide-react";
 
-import AboutA from "@/assets/v2/about-1.png";
+import AdvisoryA from "@/assets/v2/advisory-1.png";
+import AdvisoryB from "@/assets/v2/advisoty-2.png";
+import AdvisoryC from "@/assets/v2/advisory-3.png";
+import Advisory from "@/assets/v2/advisory.png";
+import PSA from "@/assets/v2/psa.png";
 
 export default function TechAdvisory() {
-  const { getStaticAsset } = useAssetContext();
-  const bannerPlain = getStaticAsset("banner_plain");
-
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const faqItems = [
@@ -50,7 +50,11 @@ export default function TechAdvisory() {
           <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
             <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
               <div className="flex items-center gap-3">
-                <img src={AboutA} alt="microsoft logo" className="w-[30%]" />
+                <img
+                  src={AdvisoryA}
+                  alt="microsoft logo"
+                  className="max-w-[25%]"
+                />
                 <h2 className="font-semibold">
                   What <span className="text-primary-500">framework</span> do we
                   use?
@@ -65,7 +69,11 @@ export default function TechAdvisory() {
             </div>
             <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
               <div className="flex items-center gap-3">
-                <img src={AboutA} alt="microsoft logo" className="w-[30%]" />
+                <img
+                  src={AdvisoryB}
+                  alt="microsoft logo"
+                  className="max-w-[25%]"
+                />
                 <h2 className="font-semibold">
                   How about the{" "}
                   <span className="text-primary-500">advisory</span> Method?
@@ -79,7 +87,11 @@ export default function TechAdvisory() {
             </div>
             <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
               <div className="flex items-center gap-3">
-                <img src={AboutA} alt="microsoft logo" className="w-[30%]" />
+                <img
+                  src={AdvisoryC}
+                  alt="microsoft logo"
+                  className="max-w-[25%]"
+                />
                 <h2 className="font-semibold">
                   What would you{" "}
                   <span className="text-primary-500">expect</span> on this
@@ -97,11 +109,7 @@ export default function TechAdvisory() {
       </section>
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] grid grid-cols-1 md:grid-cols-2 items-center gap-6">
         <div className="md:pr-15">
-          <img
-            alt="free trial"
-            src="./statHero.jpg"
-            className="rounded-xl w-full"
-          />
+          <img alt="free trial" src={Advisory} className="rounded-xl w-full" />
         </div>
         <div className="bg-white p-5 md:p-6 space-y-5 rounded-xl drop-shadow-md ">
           <div className="flex items-center gap-3">
@@ -136,7 +144,7 @@ export default function TechAdvisory() {
       <div
         className="px-[5%] md:px-[7%] lg:px-[10%] w-full py-5 grid grid-cols-1 lg:grid-cols-2 items-center gap-5"
         style={{
-          backgroundImage: `url('${bannerPlain}'), url('./statHero.jpg')`,
+          backgroundImage: `linear-gradient(#242424CC, #242424CC), url('./statHero.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -218,14 +226,10 @@ export default function TechAdvisory() {
           </div>
         </div>
         <div className="md:pl-15 col-span-2">
-          <img
-            alt="free trial"
-            src="./statHero.jpg"
-            className="rounded-xl w-full"
-          />
+          <img alt="free trial" src={PSA} className="rounded-xl w-full" />
         </div>
       </section>
-      <CTA />
+      <CTA title="Need Some Advisory?" cta="Contact Now!" />
     </section>
   );
 }

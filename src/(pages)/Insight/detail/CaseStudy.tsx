@@ -14,8 +14,8 @@ import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import { useProductDetail } from "@/services/strategic-solution/hook";
 import { formatDate } from "@/utils/helper";
 
-import HeroBG from "@/assets/banner.jpg";
-import AboutA from "@/assets/v2/about-1.png";
+import OnPremise from "@/assets/v2/onpremise.png";
+import Article from "@/assets/v2/article.jpg";
 
 const CATEGORY_LABEL: Record<string, string> = {
   DATA_ANALYTICS: "Data Analytics",
@@ -80,7 +80,7 @@ export default function CaseStudyDetail() {
             <p className="text-xs tracking-wide text-gray-400">
               RELATED INDUSTRY
             </p>
-            <div className="space-x-3">
+            <div className="flex flex-wrap gap-2">
               <span className="inline-block text-xs font-medium bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                 Food & Beverages
               </span>
@@ -102,7 +102,7 @@ export default function CaseStudyDetail() {
             </p>
             <div className="bg-white rounded-2xl space-y-3 p-5 border border-gray-300">
               <div className="items-center flex gap-2">
-                <img src={AboutA} alt="microsoft logo" className="h-10" />
+                <img src={OnPremise} alt="microsoft logo" className="h-10" />
                 <div>
                   <h2 className="font-semibold text-primary-500 text-sm">
                     On-Premise
@@ -114,7 +114,7 @@ export default function CaseStudyDetail() {
                 Hosted locally on your internal servers for maximum data control
                 and strict security compliance.
               </p>
-              <div className="grid grid-cols-3 gap-y-4 gap-x-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 gap-x-2">
                 <div className="space-y-1 pb-3 border-b border-gray-200">
                   <div className="flex gap-2 items-center">
                     <Users className="text-primary-500" size={12} />
@@ -213,7 +213,11 @@ export default function CaseStudyDetail() {
                   className="p-3 bg-white rounded-2xl flex gap-2 items-center flex-col"
                 >
                   <div className="flex gap-3 items-center">
-                    <img alt="" src={HeroBG} className="h-15 w-15 rounded-xl" />
+                    <img
+                      alt=""
+                      src={Article}
+                      className="h-15 w-15 rounded-xl"
+                    />
                     <div className="space-y-1">
                       <span className="inline-block text-xs bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                         ● Corporate Training

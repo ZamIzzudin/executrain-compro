@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "../atoms/Motion";
 
 import { useAssetContext } from "@/layouts/AssetProvider";
+import FrameworkWheel from "../molecules/FrameworkWheel";
 
 type Framework = { title: string; items: string[] };
 
@@ -143,7 +144,7 @@ export default function FrameworkBanner() {
   const frameworkBanner = getAssetUrl("framework_banner");
   return (
     <div className="px-[5%] md:px-[7%] lg:px-[10%] w-full space-y-6 md:space-y-6 min-h-[30dvh] md:min-h-[50dvh] py-[5%]">
-      <section className="w-full lg:grid lg:grid-cols-2 items-center">
+      {/* <section className="w-full lg:grid lg:grid-cols-2 items-center">
         <img
           alt="framework"
           src={frameworkBanner || ""}
@@ -160,8 +161,10 @@ export default function FrameworkBanner() {
             <FrameworkColumn frameworks={data} />
             <FrameworkColumn frameworks={data2} />
           </div>
+          <FrameworkWheel />
         </div>
-      </section>
+      </section> */}
+      <FrameworkWheel />
     </div>
   );
 }

@@ -1,16 +1,11 @@
 import CountUp from "../atoms/Countup";
 
-import { useAssetContext } from "@/layouts/AssetProvider";
-
 export default function StatSection() {
-  const { getStaticAsset } = useAssetContext();
-
-  const bannerPlain = getStaticAsset("banner_plain");
   return (
     <div
       className="px-[5%] md:px-[7%] lg:px-[10%] w-full py-5 grid grid-cols-1 lg:grid-cols-5"
       style={{
-        backgroundImage: `url('${bannerPlain}'), url('./statHero.jpg')`,
+        backgroundImage: `linear-gradient(#242424CC, #242424CC), url('./statHero.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

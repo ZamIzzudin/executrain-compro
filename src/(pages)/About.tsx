@@ -23,7 +23,10 @@ export default function About() {
       <Step />
       <ServiceList />
       <AboutSectionFlat />
-      <CTA />
+      <CTA
+        title="Ready to Work With Us?"
+        description="Chat our sales for detailed information"
+      />
     </section>
   );
 }

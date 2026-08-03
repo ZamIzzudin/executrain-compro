@@ -5,6 +5,8 @@ import FreeTriaIcon from "@/assets/v2/free-trial.gif";
 import CTA from "@/components/organisms/CTA";
 import FreeTrialList from "@/components/organisms/FreeTrialList";
 
+import PSA from "@/assets/v2/psa.png";
+
 export default function FreeTrial() {
   return (
     <section>
@@ -14,8 +16,8 @@ export default function FreeTrial() {
         description="An intensive, outcome-focused program designed to rapidly build or upgrade a specific set of competencies."
         path="/free-trial"
       />
-      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] grid grid-cols-1 md:grid-cols-2 items-center gap-6">
-        <div className="bg-[#ECECEC] p-5 md:p-6 space-y-5 rounded-xl drop-shadow-md ">
+      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+        <div className="bg-white p-5 md:p-6 space-y-5 rounded-2xl drop-shadow-md border border-gray-300">
           <div className="flex items-center gap-3">
             <img
               src={FreeTriaIcon}
@@ -53,11 +55,7 @@ export default function FreeTrial() {
           </div>
         </div>
         <div className="md:pl-15">
-          <img
-            alt="free trial"
-            src="./statHero.jpg"
-            className="rounded-xl w-full"
-          />
+          <img alt="free trial" src={PSA} className="rounded-xl w-full" />
         </div>
       </section>
       <FreeTrialList />

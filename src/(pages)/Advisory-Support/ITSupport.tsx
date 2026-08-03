@@ -129,7 +129,7 @@ export default function ITSupport() {
           ))}
         </StaggerContainer>
       </section>
-      <CTA />
+      <CTA title="Need These Kind Of Services?" cta="Consult Now!" />
     </section>
   );
 }

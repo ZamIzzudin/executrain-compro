@@ -16,7 +16,8 @@ import { useProductDetail } from "@/services/strategic-solution/hook";
 
 import Carousel from "@/components/molecules/Carousel";
 
-import HeroBG from "@/assets/banner.jpg";
+import CaraouselA from "@/assets/v2/caraousel-1.jpg";
+import CaraouselB from "@/assets/v2/caraousel-2.jpg";
 
 export default function CustomAppDetail() {
   const { id } = useParams<{ id: string }>();
@@ -59,7 +60,7 @@ export default function CustomAppDetail() {
           )}
           <div className="space-y-2">
             <p className="text-xs tracking-wide text-gray-400">TECH STACK</p>
-            <div className="space-x-3">
+            <div className="flex flex-wrap gap-2">
               <span className="inline-block text-xs font-medium bg-primary-50 text-primary-500 rounded-full px-3 py-1">
                 Power Apps
               </span>
@@ -95,19 +96,19 @@ export default function CustomAppDetail() {
               <Carousel
                 slides={[
                   {
-                    image: HeroBG,
+                    image: CaraouselB,
                     title: "Automated Letter Sending",
                     description:
                       "Schedule and dispatch correspondence automatically with templates and tracking.",
                   },
                   {
-                    image: HeroBG,
+                    image: CaraouselA,
                     title: "Smart Assignment",
                     description:
                       "Route incoming letters to the right person or department instantly.",
                   },
                   {
-                    image: HeroBG,
+                    image: CaraouselB,
                     title: "Real-time Status Tracking",
                     description:
                       "Monitor the exact location and processing status of any letter at a glance.",
@@ -131,7 +132,7 @@ export default function CustomAppDetail() {
               PROJECT DETAILS
             </p>
             <div className="bg-white p-5 rounded-2xl space-y-3">
-              <div className="grid grid-cols-3 gap-y-4 gap-x-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 gap-x-2">
                 <div className="space-y-1 pb-3 border-b border-gray-200">
                   <div className="flex gap-2 items-center">
                     <Users className="text-primary-500" size={12} />

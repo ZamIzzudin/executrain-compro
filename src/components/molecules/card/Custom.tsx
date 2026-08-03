@@ -7,8 +7,6 @@ import { ArrowRightIcon } from "lucide-react";
 import Button from "@/components/atoms/Button";
 import { Tooltip } from "antd";
 
-import HeroBG from "@/assets/banner.jpg";
-
 export default function CustomCard({
   data,
   basePath = "/strategic-solution",
@@ -22,7 +20,7 @@ export default function CustomCard({
     <div className="rounded-4xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] cursor-pointer h-full">
       <div className="h-36 md:h-48 bg-slate-100 overflow-hidden rounded-4xl">
         <img
-          src={HeroBG}
+          src="./statHero.jpg"
           alt={data?.banner?.public_id || ""}
           className="w-full h-full object-cover"
         />
