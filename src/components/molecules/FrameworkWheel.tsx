@@ -225,7 +225,7 @@ export default function FrameworkWheel() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center">
-      <div className="mx-auto w-full lg:col-span-4">
+      <div className="mx-auto w-full lg:col-span-4 p-10 lg:p-20">
         <svg viewBox="0 0 400 400" className="w-full h-auto select-none">
           <defs>
             {outerWrapped.map(({ seg, lines }) =>
