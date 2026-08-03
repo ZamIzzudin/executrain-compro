@@ -23,7 +23,7 @@ COPY . .
 RUN npm run build
 
 # ---- Stage 2: Serve static files with nginx ----
-FROM nginxinc/nginx-unprivileged:alpine AS runtime
+FROM nginx:alpine AS runtime
 
 # Replace default nginx config with SPA-aware config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -31,6 +31,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy built assets from the builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
