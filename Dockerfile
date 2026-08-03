@@ -1,5 +1,5 @@
 # ---- Stage 1: Build the Vite SPA ----
-FROM node:22-alpine AS builder
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
@@ -22,15 +22,24 @@ ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 COPY . .
 RUN npm run build
 
-# ---- Stage 2: Serve static files with nginx ----
-FROM nginx:alpine AS runtime
+# Install lightweight static file server (runtime dependency)
+RUN npm install serve@14
 
-# Replace default nginx config with SPA-aware config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# ---- Stage 2: Runtime ----
+FROM node:18-alpine AS runtime
 
-# Copy built assets from the builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 80
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-CMD ["nginx", "-g", "daemon off;"]
+# Copy built assets and the serve binary
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+EXPOSE 3000
+
+# serve handles SPA fallback automatically (rewrites unknown routes to index.html)
+CMD ["npx", "serve", "dist", "-s", "-l", "3000"]
