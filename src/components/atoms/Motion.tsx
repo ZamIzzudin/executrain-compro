@@ -249,7 +249,6 @@ interface StaggerContainerProps {
   staggerDelay?: number;
   delayChildren?: number;
   once?: boolean;
-  threshold?: number;
 }
 
 export function StaggerContainer({
@@ -258,7 +257,6 @@ export function StaggerContainer({
   staggerDelay = 0.1,
   delayChildren = 0.1,
   once = true,
-  threshold = 0.1,
 }: StaggerContainerProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-100px" });
@@ -373,7 +371,6 @@ interface AnimatedCounterProps {
   className?: string;
   prefix?: string;
   suffix?: string;
-  duration?: number;
   delay?: number;
   once?: boolean;
 }
@@ -383,7 +380,6 @@ export function AnimatedCounter({
   className = "",
   prefix = "",
   suffix = "",
-  duration = 2,
   delay = 0,
   once = true,
 }: AnimatedCounterProps) {

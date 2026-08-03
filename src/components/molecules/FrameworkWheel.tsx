@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 type Tone = "red" | "gray";
 
