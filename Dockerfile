@@ -1,5 +1,5 @@
 # ---- Stage 1: Build the Vite SPA ----
-FROM node:18-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -26,7 +26,7 @@ RUN npm run build
 RUN npm install serve@14
 
 # ---- Stage 2: Runtime ----
-FROM node:18-alpine AS runtime
+FROM node:22-alpine AS runtime
 
 WORKDIR /app
 
