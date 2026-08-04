@@ -151,7 +151,7 @@ export default function CertificationDetail() {
             </div>
             <p className="text-sm text-gray-500 mb-10">{selected.desc}</p>
 
-            <div className=" flex flex-wrap justify-between gap-3 mt-5 space-y-5">
+            <div className=" flex flex-wrap justify-between gap-5 mt-5 space-y-5">
               <InfoItem
                 icon={<Globe className="w-5 h-5 text-primary-500" />}
                 label="Company Website"
