@@ -35,7 +35,7 @@ export default function CustomAppDetail() {
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
         <Link className="opacity-50" to="/free-trial">
-          Software & Licensing Service
+          Technology & Licensing Service
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
         <Link className="text-primary-500" to={`/free-trial/${product._id}`}>
