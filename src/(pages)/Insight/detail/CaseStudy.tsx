@@ -42,11 +42,11 @@ export default function CaseStudyDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/free-trial">
+        <Link className="opacity-50" to="/case-study">
           Case Studies
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-primary-500" to={`/free-trial/${study._id}`}>
+        <Link className="text-primary-500" to={`/case-study/${study._id}`}>
           {study.product_name}
         </Link>
       </div>

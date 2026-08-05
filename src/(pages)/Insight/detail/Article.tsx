@@ -33,11 +33,11 @@ export default function ArticleDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/free-trial">
+        <Link className="opacity-50" to="/article">
           Article
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-primary-500" to={`/free-trial/${article._id}`}>
+        <Link className="text-primary-500" to={`/article/${article._id}`}>
           {article.product_name}
         </Link>
       </div>

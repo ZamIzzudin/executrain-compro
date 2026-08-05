@@ -116,7 +116,7 @@ export default function CertificationDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/free-trial">
+        <Link className="opacity-50" to="/certification">
           Technology & Licensing Service
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />

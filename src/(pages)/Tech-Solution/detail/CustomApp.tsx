@@ -34,11 +34,14 @@ export default function CustomAppDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/free-trial">
-          Technology & Licensing Service
+        <Link className="opacity-50" to="/app-development">
+          Custom App Development
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-primary-500" to={`/free-trial/${product._id}`}>
+        <Link
+          className="text-primary-500"
+          to={`/app-development/${product._id}`}
+        >
           {product.product_name}
         </Link>
       </div>
