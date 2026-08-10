@@ -3,12 +3,11 @@ import {
   FadeInUp,
   StaggerItem,
   StaggerContainer,
-} from "@/components/atoms/Motion";
+  LordIcons,
+} from "@/components/atoms";
 import CustomCard from "@/components/molecules/card/Custom";
 import CTA from "@/components/organisms/CTA";
 
-import AboutA from "@/assets/v2/about-2.png";
-import AboutB from "@/assets/v2/about-6.png";
 import MatrixA from "@/assets/dummy/matrix-1.png";
 import MatrixB from "@/assets/dummy/matrix-2.png";
 
@@ -57,37 +56,75 @@ export default function TalentPlacement() {
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] items-center">
         <div className="space-y-5 rounded-xl drop-shadow-md">
           <div className="space-y-2">
-            <h3 className="text-lg md:text-xl font-semibold">
+            <h3 className="text-lg md:text-2xl font-semibold">
               Our Placement Models
             </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
-              <div className="items-center grid grid-cols-6 gap-5">
-                <img src={AboutA} alt="microsoft logo" />
-                <div className="col-span-5">
-                  <h2 className="font-semibold text-primary-500">On-Site</h2>
-                  <h2 className="font-semibold">Basis</h2>
+            <div
+              id="placement-card-1"
+              className="w-full px-4 pt-4 pb-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 inline-flex flex-col justify-start items-center gap-3 transition-all duration-300 cursor-pointer"
+            >
+              <div className="self-stretch inline-flex justify-start items-center gap-3">
+                <div className="p-1 bg-stone-50 rounded-xl outline outline-[0.25px] outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
+                  <LordIcons
+                    src="https://cdn.lordicon.com/byicyhmi.json"
+                    trigger="hover"
+                    target="#placement-card-1"
+                    state="hover-pinch"
+                    colors="primary:#646e78,secondary:#f9c9c0,tertiary:#ebe6ef,quaternary:#b26836,quinary:#4bb3fd"
+                    size={40}
+                  />
+                </div>
+                <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
+                  <div className="self-stretch justify-start">
+                    <span className="text-rose-700 text-base font-medium">
+                      On-Site{" "}
+                    </span>
+                    <span className="text-neutral-800 text-base font-medium">
+                      Basis
+                    </span>
+                  </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 border-t pt-4 border-gray-300">
-                Full-tm on-site IT Support. Engineer (1st level) are deployed
+              <div className="self-stretch h-0 outline outline-[0.25px] outline-offset-[-0.50px] outline-gray-200"></div>
+              <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
+                Full-time on-site IT Support. Engineer (1st level) are deployed
                 based on required location to ensure business running well.
-              </p>
+              </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
-              <div className="items-center grid grid-cols-6 gap-5">
-                <img src={AboutB} alt="microsoft logo" />
-                <div className="col-span-5">
-                  <h2 className="font-semibold text-primary-500">On-Call</h2>
-                  <h2 className="font-semibold">Basis</h2>
+            <div
+              id="placement-card-2"
+              className="w-full px-4 pt-4 pb-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 inline-flex flex-col justify-start items-center gap-3 transition-all duration-300 cursor-pointer"
+            >
+              <div className="self-stretch inline-flex justify-start items-center gap-3">
+                <div className="p-1 bg-stone-50 rounded-xl outline outline-[0.25px] outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
+                  <LordIcons
+                    src="https://cdn.lordicon.com/wqbswumt.json"
+                    trigger="hover"
+                    target="#placement-card-2"
+                    state="hover-calling"
+                    colors="primary:#ffc738,secondary:#be1e40,tertiary:#f9c9c0,quaternary:#be1e40"
+                    size={40}
+                  />
+                </div>
+                <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
+                  <div className="self-stretch justify-start">
+                    <span className="text-rose-700 text-base font-medium">
+                      On-Call{" "}
+                    </span>
+                    <span className="text-neutral-800 text-base font-medium">
+                      Basis
+                    </span>
+                  </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 border-t pt-4 border-gray-300">
+              <div className="self-stretch h-0 outline outline-[0.25px] outline-offset-[-0.50px] outline-gray-200"></div>
+              <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
                 High workload and complex troubleshooting do not happen all the
                 time. In order to optimize the IT support engineer utilization,
                 higher expertise level can be called when needed.
-              </p>
+              </div>
             </div>
           </div>
         </div>
