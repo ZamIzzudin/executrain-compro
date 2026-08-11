@@ -20,17 +20,17 @@ export default function Certification() {
     {
       question: "How are renewals and price changes handled?",
       answer:
-        "We provide perpetual, subscription, and volume licensing options from major vendors including Microsoft, Google, Tableu, and Pearson. Our team helps you choose the most cost-effective model for your organization.",
+        "Renewals are managed proactively — we track every license expiry and send reminders well before the deadline so there's never a gap in coverage. Price changes follow each vendor's official rate card, and we'll always confirm any increase with you before you renew.",
     },
     {
-      question: "What compliance documentation is included? ",
+      question: "What compliance documentation is included?",
       answer:
-        "Yes, most licenses can be reassigned within your organization. Transfer policies vary by vendor and product, and our team will guide you through the specific terms for each license you purchase.",
+        "Every purchase includes the vendor's official documentation — license agreements, invoices, product keys, and proof of entitlement — so you stay fully compliant during audits and renewals.",
     },
     {
-      question: "Can we cancel or downgrade mid-term? ",
+      question: "Can we cancel or downgrade mid-term?",
       answer:
-        "Absolutely. Every license comes with setup assistance, and we offer ongoing support packages covering deployment, troubleshooting, and user training to ensure your team gets the most out of your investment.",
+        "Most licenses can be downgraded or reassigned within your organization, but cancellation and mid-term changes depend on each vendor's terms. Our team will walk you through the specific policy for each license before you commit.",
     },
   ];
 

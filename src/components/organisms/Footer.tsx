@@ -9,6 +9,39 @@ import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { useSocmed } from "@/services/socmed/hook";
 import { useSocmedLogo } from "@/hooks/useSocmedLogo";
 
+const footerLinks: { title: string; items: { label: string; path: string }[] }[] = [
+  {
+    title: "Training & Skills",
+    items: [
+      { label: "Skill Accelerator ", path: "/free-trial" },
+      { label: "Training Calendar", path: "/schedule" },
+      { label: "Learning Paths", path: "/learning-path" },
+      { label: "Course Catalog", path: "/strategic-solution" },
+    ],
+  },
+  {
+    title: "Tech Solutions",
+    items: [
+      { label: "Ready-to-Use IT Products", path: "/product" },
+      { label: "Custom App Development", path: "/app-development" },
+      { label: "Technology & Cloud Licensing", path: "/certification" },
+    ],
+  },
+  {
+    title: "Advisory Support",
+    items: [
+      { label: "Support Advisory", path: "/tech-advisory" },
+      { label: "Implementation & Support", path: "/implementation-support" },
+      { label: "IT Talent Placement", path: "/talent-placement" },
+    ],
+  },
+];
+
+const insightLinks: { label: string; path: string }[] = [
+  { label: "Case Studies", path: "/case-study" },
+  { label: "Articles", path: "/article" },
+];
+
 export default function Footer() {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
 
@@ -40,11 +73,11 @@ export default function Footer() {
               <Link
                 to={`mailto:${
                   socmedData?.find((each: any) => each.socmed_name === "GMAIL")
-                    ?.socmed_link || "sales@excelearn.co.id"
+                    ?.socmed_link || "sales@executrain.co.id"
                 }`}
               >
                 {socmedData?.find((each: any) => each.socmed_name === "GMAIL")
-                  ?.socmed_link || "sales@excelearn.co.id"}
+                  ?.socmed_link || "sales@executrain.co.id"}
               </Link>
             </div>
             <div className="flex items-center gap-4">
@@ -61,73 +94,28 @@ export default function Footer() {
         </div>
         <div className="flex md:col-span-2 flex-col gap-5 md:gap-8 items-center md:items-start w-full">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 flex-1 w-full">
-            <div className="space-y-2 md:space-y-3 text-sm">
-              <span className="text-gray-500  text-xs block">
-                Training & Skills
-              </span>
-              <div className="flex flex-col gap-4">
-                {[
-                  "Skill Accelerator (Free Trial)",
-                  "Training Calendar",
-                  "Learning Paths",
-                  "Course Catalog",
-                ].map((service: string) => (
-                  <span key={service}>
-                    <Link to={`/tech-solutions?type=${service}`}>
-                      {service}
-                    </Link>
-                  </span>
-                ))}
+            {footerLinks.map((column) => (
+              <div key={column.title} className="space-y-2 md:space-y-3 text-sm">
+                <span className="text-gray-500 text-xs block">
+                  {column.title}
+                </span>
+                <div className="flex flex-col gap-4">
+                  {column.items.map((item) => (
+                    <span key={item.label}>
+                      <Link to={item.path}>{item.label}</Link>
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="space-y-2 md:space-y-3 text-sm">
-              <span className="text-gray-500  text-xs block">
-                Tech Solutions
-              </span>
-
-              <div className="flex flex-col gap-4">
-                {[
-                  "Ready-to-Use IT Products",
-                  "Custom App Development",
-                  "Software & Cloud Licensing",
-                ].map((service: string) => (
-                  <span key={service}>
-                    <Link to={`/tech-solutions?type=${service}`}>
-                      {service}
-                    </Link>
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-2 md:space-y-3 text-sm">
-              <span className="text-gray-500  text-xs block">
-                Advisory Support
-              </span>
-
-              <div className="flex flex-col gap-4">
-                {[
-                  "Support Advisory",
-                  "Implementation & Support",
-                  "IT Talent Placement",
-                ].map((service: string) => (
-                  <span key={service}>
-                    <Link to={`/tech-solutions?type=${service}`}>
-                      {service}
-                    </Link>
-                  </span>
-                ))}
-              </div>
-            </div>
+            ))}
             <div className="text-sm flex flex-col justify-between gap-5">
               <div className="space-y-2 md:space-y-3">
-                <span className="text-gray-500  text-xs block">Insight</span>
+                <span className="text-gray-500 text-xs block">Insight</span>
 
                 <div className="flex flex-col gap-4">
-                  {["Case Studies", "Articles"].map((service: string) => (
-                    <span key={service}>
-                      <Link to={`/tech-solutions?type=${service}`}>
-                        {service}
-                      </Link>
+                  {insightLinks.map((item) => (
+                    <span key={item.label}>
+                      <Link to={item.path}>{item.label}</Link>
                     </span>
                   ))}
                 </div>
@@ -177,7 +165,7 @@ export default function Footer() {
         </div>
       </div>
       <span className="text-gray-500 block text-center text-xs py-2 border-t mx-[3%] pt-5 pb-10">
-        Copyright © 2026 - by ExecuTrain of Jakarta
+        Copyright © {new Date().getFullYear()} - by ExecuTrain of Jakarta
       </span>
     </footer>
   );

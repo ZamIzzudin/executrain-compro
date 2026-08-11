@@ -64,7 +64,7 @@ export default function Navbar() {
       key: "training",
       label: "Training & Skills",
       items: [
-        { label: "Skill Accelerator (Free Trial)", path: "/free-trial" },
+        { label: "Skill Accelerator ", path: "/free-trial" },
         { label: "Training Calendar", path: "/schedule" },
         { label: "Learning Paths", path: "/learning-path" },
         { label: "Course Catalog", path: "/strategic-solution" },
@@ -76,7 +76,7 @@ export default function Navbar() {
       items: [
         { label: "Ready-to-Use IT Products", path: "/product" },
         { label: "Custom App Development", path: "/app-development" },
-        { label: "Software & Cloud Licensing", path: "/certification" },
+        { label: "Technology & Cloud Licensing", path: "/certification" },
       ],
     },
     {

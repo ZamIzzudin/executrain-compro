@@ -23,12 +23,12 @@ export default function TechAdvisory() {
     {
       question: "Do you work with our team or independently?",
       answer:
-        "Most advisory engagements run two to three weeks from kickoff to final  recommendation. Urgent decisions — like a vendor contract deadline — can be compressed to a few days.",
+        "We work closely with your team. Discovery and the technical audit involve your stakeholders, and the final recommendation is walked through with your engineers and decision-makers. That said, our advice stays independent — we're not tied to any vendor, product, or outcome.",
     },
     {
       question: "Is this one time engagement or ongoing?",
       answer:
-        "Most advisory engagements run two to three weeks from kickoff to final  recommendation. Urgent decisions — like a vendor contract deadline — can be compressed to a few days.",
+        "Either, depending on what you need. Most engagements are one-time, decision-focused projects, but we can also set up a retainer for ongoing architecture reviews, vendor evaluations, or quarterly check-ins as your roadmap evolves.",
     },
   ];
 
@@ -38,7 +38,7 @@ export default function TechAdvisory() {
         title="Tech Advisory"
         subtitle="Tech Advisory Page"
         description="Independent technical guidance for teams choosing an architecture,  evaluating a vendor, or deciding what to build next — before the budget  and timeline are locked in."
-        path="/tech-advisory "
+        path="/tech-advisory"
       />
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] items-center">
         <div className="space-y-5 rounded-xl drop-shadow-md">

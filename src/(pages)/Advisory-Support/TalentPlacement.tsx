@@ -71,7 +71,7 @@ export default function TalentPlacement() {
                 </div>
               </div>
               <p className="text-xs text-gray-500 border-t pt-4 border-gray-300">
-                Full-tm on-site IT Support. Engineer (1st level) are deployed
+                Full-time on-site IT Support. Engineer (1st level) are deployed
                 based on required location to ensure business running well.
               </p>
             </div>
