@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, InfoIcon } from "lucide-react";
 import { useAssetContext } from "@/layouts/AssetProvider";
+import LordIcons from "@/components/atoms/LordIcons";
 
 // ── Types ──────────────────────────────────────────────────────────
 type Tone = "red" | "gray";
@@ -206,6 +207,7 @@ export default function FrameworkWheel() {
   const { getAssetUrl } = useAssetContext();
   const frameworkBanner = getAssetUrl("framework_banner");
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const active: Segment | CoreData | undefined =
     activeId === "core" ? CORE : SEGMENTS.find((s) => s.id === activeId);
@@ -220,7 +222,7 @@ export default function FrameworkWheel() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center">
       {/* ── Stage: image + invisible SVG overlay ── */}
-      <div className="mx-auto w-full lg:col-span-4 p-10 lg:p-20">
+      <div className="mx-auto w-full max-w-[500px] lg:col-span-4 p-2 lg:p-4">
         <div className="relative w-full aspect-square">
           {/* Background image (labels are printed on the image itself) */}
           {frameworkBanner && (
@@ -239,6 +241,7 @@ export default function FrameworkWheel() {
             {/* ── Outer ring segments ── */}
             {SEGMENTS.filter((s) => s.ring === "outer").map((seg) => {
               const isActive = activeId === seg.id;
+              const isHovered = hoveredId === seg.id;
               return (
                 <path
                   key={seg.id}
@@ -247,10 +250,12 @@ export default function FrameworkWheel() {
                   fill={outerFill}
                   stroke={outerStroke}
                   strokeWidth={1.2}
-                  fillOpacity={isActive ? 0.55 : 0}
-                  strokeOpacity={isActive ? 1 : 0}
-                  className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out hover:fill-opacity-[0.28] hover:stroke-opacity-90"
+                  fillOpacity={isActive || isHovered ? 0.55 : 0}
+                  strokeOpacity={isActive || isHovered ? 1 : 0}
+                  className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out"
                   onClick={() => toggle(seg.id)}
+                  onMouseEnter={() => setHoveredId(seg.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                 >
                   <title>{seg.label}</title>
                 </path>
@@ -260,6 +265,7 @@ export default function FrameworkWheel() {
             {/* ── Cybersecurity ring: full 360° outermost band ── */}
             {SEGMENTS.filter((s) => s.ring === "cyber").map((seg) => {
               const isActive = activeId === seg.id;
+              const isHovered = hoveredId === seg.id;
               return (
                 <path
                   key={seg.id}
@@ -269,10 +275,12 @@ export default function FrameworkWheel() {
                   fill={outerFill}
                   stroke={outerStroke}
                   strokeWidth={1.2}
-                  fillOpacity={isActive ? 0.55 : 0}
-                  strokeOpacity={isActive ? 1 : 0}
-                  className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out hover:fill-opacity-[0.28] hover:stroke-opacity-90"
+                  fillOpacity={isActive || isHovered ? 0.55 : 0}
+                  strokeOpacity={isActive || isHovered ? 1 : 0}
+                  className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out"
                   onClick={() => toggle(seg.id)}
+                  onMouseEnter={() => setHoveredId(seg.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                 >
                   <title>{seg.label}</title>
                 </path>
@@ -283,6 +291,7 @@ export default function FrameworkWheel() {
             {SEGMENTS.filter((s) => s.ring === "inner").map((seg) => {
               const tone = TONE[seg.tone!];
               const isActive = activeId === seg.id;
+              const isHovered = hoveredId === seg.id;
               return (
                 <path
                   key={seg.id}
@@ -291,10 +300,12 @@ export default function FrameworkWheel() {
                   fill={tone.active}
                   stroke="#ECECEC"
                   strokeWidth={1.6}
-                  fillOpacity={isActive ? 0.55 : 0}
-                  strokeOpacity={isActive ? 1 : 0}
-                  className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out hover:fill-opacity-[0.28] hover:stroke-opacity-90"
+                  fillOpacity={isActive || isHovered ? 0.55 : 0}
+                  strokeOpacity={isActive || isHovered ? 1 : 0}
+                  className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out"
                   onClick={() => toggle(seg.id)}
+                  onMouseEnter={() => setHoveredId(seg.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                 >
                   <title>{seg.label}</title>
                 </path>
@@ -310,10 +321,12 @@ export default function FrameworkWheel() {
               fill="#ffffff"
               stroke="#DD3452"
               strokeWidth={2.5}
-              fillOpacity={activeId === "core" ? 0.35 : 0}
-              strokeOpacity={activeId === "core" ? 1 : 0}
-              className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out hover:fill-opacity-[0.35] hover:stroke-opacity-100"
+              fillOpacity={activeId === "core" || hoveredId === "core" ? 0.35 : 0}
+              strokeOpacity={activeId === "core" || hoveredId === "core" ? 1 : 0}
+              className="cursor-pointer transition-[fill-opacity,stroke-opacity] duration-200 ease-in-out"
               onClick={() => toggle("core")}
+              onMouseEnter={() => setHoveredId("core")}
+              onMouseLeave={() => setHoveredId(null)}
             >
               <title>{CORE.label}</title>
             </circle>
@@ -322,56 +335,79 @@ export default function FrameworkWheel() {
       </div>
 
       {/* ── Panel: detail card (side by side) ── */}
-      <div className="bg-white rounded-xl border border-black/5 shadow-[0px_0px_50px_5px_rgba(0,0,0,0.08)] p-5 md:p-6 min-h-[280px] flex flex-col lg:col-span-3">
-        {!active ? (
-          <div className="m-auto text-center">
-            <span className="text-xs text-gray-600 block">OUR FRAMEWORK</span>
-            <h2 className="font-semibold text-2xl mb-5">
-              Perfomance Improvement Framework
-            </h2>
-            <span className="italic text-xs text-gray-400">
-              Click the diagram for more detail
-            </span>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4 flex-1">
-            <div className="flex items-center gap-3">
-              <div className="space-y-2">
-                <span className="text-sm uppercase tracking-wide text-gray-500 flex items-center gap-2">
-                  <InfoIcon size={14} className="text-primary-500" />
-                  FRAMEWORK DETAILS
+      <div className="lg:col-span-3 flex flex-col justify-center items-end w-full">
+        <div className="w-full p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-4 min-h-[360px]">
+          {!active ? (
+            <div id="framework-empty-card" className="w-full h-full flex flex-col justify-center items-center gap-4 cursor-pointer">
+              <div className="self-stretch flex flex-col justify-start items-start gap-2">
+                <div className="self-stretch inline-flex justify-start items-center gap-2">
+                  <InfoIcon size={16} className="text-rose-700 shrink-0" />
+                  <span className="justify-start text-neutral-400 text-sm font-normal">
+                    FRAMEWORK DETAILS
+                  </span>
+                </div>
+                <h2 className="self-stretch justify-start text-neutral-800 text-2xl font-semibold">
+                  Performance Improvement Framework
+                </h2>
+              </div>
+              <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
+              <div className="self-stretch flex-1 flex flex-col justify-center items-center gap-2 my-4">
+                <LordIcons
+                  src="https://cdn.lordicon.com/tiiukiyg.json"
+                  trigger="hover"
+                  target="#framework-empty-card"
+                  state="hover-pinch"
+                  colors="primary:#f9c9c0,secondary:#bf1e40"
+                  size={72}
+                />
+                <span className="self-stretch text-center justify-start text-neutral-400 text-sm font-normal">
+                  Click on the framework wheel to <br />
+                  view the details
                 </span>
-                <h3 className="font-semibold text-lg leading-tight">
+              </div>
+              <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
+            </div>
+          ) : (
+            <div className="w-full flex flex-col gap-4 flex-1">
+              <div className="self-stretch flex flex-col justify-start items-start gap-2">
+                <div className="self-stretch inline-flex justify-start items-center gap-2">
+                  <InfoIcon size={16} className="text-rose-700 shrink-0" />
+                  <span className="justify-start text-neutral-400 text-sm font-normal">
+                    FRAMEWORK DETAILS
+                  </span>
+                </div>
+                <h3 className="self-stretch justify-start text-neutral-800 text-2xl font-semibold">
                   {active.label}
                 </h3>
               </div>
-            </div>
 
-            <div className="flex-1 flex flex-col justify-between gap-4">
-              <div className="flex flex-col gap-2">
-                {active.items.map((item) => (
-                  <Link
-                    to="/strategic-solution"
-                    key={item}
-                    className="group relative flex items-center gap-2 text-sm text-gray-700 border border-gray-300 rounded-full px-3 py-2 justify-between hover:border-primary-500 hover:text-primary-500 duration-200 cursor-pointer overflow-visible"
-                  >
-                    <span className="font-medium truncate">{item}</span>
-                    <ArrowRight size={14} className="shrink-0" />
-                    {/* Tooltip for long text */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block z-50 pointer-events-none">
-                      <span className="whitespace-nowrap bg-gray-800 text-white text-xs rounded-md px-2.5 py-1.5 shadow-lg block">
+              <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200 my-1" />
+
+              <div className="flex-1 flex flex-col justify-between gap-4">
+                <div className="self-stretch flex flex-col justify-start items-start gap-3">
+                  {active.items.map((item) => (
+                    <Link
+                      to="/strategic-solution"
+                      key={item}
+                      className="self-stretch px-4 py-3 rounded-[100px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] bg-white outline outline-1 outline-offset-[-1px] outline-gray-200 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 hover:outline-rose-700 inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group"
+                    >
+                      <span className="flex-1 justify-start text-sm font-medium text-neutral-800 group-hover:text-rose-700 transition-colors duration-300">
                         {item}
                       </span>
-                    </div>
-                  </Link>
-                ))}
+                      <ArrowRight
+                        size={18}
+                        className="shrink-0 text-neutral-800 group-hover:text-rose-700 transition-colors duration-300"
+                      />
+                    </Link>
+                  ))}
+                </div>
+                <span className="self-stretch text-center justify-start text-neutral-400 text-sm font-normal">
+                  Click to view the details of the class
+                </span>
               </div>
-              <span className="text-xs text-center text-gray-400 w-full block">
-                Click to view the details of the class
-              </span>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

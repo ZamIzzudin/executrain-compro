@@ -32,13 +32,13 @@ export default function CourseCard({
   return (
     <div
       onClick={() => navigate(`${basePath}/${data._id}`)}
-      className="rounded-4xl overflow-hidden shadow-[0px_0px_50px_5px_rgba(0,0,0,0.11)] cursor-pointer"
+      className="rounded-[32px] overflow-hidden shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 cursor-pointer group"
     >
-      <div className="h-36 md:h-48 bg-slate-100 overflow-hidden rounded-4xl">
+      <div className="h-36 md:h-48 bg-slate-100 overflow-hidden rounded-[32px] border-2 border-gray-200 group-hover:border-rose-700 transition-colors duration-300">
         <img
           src={data?.banner?.url || HeroBG}
           alt={data?.banner?.public_id || ""}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
       <div className="p-5 space-y-2">

@@ -144,12 +144,14 @@ export default function TechAdvisory() {
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pb-12 flex flex-col justify-start items-start gap-8 overflow-hidden">
         <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200"></div>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-          <div className="w-full flex justify-center items-center">
-            <img
-              alt="advisory support"
-              src={Advisory}
-              className="w-full max-w-[490px] rounded-[19.59px] shadow-[0px_1.63px_3.26px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-gray-200 object-cover"
-            />
+          <div className="w-full flex justify-start items-center">
+            <div className="w-96 h-60 relative bg-gradient-to-b from-neutral-800/0 to-neutral-800/60 rounded-[19.59px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-gray-200 overflow-hidden group">
+              <img
+                alt="advisory support"
+                src={Advisory}
+                className="w-full h-full object-cover rounded-[19.59px] group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
           <div className="w-full">
             <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-6">
@@ -196,7 +198,7 @@ export default function TechAdvisory() {
         }}
       >
         <div className="text-white mb-4 lg:mb-0">
-          <span className="text-xs md:text-base">
+          <span className="text-xs md:text-sm">
             FREQUENTLY ASKED QUESTION
           </span>
           <h4 className="text-xl md:text-3xl font-semibold">
@@ -277,11 +279,13 @@ export default function TechAdvisory() {
             </div>
           </div>
           <div className="w-full flex justify-center md:justify-end items-center">
-            <img
-              alt="PSA"
-              src={PSA}
-              className="w-full max-w-[490px] rounded-[19.59px] outline outline-1 outline-gray-200 object-cover"
-            />
+            <div className="w-96 h-60 relative bg-gradient-to-b from-neutral-800/0 to-neutral-800/60 rounded-[19.59px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-gray-200 overflow-hidden group">
+              <img
+                alt="PSA"
+                src={PSA}
+                className="w-full h-full object-cover rounded-[19.59px] group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
         </div>
       </section>
