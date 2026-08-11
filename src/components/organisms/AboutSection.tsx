@@ -23,24 +23,37 @@ import AboutC from "@/assets/v2/about-2.png";
 import Vision from "@/assets/v2/about-4.png";
 import Mission from "@/assets/v2/about-5.png";
 
+import PSA from "@/assets/v2/psa.png";
+import Award from "@/assets/v2/award.png";
+
 export default function AboutSection() {
   return (
-    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%] bg-gradient-to-b from-white from-70% to-primary-100 space-y-5">
-      <ServiceCard />
+    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] gap-10 pb-[5%] bg-gradient-to-b from-white from-0% to-gray-200 space-y-5">
       <AboutCard />
-      <TechList />
+      <ServiceCard />
     </section>
   );
 }
 
 export function AboutDetailSection() {
   return (
-    <section className="w-full grid grid-cols-1 md:grid-cols-2 px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%] items-center">
-      <div className="space-y-5">
-        <AboutDetailCard />
-        <VisionCard />
+    <section>
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%] items-center bg-gradient-to-b from-white to-gray-200">
+        <div className="space-y-5">
+          <AboutDetailCard />
+          <VisionCard />
+        </div>
+        <div className="px-[10%]">
+          <img alt="free trial" src={PSA} className="rounded-xl w-full" />
+        </div>
       </div>
-      <AwardCard />
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 px-[5%] md:px-[7%] lg:px-[10%] gap-10 py-[5%] items-center">
+        <div className="px-[10%] space-y-4">
+          <span className="text-xs text-gray-600 block">OUR AWARD</span>
+          <img alt="free trial" src={Award} className="rounded-xl w-full" />
+        </div>
+        <AwardCard />
+      </div>
     </section>
   );
 }
@@ -64,7 +77,7 @@ export function AboutSectionFlat() {
 function AboutCard() {
   const navigate = useNavigate();
   return (
-    <div className="bg-[#ECECEC] p-6 space-y-3 rounded-xl drop-shadow-md">
+    <div className="bg-white p-6 space-y-3 rounded-xl drop-shadow-md">
       <span className="text-xs text-gray-600 block">ABOUT</span>
       <h1 className="text-xl font-semibold">We Transform Result Into Impact</h1>
       <p className="text-xs text-gray-600 my-4">
@@ -86,7 +99,7 @@ function AboutCard() {
 
 function AboutDetailCard() {
   return (
-    <div className="bg-[#ECECEC] p-6 space-y-3 rounded-xl drop-shadow-md">
+    <div className="bg-white p-6 space-y-3 rounded-xl drop-shadow-md">
       <span className="text-xs text-gray-600 block">ABOUT</span>
       <h1 className="text-xl font-semibold">We Transform Result Into Impact</h1>
       <p className="text-xs text-gray-600 my-4">
@@ -110,7 +123,7 @@ function AboutDetailCard() {
 
 function VisionCard() {
   return (
-    <div className="border-1 border-primary-500 p-6 space-y-3 rounded-xl">
+    <div className="border-1 border-primary-500 p-6 space-y-3 rounded-xl bg-white">
       <span className="text-xs text-primary-500 block">VISION</span>
       <div className="flex items-center gap-4">
         <img src={Vision} alt="microsoft logo" />
@@ -134,7 +147,6 @@ function VisionCard() {
 function AwardCard() {
   return (
     <div>
-      <span className="text-xs text-gray-600 block">OUR AWARD</span>
       <div className="mt-5 space-y-3">
         {[
           "The Best Microsoft Authorized Training Center",
@@ -146,10 +158,10 @@ function AwardCard() {
         ].map((each: string) => (
           <div
             key={each}
-            className="flex gap-3 text-primary-500 text-sm items-center shadow-lg border border-gray-200 px-4 py-3 rounded-lg md:rounded-full"
+            className="flex gap-3 text-black text-sm items-center shadow-lg border border-gray-200 px-4 py-3 rounded-lg md:rounded-full hover:text-primary-500 hover:border-primary-500 font-medium cursor-pointer duration-200"
           >
-            <AwardIcon size={20} className="shrink-0" />
-            <p className="text-black">{each}</p>
+            <AwardIcon size={20} className="shrink-0 text-primary-500" />
+            <p>{each}</p>
           </div>
         ))}
       </div>
@@ -159,10 +171,10 @@ function AwardCard() {
 
 function ServiceCard() {
   return (
-    <div className="bg-[#ECECEC] p-6 space-y-3 rounded-xl drop-shadow-md">
+    <div className="bg-white p-6 space-y-3 rounded-xl drop-shadow-md">
       <span className="text-xs text-gray-600 block">WHAT WE CAN DO</span>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center items-center flex">
+        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center items-center flex gap-4">
           <img src={AboutA} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500 max-w-[80%]">
@@ -174,7 +186,7 @@ function ServiceCard() {
             </p>
           </div>
         </div>
-        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex items-center">
+        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex items-center gap-4">
           <img src={AboutB} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500">
@@ -186,7 +198,7 @@ function ServiceCard() {
             </p>
           </div>
         </div>
-        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex items-center">
+        <div className="bg-white p-3 rounded-2xl space-y-2 flex-1 justify-center flex items-center gap-4">
           <img src={AboutC} alt="microsoft logo" className="w-[50%]" />
           <div className="space-y-2">
             <h2 className="font-semibold text-primary-500">
@@ -198,6 +210,49 @@ function ServiceCard() {
             </p>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+export function TechSlider() {
+  const techLogos = [
+    { src: Microsoft, alt: "Microsoft logo" },
+    { src: Google, alt: "Google logo" },
+    { src: Tableu, alt: "Tableau logo" },
+    { src: Pearson, alt: "Pearson logo" },
+    { src: Power, alt: "Power logo" },
+    { src: Azure, alt: "Azure logo" },
+    { src: ReactLogo, alt: "React logo" },
+    { src: Next, alt: "Next.js logo" },
+    { src: Node, alt: "Node.js logo" },
+    { src: Mongo, alt: "MongoDB logo" },
+  ];
+
+  return (
+    <div className="space-y-3 pt-[5%] pb-10">
+      <span className="text-xs text-gray-600 block text-center">
+        TECHNOLOGY BEHIND US
+      </span>
+      <div className="relative w-full">
+        <div className="overflow-hidden">
+          <div className="flex gap-8 animate-infinite-scroll hover:pause-animation">
+            {[...techLogos, ...techLogos, ...techLogos].map((logo, index) => (
+              <div
+                key={`${logo.alt}-${index}`}
+                className="flex-shrink-0 flex items-center justify-center w-[100px] h-[100px]"
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
       </div>
     </div>
   );

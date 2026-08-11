@@ -11,7 +11,7 @@ export default function FreeTrial() {
   return (
     <section className="bg-[#FCFCFC]">
       <CustomHero
-        title="Skill Accelerator (Free Trial)"
+        title="Skill Accelerator "
         subtitle="Skill Accelerator"
         description="An intensive, outcome-focused program designed to rapidly build or upgrade a specific set of competencies."
         path="/free-trial"

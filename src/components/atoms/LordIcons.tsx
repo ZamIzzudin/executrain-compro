@@ -226,7 +226,7 @@ export function LordIcons({
 
     const setupListener = () => {
       targetEl = target
-        ? document.querySelector(target) || iconRef.current?.closest(target)
+        ? (document.querySelector(target) || iconRef.current?.closest(target)) ?? null
         : iconRef.current;
       if (!targetEl) return false;
 
