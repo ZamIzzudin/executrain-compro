@@ -18,7 +18,7 @@ function ScrollToTop() {
 
 export default function RootLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
+    <div className="flex min-h-screen flex-col bg-[#FCFCFC] text-slate-900">
       <ScrollToTop />
       <AssetProvider>
         <Navbar />

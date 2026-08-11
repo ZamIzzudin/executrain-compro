@@ -10,7 +10,7 @@ export default function CaseStudy() {
   const [sort, setSort] = useState<string | undefined>(undefined);
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Case Studies"
         subtitle="Case Studies"

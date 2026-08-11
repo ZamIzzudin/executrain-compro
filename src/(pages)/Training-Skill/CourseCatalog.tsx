@@ -16,7 +16,7 @@ export default function CourseCatalog() {
   const [framework, setFramework] = useState<string | undefined>(undefined);
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Course Catalog"
         subtitle="Course Catalog"

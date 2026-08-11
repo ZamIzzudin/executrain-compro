@@ -110,7 +110,7 @@ export default function CertificationDetail() {
   const selected = data.find((each) => each.id === id);
 
   return (
-    <section className="pt-0 md:pt-[10%] pb-[8%]">
+    <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
         <Link className="opacity-50" to="/">
           Home

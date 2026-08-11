@@ -9,7 +9,7 @@ import PSA from "@/assets/v2/psa.png";
 
 export default function FreeTrial() {
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Skill Accelerator (Free Trial)"
         subtitle="Skill Accelerator"

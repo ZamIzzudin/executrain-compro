@@ -15,7 +15,7 @@ export default function Home() {
   const { data: partner = [], isLoading: partnerLoading } = usePartner();
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <Hero />
       <GallerySlider data={gallery} isLoading={galleryLoading} />
       <AboutSection />

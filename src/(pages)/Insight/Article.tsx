@@ -10,7 +10,7 @@ export default function Article() {
   const [sort, setSort] = useState<string | undefined>(undefined);
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Article"
         subtitle="Article"

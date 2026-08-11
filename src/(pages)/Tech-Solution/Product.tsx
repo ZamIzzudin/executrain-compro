@@ -10,7 +10,7 @@ export default function Product() {
   const [deployment, setDeployment] = useState<string | undefined>(undefined);
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Ready-to-use IT Products"
         subtitle="Ready-to-use IT Products"

@@ -3,7 +3,7 @@ import CTA from "@/components/organisms/CTA";
 
 export default function LearningPath() {
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Learning Paths"
         subtitle="Learning Paths"

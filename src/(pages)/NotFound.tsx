@@ -6,7 +6,7 @@ export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <Compass className="h-12 w-12 text-brand-600" />
         <h1 className="mt-4 text-3xl font-bold text-slate-900">404</h1>

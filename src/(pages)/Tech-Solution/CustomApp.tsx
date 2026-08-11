@@ -19,7 +19,7 @@ export default function CustomApp() {
   const [deployment, setDeployment] = useState<string | undefined>(undefined);
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Custom App Development"
         subtitle="Custom App Development"

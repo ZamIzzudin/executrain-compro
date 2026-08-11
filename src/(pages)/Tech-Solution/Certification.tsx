@@ -35,7 +35,7 @@ export default function Certification() {
   ];
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Technology & Licensing Service"
         subtitle="Technology & Licensing Service"
@@ -108,19 +108,19 @@ export default function Certification() {
               return (
                 <div
                   key={item.question}
-                  className={`border border-white/20 overflow-hidden bg-white/30 ${isOpen ? "rounded-3xl" : "rounded-full"}`}
+                  className={`border border-white/20 overflow-hidden bg-white/30 cursor-pointer ${isOpen ? "rounded-3xl" : "rounded-full"}`}
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaq(isOpen ? null : index)}
-                    className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left text-white hover:bg-white/10 transition-colors"
+                    className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left text-white hover:bg-white/10 transition-colors cursor-pointer"
                     aria-expanded={isOpen}
                   >
                     <span className="text-sm md:text-base font-medium">
                       {item.question}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-primary-500 transition-transform duration-300 ${
+                      className={`w-5 h-5 shrink-0 text-white cursor-pointer transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     />

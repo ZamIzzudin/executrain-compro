@@ -10,7 +10,7 @@ import CustomHero from "@/components/organisms/hero/CustomHero";
 
 export default function About() {
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="About Us"
         subtitle="About"
