@@ -5,11 +5,10 @@ import CustomHero from "@/components/organisms/hero/CustomHero";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, CheckCircleIcon } from "lucide-react";
 
-import AdvisoryA from "@/assets/v2/advisory-1.png";
-import AdvisoryB from "@/assets/v2/advisoty-2.png";
-import AdvisoryC from "@/assets/v2/advisory-3.png";
 import Advisory from "@/assets/v2/advisory.png";
 import PSA from "@/assets/v2/psa.png";
+import { LordIcons } from "@/components/atoms";
+
 
 export default function TechAdvisory() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -43,66 +42,119 @@ export default function TechAdvisory() {
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] items-center">
         <div className="space-y-5 rounded-xl drop-shadow-md">
           <div className="space-y-2">
-            <h3 className="text-lg md:text-xl font-semibold">
+            <h3 className="text-lg md:text-2xl font-semibold">
               How The Advisory Work
             </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
-              <div className="flex items-center gap-3">
-                <img
-                  src={AdvisoryA}
-                  alt="microsoft logo"
-                  className="max-w-[25%]"
-                />
-                <h2 className="font-semibold">
-                  What <span className="text-primary-500">framework</span> do we
-                  use?
-                </h2>
+            <div
+              id="advisory-card-1"
+              className="w-full px-4 pt-4 pb-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 inline-flex flex-col justify-start items-center gap-3 transition-all duration-300 cursor-pointer"
+            >
+              <div className="self-stretch inline-flex justify-start items-center gap-3">
+                <div className="p-1 bg-stone-50 rounded-xl outline outline-[0.25px] outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
+                  <LordIcons
+                    src="https://cdn.lordicon.com/zuitvaic.json"
+                    trigger="hover"
+                    target="#advisory-card-1"
+                    state="hover-pinch"
+                    colors="primary:#bf1e40,secondary:#ffc738,tertiary:#3a3347"
+                    size={40}
+                  />
+                </div>
+                <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
+                  <div className="self-stretch justify-start">
+                    <span className="text-neutral-800 text-base font-medium ">
+                      What{" "}
+                    </span>
+                    <span className="text-rose-700 text-base font-medium">
+                      framework{" "}
+                    </span>
+                    <span className="text-neutral-800 text-base font-medium ">
+                      do we use?
+                    </span>
+                  </div>
+                </div>
               </div>
-              <p className="text-xs text-gray-500 border-t pt-4 border-gray-300">
+              <div className="self-stretch h-0 outline outline-[0.25px] outline-offset-[-0.50px] outline-gray-200"></div>
+              <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
                 Every decision is weighed against three lenses: total cost of
                 ownership, your team's real capability, and time-to-value. No
                 framework gets applied blindly — we adapt it to what your team
                 can actually maintain after we leave.
-              </p>
-            </div>
-            <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
-              <div className="flex items-center gap-3">
-                <img
-                  src={AdvisoryB}
-                  alt="microsoft logo"
-                  className="max-w-[25%]"
-                />
-                <h2 className="font-semibold">
-                  How about the{" "}
-                  <span className="text-primary-500">advisory</span> Method?
-                </h2>
               </div>
-              <p className="text-xs text-gray-500 border-t pt-4 border-gray-300">
+            </div>
+            <div
+              id="advisory-card-2"
+              className="w-full px-4 pt-4 pb-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 inline-flex flex-col justify-start items-center gap-3 transition-all duration-300 cursor-pointer"
+            >
+              <div className="self-stretch inline-flex justify-start items-center gap-3">
+                <div className="p-1 bg-stone-50 rounded-xl outline outline-[0.25px] outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
+                  <LordIcons
+                    src="https://cdn.lordicon.com/uujuddgu.json"
+                    trigger="hover"
+                    target="#advisory-card-2"
+                    state="hover-pinch"
+                    colors="primary:#ebe6ef,secondary:#ffc738,tertiary:#e37048,quaternary:#be1e40,quinary:#47c4e4"
+                    size={40}
+                  />
+                </div>
+                <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
+                  <div className="self-stretch justify-start">
+                    <span className="text-neutral-800 text-base font-medium">
+                      How about the{" "}
+                    </span>
+                    <span className="text-rose-700 text-base font-medium">
+                      advisory{" "}
+                    </span>
+                    <span className="text-neutral-800 text-base font-medium">
+                      Method?
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-0 outline outline-[0.25px] outline-offset-[-0.50px] outline-gray-200"></div>
+              <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
                 A discovery call, a technical audit of your current stack or
                 proposal, a written recommendation with the trade-offs spelled
                 out, and a follow-up session to walk through it with your team.
-              </p>
-            </div>
-            <div className="bg-white p-5 rounded-2xl space-y-2 flex-1 flex-col flex">
-              <div className="flex items-center gap-3">
-                <img
-                  src={AdvisoryC}
-                  alt="microsoft logo"
-                  className="max-w-[25%]"
-                />
-                <h2 className="font-semibold">
-                  What would you{" "}
-                  <span className="text-primary-500">expect</span> on this
-                  services?
-                </h2>
               </div>
-              <p className="text-xs text-gray-500 border-t pt-4 border-gray-300">
+            </div>
+            <div
+              id="advisory-card-3"
+              className="w-full px-4 pt-4 pb-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 inline-flex flex-col justify-start items-center gap-3 transition-all duration-300 cursor-pointer"
+            >
+              <div className="self-stretch inline-flex justify-start items-center gap-3">
+                <div className="p-1 bg-stone-50 rounded-xl outline outline-[0.25px] outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
+                  <LordIcons
+                    src="https://cdn.lordicon.com/jzspergk.json"
+                    trigger="hover"
+                    target="#advisory-card-3"
+                    state="hover-pinch"
+                    colors="primary:#47c4e4,secondary:#f9c9c0,tertiary:#be1e40,quaternary:#ebe6ef"
+                    size={40}
+                  />
+                </div>
+                <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
+                  <div className="self-stretch justify-start">
+                    <span className="text-neutral-800 text-base font-medium">
+                      What would you{" "}
+                    </span>
+                    <span className="text-rose-700 text-base font-medium">
+                      expect{" "}
+                    </span>
+                    <span className="text-neutral-800 text-base font-medium">
+                      on this services?
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-0 outline outline-[0.25px] outline-offset-[-0.50px] outline-gray-200"></div>
+              <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
                 A clear, documented recommendation — not a slide deck. You'll
                 know what to build, what to buy, and what to avoid, in language
                 your whole team can act on immediately.
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -176,9 +228,8 @@ export default function TechAdvisory() {
                       {item.question}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-primary-500 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-5 h-5 shrink-0 text-primary-500 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                   <AnimatePresence initial={false}>

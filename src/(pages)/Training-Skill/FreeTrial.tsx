@@ -1,7 +1,7 @@
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import { CheckCircleIcon } from "lucide-react";
+import { LordIcons } from "@/components/atoms";
 
-import FreeTriaIcon from "@/assets/v2/free-trial.gif";
 import CTA from "@/components/organisms/CTA";
 import FreeTrialList from "@/components/organisms/FreeTrialList";
 
@@ -17,13 +17,18 @@ export default function FreeTrial() {
         path="/free-trial"
       />
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] grid grid-cols-1 md:grid-cols-2 items-center gap-6">
-        <div className="bg-white p-5 md:p-6 space-y-5 rounded-2xl drop-shadow-md border border-gray-300">
+        <div id="psa-card" className="bg-white p-5 md:p-6 space-y-5 rounded-2xl drop-shadow-md border border-gray-300">
           <div className="flex items-center gap-3">
-            <img
-              src={FreeTriaIcon}
-              alt="free trial icon"
-              className="aspect-square max-h-[50px]"
-            />
+            <div className="p-1.5 bg-stone-50 rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden shrink-0">
+              <LordIcons
+                src="https://cdn.lordicon.com/lvmykwmd.json"
+                trigger="hover"
+                target="#psa-card"
+                state="hover-pinch"
+                colors="primary:#3a3347,secondary:#ebe6ef,tertiary:#ffc738,quaternary:#3080e8,quinary:#121331"
+                size={40}
+              />
+            </div>
             <div className="space-y-2">
               <span className="text-xs text-gray-600 block">ABOUT PSA</span>
               <h3 className="text-lg md:text-xl font-semibold">
