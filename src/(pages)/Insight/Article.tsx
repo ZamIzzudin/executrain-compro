@@ -12,11 +12,12 @@ export default function Article() {
   return (
     <section className="bg-[#FCFCFC]">
       <CustomHero
-        title="Article"
+        title="Our Article"
         subtitle="Article"
         description="Insights, tips, and practical knowledge to help you stay ahead in technology, business skills, and workplace productivity."
         path="/article"
-      >
+      />
+      <section className="px-[5%] md:px-[7%] lg:px-[10%] pt-12 pb-[5%] space-y-8">
         <ArticleFilter
           searchValue={search}
           categoryValue={category}
@@ -25,8 +26,6 @@ export default function Article() {
           onCategoryChange={setCategory}
           onSortChange={setSort}
         />
-      </CustomHero>
-      <section className="py-[5%]">
         <ArticleList name="Showing Newest Article" type={"it_training"} />
       </section>
     </section>
