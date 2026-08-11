@@ -1,6 +1,6 @@
 import Hero from "@/components/organisms/hero/Hero";
 import GallerySlider from "@/components/organisms/GallerySlider";
-import AboutSection from "@/components/organisms/AboutSection";
+import AboutSection, { TechSlider } from "@/components/organisms/AboutSection";
 import FrameworkBanner from "@/components/organisms/Framework";
 import TestimoniList from "@/components/organisms/Testimoni";
 import ServiceList from "@/components/organisms/Service";
@@ -18,6 +18,7 @@ export default function Home() {
     <section>
       <Hero />
       <GallerySlider data={gallery} isLoading={galleryLoading} />
+      <TechSlider />
       <AboutSection />
       <FrameworkBanner />
       <ServiceList />
