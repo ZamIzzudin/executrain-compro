@@ -22,7 +22,7 @@ export default function CustomHero({
 }>) {
   return (
     <div
-      className="w-full min-h-[55dvh] md:min-h-[70dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%] py-20 md:py-0"
+      className="w-full h-fit pt-20 md:pt-30 pb-5 text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
         backgroundImage: `linear-gradient(#242424CC, #242424CC), url(${banner})`,
         backgroundSize: "cover",
@@ -37,7 +37,7 @@ export default function CustomHero({
           <ChevronRight className="w-4 h-4" />
           <Link to={path}>{subtitle}</Link>
         </div>
-        <div className="pb-6 md:pb-10 border-b space-y-3 md:space-y-4 w-full">
+        <div className="pb-6 md:pb-10 space-y-3 md:space-y-4 w-full">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
             {title}
           </h1>
