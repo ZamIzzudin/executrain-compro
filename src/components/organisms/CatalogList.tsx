@@ -55,7 +55,7 @@ export default function CatalogList({
   };
 
   return (
-    <section className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
+    <section className="w-full">
       <FadeInUp delay={0.1} duration={0.5}>
         <h2 className="font-semibold text-2xl mb-5 capitalize">{name}</h2>
       </FadeInUp>

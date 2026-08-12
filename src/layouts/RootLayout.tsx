@@ -22,7 +22,7 @@ export default function RootLayout() {
       <ScrollToTop />
       <AssetProvider>
         <Navbar />
-        <main className="flex-1 mt-[-7%] overflow-x-hidden">
+        <main className="flex-1 mt-[-7%]">
           <Outlet />
         </main>
         <Footer />

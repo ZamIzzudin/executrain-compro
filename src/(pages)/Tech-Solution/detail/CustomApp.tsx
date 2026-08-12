@@ -30,16 +30,16 @@ export default function CustomAppDetail() {
   return (
     <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
-        <Link className="opacity-50" to="/">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/app-development">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/app-development">
           Custom App Development
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
         <Link
-          className="text-primary-500"
+          className="text-rose-700 hover:opacity-80 transition-opacity duration-200"
           to={`/app-development/${product._id}`}
         >
           {product.product_name}

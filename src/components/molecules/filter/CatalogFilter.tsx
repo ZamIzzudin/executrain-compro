@@ -39,35 +39,41 @@ export default function CatalogFilter({
   onFrameworkChange,
 }: Readonly<CatalogFilterProps>) {
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-start w-full max-w-4xl">
-      <SearchBar
-        label="Search"
-        value={searchValue}
-        onChange={onSearchChange}
-        placeholder="Search course..."
-        variant="glass"
-        className="flex-1"
-      />
+    <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
+      <div className="w-full sm:w-[466px]">
+        <SearchBar
+          label="Search Course"
+          value={searchValue}
+          onChange={onSearchChange}
+          placeholder="Search for a course..."
+          variant="default"
+          className="w-full"
+        />
+      </div>
 
-      <FilterDropdown
-        label="Category"
-        value={categoryValue}
-        onChange={onCategoryChange}
-        options={CATEGORIES}
-        placeholder="All Categories"
-        variant="primary"
-        className="w-full md:w-52"
-      />
+      <div className="w-full sm:w-44">
+        <FilterDropdown
+          label="Category"
+          value={categoryValue}
+          onChange={onCategoryChange}
+          options={CATEGORIES}
+          placeholder="All Category"
+          variant="primary"
+          className="w-full"
+        />
+      </div>
 
-      <FilterDropdown
-        label="Framework"
-        value={frameworkValue}
-        onChange={onFrameworkChange}
-        options={FRAMEWORKS}
-        placeholder="All Frameworks"
-        variant="primary"
-        className="w-full md:w-52"
-      />
+      <div className="w-full sm:w-44">
+        <FilterDropdown
+          label="Framework"
+          value={frameworkValue}
+          onChange={onFrameworkChange}
+          options={FRAMEWORKS}
+          placeholder="All Framework"
+          variant="primary"
+          className="w-full"
+        />
+      </div>
     </div>
   );
 }

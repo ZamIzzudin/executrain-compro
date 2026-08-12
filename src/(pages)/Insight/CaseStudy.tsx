@@ -16,7 +16,8 @@ export default function CaseStudy() {
         subtitle="Case Studies"
         description="Dive in to see real-world applications of our technology and discover how we can help your organization thrive."
         path="/case-study"
-      >
+      />
+      <section className="px-[5%] md:px-[7%] lg:px-[10%] pt-12 pb-[5%] space-y-8">
         <CaseStudyFilter
           searchValue={search}
           categoryValue={category}
@@ -25,8 +26,6 @@ export default function CaseStudy() {
           onCategoryChange={setCategory}
           onSortChange={setSort}
         />
-      </CustomHero>
-      <section className="py-[5%]">
         <ArticleList name="Showing Newest Case Studies" type={"it_training"} basePath="/case-study" />
       </section>
     </section>

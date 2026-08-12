@@ -31,11 +31,11 @@ export default function CustomHero({
     >
       <div className="flex flex-col gap-4 md:gap-5 items-start max-w-full w-full">
         <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap">
-          <Link className="opacity-50" to="/">
+          <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
             Home
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link to={path}>{subtitle}</Link>
+          <Link className="hover:opacity-80 transition-opacity duration-200" to={path}>{subtitle}</Link>
         </div>
         <div className="pb-6 md:pb-10 border-b space-y-3 md:space-y-4 w-full">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">

@@ -28,7 +28,7 @@ export default function About() {
       <StatSection />
       <Step />
       <ServiceList />
-      <TechSlider />
+      <TechSlider bgColor="bg-[#FCFCFC]" />
       <CTA
         title="Ready to Work With Us?"
         description="Chat our sales for detailed information"

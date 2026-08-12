@@ -29,15 +29,15 @@ export default function ArticleDetail() {
   return (
     <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
-        <Link className="opacity-50" to="/">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/article">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/article">
           Article
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-primary-500" to={`/article/${article._id}`}>
+        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/article/${article._id}`}>
           {article.product_name}
         </Link>
       </div>
@@ -143,7 +143,7 @@ export default function ArticleDetail() {
             </span>
             <div className="self-stretch p-4 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 flex flex-col justify-center items-center gap-3 group cursor-pointer">
               <div className="self-stretch inline-flex justify-start items-center gap-3">
-                <div className="w-20 h-20 relative bg-slate-100 rounded-3xl border-2 border-gray-200 group-hover:border-rose-700 overflow-hidden shrink-0 transition-colors duration-300">
+                <div className="w-20 h-20 relative bg-slate-100 rounded-3xl border-2 border-gray-200 overflow-hidden shrink-0">
                   <img
                     alt="Product banner"
                     src={Article}
@@ -212,7 +212,7 @@ export default function ArticleDetail() {
                   key={item.title}
                   className="self-stretch p-3 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group"
                 >
-                  <div className="w-20 h-20 relative bg-slate-100 rounded-3xl border-2 border-gray-200 group-hover:border-rose-700 overflow-hidden shrink-0 transition-colors duration-300">
+                  <div className="w-20 h-20 relative bg-slate-100 rounded-3xl border-2 border-gray-200 overflow-hidden shrink-0">
                     <img
                       alt={item.title}
                       src={Article}

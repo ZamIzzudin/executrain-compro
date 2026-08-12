@@ -320,7 +320,7 @@ function ServiceCard() {
   );
 }
 
-export function TechSlider() {
+export function TechSlider({ bgColor = "bg-white" }: Readonly<{ bgColor?: string }>) {
   const techLogos = [
     { src: Microsoft, alt: "Microsoft logo" },
     { src: Google, alt: "Google logo" },
@@ -334,8 +334,10 @@ export function TechSlider() {
     { src: Mongo, alt: "MongoDB logo" },
   ];
 
+  const fadeBgFrom = bgColor === "bg-[#FCFCFC]" ? "from-[#FCFCFC]" : "from-white";
+
   return (
-    <div className="space-y-3 pt-[5%] pb-10 bg-white">
+    <div className={`space-y-3 pt-[5%] pb-10 ${bgColor}`}>
       <span className="text-xs text-gray-600 block text-center">
         TECHNOLOGY BEHIND US
       </span>
@@ -356,8 +358,8 @@ export function TechSlider() {
             ))}
           </div>
         </div>
-        <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+        <div className={`absolute top-0 left-0 w-20 h-full bg-gradient-to-r ${fadeBgFrom} to-transparent pointer-events-none z-10`} />
+        <div className={`absolute top-0 right-0 w-20 h-full bg-gradient-to-l ${fadeBgFrom} to-transparent pointer-events-none z-10`} />
       </div>
     </div>
   );

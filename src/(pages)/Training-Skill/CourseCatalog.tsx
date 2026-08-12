@@ -22,7 +22,8 @@ export default function CourseCatalog() {
         subtitle="Course Catalog"
         description="Whether you want to master a new software, sharpen your leadership abilities, or earn an industry-recognized credential, your next breakthrough is right here."
         path="/strategic-solution"
-      >
+      />
+      <section className="px-[5%] md:px-[7%] lg:px-[10%] pt-12 pb-[5%] space-y-8">
         <CatalogFilter
           searchValue={search}
           categoryValue={category}
@@ -31,11 +32,11 @@ export default function CourseCatalog() {
           onCategoryChange={setCategory}
           onFrameworkChange={setFramework}
         />
-      </CustomHero>
-      <section className="py-[5%] space-y-5">
-        {FRAMEWORK_LIST.map((each) => (
-          <CatalogList name={each} type={"it_training"} key={each} />
-        ))}
+        <div className="space-y-8">
+          {FRAMEWORK_LIST.map((each) => (
+            <CatalogList name={each} type={"it_training"} key={each} />
+          ))}
+        </div>
       </section>
 
       <CTA />

@@ -34,26 +34,30 @@ export default function ProductFilter({
   onDeployChange,
 }: Readonly<CatalogFilterProps>) {
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-start max-w-4xl">
-      <FilterDropdown
-        label="Tech Stack"
-        value={techValue}
-        onChange={onTechChange}
-        options={TECH}
-        placeholder="All Tech Stack"
-        variant="primary"
-        className="w-full md:w-52"
-      />
+    <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
+      <div className="w-full sm:w-44">
+        <FilterDropdown
+          label="Tech Stack"
+          value={techValue}
+          onChange={onTechChange}
+          options={TECH}
+          placeholder="All Tech Stack"
+          variant="primary"
+          className="w-full"
+        />
+      </div>
 
-      <FilterDropdown
-        label="Deployment"
-        value={deployValue}
-        onChange={onDeployChange}
-        options={DEPLOY}
-        placeholder="All Deployment"
-        variant="primary"
-        className="w-full md:w-52"
-      />
+      <div className="w-full sm:w-44">
+        <FilterDropdown
+          label="Deployment"
+          value={deployValue}
+          onChange={onDeployChange}
+          options={DEPLOY}
+          placeholder="All Deployment"
+          variant="primary"
+          className="w-full"
+        />
+      </div>
     </div>
   );
 }

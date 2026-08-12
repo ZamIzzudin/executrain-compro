@@ -195,7 +195,7 @@ export default function TalentPlacement() {
                       </div>
                       <div className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed">
                         {each.items.map((item: string, i: number) => (
-                          <div key={i}>{item}</div>
+                          <div key={i}>• {item}</div>
                         ))}
                       </div>
                     </div>

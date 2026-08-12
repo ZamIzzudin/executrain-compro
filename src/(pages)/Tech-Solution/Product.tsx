@@ -16,16 +16,9 @@ export default function Product() {
         subtitle="Ready-to-use IT Products"
         description="These software solutions streamline operations, enhance productivity, and equip your team with the tools they need to thrive in a competitive landscape."
         path="/product"
-      >
-        <ProductFilter
-          techValue={tech}
-          deployValue={deployment}
-          onTechChange={setTech}
-          onDeployChange={setDeployment}
-        />
-      </CustomHero>
+      />
 
-      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] items-center">
+      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-white rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200 flex flex-col justify-start items-center gap-8">
         <div className="self-stretch p-6 bg-stone-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-6">
           <div className="self-stretch flex flex-col justify-start items-start gap-2">
             <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
@@ -36,11 +29,12 @@ export default function Product() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+            {/* Card 1: Active / Highlighted */}
             <div
               id="deliverable-card-1"
-              className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
+              className="w-full p-5 bg-gradient-to-b from-white to-pink-50 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-rose-700 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
                 <LordIcons
                   src="https://cdn.lordicon.com/lldhrpsv.json"
                   trigger="hover"
@@ -51,7 +45,7 @@ export default function Product() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-rose-700 group-hover:text-rose-700 text-base font-semibold">
                   Business Process Digitalization
                 </div>
                 <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
@@ -60,11 +54,12 @@ export default function Product() {
               </div>
             </div>
 
+            {/* Card 2 */}
             <div
               id="deliverable-card-2"
               className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden transition-colors duration-300">
                 <LordIcons
                   src="https://cdn.lordicon.com/cnbqxixv.json"
                   trigger="hover"
@@ -75,20 +70,21 @@ export default function Product() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold transition-colors duration-300">
                   Data Analytics and Dashboard
                 </div>
-                <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
-                  Real-time interactive dashboards for tracking.
+                <div className="self-stretch justify-start text-neutral-400 group-hover:text-zinc-600 text-sm font-normal transition-colors duration-300">
+                  Real-time interactive dashboards for metric tracking.
                 </div>
               </div>
             </div>
 
+            {/* Card 3 */}
             <div
               id="deliverable-card-3"
               className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden transition-colors duration-300">
                 <LordIcons
                   src="https://cdn.lordicon.com/ndbacbli.json"
                   trigger="hover"
@@ -99,20 +95,21 @@ export default function Product() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold transition-colors duration-300">
                   Business Intelligence
                 </div>
-                <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
+                <div className="self-stretch justify-start text-neutral-400 group-hover:text-zinc-600 text-sm font-normal transition-colors duration-300">
                   A structured reporting suite for strategic insights.
                 </div>
               </div>
             </div>
 
+            {/* Card 4 */}
             <div
               id="deliverable-card-4"
               className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden transition-colors duration-300">
                 <LordIcons
                   src="https://cdn.lordicon.com/nxmhrpbr.json"
                   trigger="hover"
@@ -123,10 +120,10 @@ export default function Product() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold transition-colors duration-300">
                   Artificial Intelligence Support
                 </div>
-                <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
+                <div className="self-stretch justify-start text-neutral-400 group-hover:text-zinc-600 text-sm font-normal transition-colors duration-300">
                   Integrated AI modules for predictive recommendations.
                 </div>
               </div>
@@ -135,11 +132,18 @@ export default function Product() {
         </div>
       </section>
 
-      <section className="py-[5%]">
+      <section className="pt-12 pb-[5%] space-y-8">
         <ProductList
           name="Our Ready-to-use IT Product Catalog"
           type={"it_training"}
-        />
+        >
+          <ProductFilter
+            techValue={tech}
+            deployValue={deployment}
+            onTechChange={setTech}
+            onDeployChange={setDeployment}
+          />
+        </ProductList>
       </section>
       <CTA />
     </section>
