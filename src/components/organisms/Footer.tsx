@@ -13,24 +13,23 @@ const footerLinks: { title: string; items: { label: string; path: string }[] }[]
   {
     title: "Training & Skills",
     items: [
-      { label: "Skill Accelerator ", path: "/free-trial" },
-      { label: "Training Calendar", path: "/schedule" },
+      { label: "Skill Accelerator ", path: "/skill-accelerator" },
       { label: "Learning Paths", path: "/learning-path" },
-      { label: "Course Catalog", path: "/strategic-solution" },
+      { label: "Course Catalog", path: "/course-catalog" },
     ],
   },
   {
     title: "Tech Solutions",
     items: [
-      { label: "Ready-to-Use IT Products", path: "/product" },
+      { label: "Ready-to-Use IT Products", path: "/it-product" },
       { label: "Custom App Development", path: "/app-development" },
-      { label: "Technology & Cloud Licensing", path: "/certification" },
+      { label: "Technology & Cloud Licensing", path: "/licensing" },
     ],
   },
   {
     title: "Advisory Support",
     items: [
-      { label: "Support Advisory", path: "/tech-advisory" },
+      { label: "Tech Advisory", path: "/tech-advisory" },
       { label: "Implementation & Support", path: "/implementation-support" },
       { label: "IT Talent Placement", path: "/talent-placement" },
     ],
@@ -51,7 +50,7 @@ export default function Footer() {
     <footer className="bg-[#242424] ">
       <div className="w-full text-white grid grid-cols-1 md:grid-cols-3 px-[5%] md:px-[7%] lg:px-[10%] py-[3%] gap-10">
         <div className="flex flex-col space-y-10 items-start md:items-start">
-          <Link to="/">
+          <Link to="/" className="hover:opacity-75 transition-opacity duration-200">
             <img src="./logo.png" alt="logo" className="w-30 lg:w-50 h-auto" />
           </Link>
           <div className="flex flex-col gap-4 text-sm">
@@ -75,6 +74,7 @@ export default function Footer() {
                   socmedData?.find((each: any) => each.socmed_name === "GMAIL")
                     ?.socmed_link || "sales@executrain.co.id"
                 }`}
+                className="hover:opacity-75 transition-opacity duration-200"
               >
                 {socmedData?.find((each: any) => each.socmed_name === "GMAIL")
                   ?.socmed_link || "sales@executrain.co.id"}
@@ -102,7 +102,9 @@ export default function Footer() {
                 <div className="flex flex-col gap-4">
                   {column.items.map((item) => (
                     <span key={item.label}>
-                      <Link to={item.path}>{item.label}</Link>
+                      <Link to={item.path} className="hover:opacity-75 transition-opacity duration-200">
+                        {item.label}
+                      </Link>
                     </span>
                   ))}
                 </div>
@@ -115,7 +117,9 @@ export default function Footer() {
                 <div className="flex flex-col gap-4">
                   {insightLinks.map((item) => (
                     <span key={item.label}>
-                      <Link to={item.path}>{item.label}</Link>
+                      <Link to={item.path} className="hover:opacity-75 transition-opacity duration-200">
+                        {item.label}
+                      </Link>
                     </span>
                   ))}
                 </div>
@@ -143,7 +147,7 @@ export default function Footer() {
                             to={each.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="max-w-5"
+                            className="max-w-5 hover:opacity-75 transition-opacity duration-200"
                           >
                             <img
                               src={each.icon}

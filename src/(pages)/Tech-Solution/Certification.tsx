@@ -37,10 +37,10 @@ export default function Certification() {
   return (
     <section className="bg-[#FCFCFC]">
       <CustomHero
-        title="Technology & Licensing Service"
-        subtitle="Technology & Licensing Service"
-        description="At our company, we offer top-notch software and licensing services, partnering with industry giants like Microsoft and Google."
-        path="/certification"
+        title="Technology & Cloud Licensing"
+        subtitle="Technology & Cloud Licensing"
+        description="Providing genuine software licenses and cloud solution subscriptions from top global vendors to ensure your IT infrastructure is secure, compliant, and fully optimized."
+        path="/licensing"
       />
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] items-center">
         <FadeInUp delay={0.2} duration={0.5}>
@@ -60,29 +60,44 @@ export default function Certification() {
             <img src={IBM} alt="microsoft logo" />
           </div>
         </div>
-        <div className="grid  grid-cols-1 lg:grid-cols-2 items-center gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-5">
           <FadeInUp delay={0.2} duration={0.5}>
             <h2 className="text-3xl font-semibold">Featured Vendor</h2>
-            <span className="text-sm text-gray-400 block mx-auto mt-2">
+            <p className="text-sm text-gray-500 block mt-2 leading-relaxed">
               Genuine software licenses from{" "}
-              <span className="font-medium text-primary-500">
+              <span className="font-semibold text-rose-700">
                 trusted vendors
               </span>{" "}
               to keep your business secure, compliant, and fully supported.
-            </span>
+            </p>
           </FadeInUp>
-          <div className="flex flex-wrap justify-evenly gap-4 mt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+            {/* Sophos Vendor Card */}
             <Link
-              to="/certification/sophos"
-              className="min-h-[100px] flex items-center bg-[#ECECEC] rounded-xl shadow-md hover:bg-gray-300 duration-200 flex-1"
+              to="/licensing/sophos"
+              className="p-5 bg-white rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 cursor-pointer group flex flex-col justify-between items-center gap-0 text-center"
             >
-              <img src={Sophos} alt="microsoft logo" />
+              <div className="h-24 w-full flex items-center justify-center p-2 overflow-hidden">
+                <img src={Sophos} alt="Sophos logo" className="max-h-full max-w-full object-contain" />
+              </div>
+              <div className="inline-flex items-center gap-2 text-rose-700 text-sm font-medium hover:underline">
+                <span>View Detail</span>
+                <ChevronDown size={16} className="-rotate-90 text-rose-700 group-hover:translate-x-1 transition-transform duration-300" />
+              </div>
             </Link>
+
+            {/* Microsoft Vendor Card */}
             <Link
-              to="/certification/microsoft"
-              className="min-h-[100px] flex items-center bg-[#ECECEC] rounded-xl shadow-md hover:bg-gray-300 duration-200 flex-1"
+              to="/licensing/microsoft"
+              className="p-5 bg-white rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 cursor-pointer group flex flex-col justify-between items-center gap-0 text-center"
             >
-              <img src={Microsoft} alt="microsoft logo" />
+              <div className="h-24 w-full flex items-center justify-center p-2 overflow-hidden">
+                <img src={Microsoft} alt="Microsoft logo" className="max-h-full max-w-full object-contain" />
+              </div>
+              <div className="inline-flex items-center gap-2 text-rose-700 text-sm font-medium hover:underline">
+                <span>View Detail</span>
+                <ChevronDown size={16} className="-rotate-90 text-rose-700 group-hover:translate-x-1 transition-transform duration-300" />
+              </div>
             </Link>
           </div>
         </div>
@@ -96,7 +111,7 @@ export default function Certification() {
         }}
       >
         <div className="text-white mb-4 lg:mb-0">
-          <span className="text-xs md:text-base">FAQ & COMPLIANCE GUIDE</span>
+          <span className="text-xs md:text-sm">FAQ & COMPLIANCE GUIDE</span>
           <h4 className="text-xl md:text-3xl font-semibold">
             Before You Commit.
           </h4>
@@ -120,9 +135,8 @@ export default function Certification() {
                       {item.question}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-white cursor-pointer transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-5 h-5 shrink-0 text-white cursor-pointer transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                   <AnimatePresence initial={false}>

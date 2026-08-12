@@ -49,7 +49,7 @@ export default function ProductList({
             size="sm"
             type="outline-primary"
             icon={<ArrowRightIcon size={18} />}
-            onClick={() => navigate("/strategic-solution")}
+            onClick={() => navigate("/course-catalog")}
           />
         </FadeInUp>
       )}

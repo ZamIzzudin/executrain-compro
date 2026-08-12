@@ -22,7 +22,7 @@ export interface ProductCardData {
 
 export default function CourseCard({
   data,
-  basePath = "/strategic-solution",
+  basePath = "/course-catalog",
 }: Readonly<{
   data: ProductCardData;
   basePath?: string;

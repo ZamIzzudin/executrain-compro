@@ -15,7 +15,7 @@ export default function Product() {
         title="Ready-to-use IT Products"
         subtitle="Ready-to-use IT Products"
         description="These software solutions streamline operations, enhance productivity, and equip your team with the tools they need to thrive in a competitive landscape."
-        path="/product"
+        path="/it-product"
       />
 
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-white rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200 flex flex-col justify-start items-center gap-8">

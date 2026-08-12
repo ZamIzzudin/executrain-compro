@@ -49,11 +49,11 @@ export default function FreeTrialDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/free-trial">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/skill-accelerator">
           Skill Accelerator
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-primary-500 hover:opacity-80 transition-opacity duration-200" to={`/free-trial/${product._id}`}>
+        <Link className="text-primary-500 hover:opacity-80 transition-opacity duration-200" to={`/skill-accelerator/${product._id}`}>
           {product.product_name}
         </Link>
       </div>
@@ -299,7 +299,7 @@ export default function FreeTrialDetail() {
       <RelatedList
         type="it_training"
         name="Related Courses"
-        basePath="/free-trial"
+        basePath="/skill-accelerator"
       />
     </section>
   );

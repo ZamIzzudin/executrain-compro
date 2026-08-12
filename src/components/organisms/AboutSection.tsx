@@ -246,7 +246,7 @@ function ServiceCard() {
       id: "service-card-1",
       title: "Building Real Skills",
       desc: "Equipping people with practical skills to turn daily challenges into lasting impacts.",
-      path: "/strategic-solution",
+      path: "/course-catalog",
       lordIcon: {
         src: "https://cdn.lordicon.com/mdgonzfn.json",
         trigger: "hover",

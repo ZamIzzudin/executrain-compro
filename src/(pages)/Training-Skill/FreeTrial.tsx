@@ -14,7 +14,7 @@ export default function FreeTrial() {
         title="Skill Accelerator "
         subtitle="Skill Accelerator"
         description="An intensive, outcome-focused program designed to rapidly build or upgrade a specific set of competencies."
-        path="/free-trial"
+        path="/skill-accelerator"
       />
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-gradient-to-b from-white to-neutral-100 rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200">
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

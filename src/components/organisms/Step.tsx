@@ -66,7 +66,7 @@ export default function Step() {
                       </h3>
                     </div>
                     <p
-                      className={`self-stretch text-xs font-normal transition-colors duration-300 ${isFirst
+                      className={`self-stretch text-sm font-normal transition-colors duration-300 ${isFirst
                           ? "text-zinc-600"
                           : "text-neutral-400 group-hover:text-zinc-600"
                         }`}

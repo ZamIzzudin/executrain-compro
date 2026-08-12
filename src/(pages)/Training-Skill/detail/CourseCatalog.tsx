@@ -49,13 +49,13 @@ export default function CourseCatalogDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/strategic-solution">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/course-catalog">
           Course Catalog
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
         <Link
-          className="text-rose-700 hover:opacity-80 transition-opacity duration-200"
-          to={`/strategic-solution/${product._id}`}
+          className="text-primary-500 hover:opacity-80 transition-opacity duration-200"
+          to={`/course-catalog/${product._id}`}
         >
           {product.product_name}
         </Link>
@@ -302,7 +302,7 @@ export default function CourseCatalogDetail() {
       <RelatedList
         type="it_training"
         name="Related Courses"
-        basePath="/strategic-solution"
+        basePath="/course-catalog"
       />
     </section>
   );

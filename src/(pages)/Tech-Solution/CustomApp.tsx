@@ -26,7 +26,7 @@ export default function CustomApp() {
         description="We specialize in designing and building applications that are uniquely tailored to your organization's needs."
         path="/app-development"
       />
-      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pt-[5%] items-center">
+      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-white rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200 flex flex-col justify-start items-center gap-8">
         <div className="self-stretch p-6 bg-stone-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-6">
           <div className="self-stretch flex flex-col justify-start items-start gap-2">
             <div className="self-stretch justify-start text-zinc-500 text-sm font-normal">
@@ -37,11 +37,12 @@ export default function CustomApp() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+            {/* Card 1: Active / Highlighted */}
             <div
               id="dev-card-1"
-              className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
+              className="w-full p-5 bg-gradient-to-b from-white to-pink-50 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-rose-700 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
                 <LordIcons
                   src="https://cdn.lordicon.com/pfzzikja.json"
                   trigger="hover"
@@ -52,7 +53,7 @@ export default function CustomApp() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-rose-700 group-hover:text-rose-700 text-base font-semibold">
                   Web Platforms
                 </div>
                 <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
@@ -61,11 +62,12 @@ export default function CustomApp() {
               </div>
             </div>
 
+            {/* Card 2 */}
             <div
               id="dev-card-2"
               className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden transition-colors duration-300">
                 <LordIcons
                   src="https://cdn.lordicon.com/whjtorej.json"
                   trigger="hover"
@@ -76,20 +78,21 @@ export default function CustomApp() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold transition-colors duration-300">
                   Mobile Apps
                 </div>
-                <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
+                <div className="self-stretch justify-start text-neutral-400 group-hover:text-zinc-600 text-sm font-normal transition-colors duration-300">
                   Native and cross-platform apps for iOS and Android.
                 </div>
               </div>
             </div>
 
+            {/* Card 3 */}
             <div
               id="dev-card-3"
               className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden transition-colors duration-300">
                 <LordIcons
                   src="https://cdn.lordicon.com/gekxoxst.json"
                   trigger="hover"
@@ -100,20 +103,21 @@ export default function CustomApp() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold transition-colors duration-300">
                   System Integrations
                 </div>
-                <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
+                <div className="self-stretch justify-start text-neutral-400 group-hover:text-zinc-600 text-sm font-normal transition-colors duration-300">
                   Connecting the tools you already run into one workflow.
                 </div>
               </div>
             </div>
 
+            {/* Card 4 */}
             <div
               id="dev-card-4"
               className="w-full p-5 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-start gap-3 transition-all duration-300 cursor-pointer group"
             >
-              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden">
+              <div className="p-1.5 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 inline-flex justify-start items-center gap-1.5 overflow-hidden transition-colors duration-300">
                 <LordIcons
                   src="https://cdn.lordicon.com/vgadqplj.json"
                   trigger="hover"
@@ -124,49 +128,50 @@ export default function CustomApp() {
                 />
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold">
+                <div className="self-stretch justify-start text-neutral-800 group-hover:text-rose-700 text-base font-semibold transition-colors duration-300">
                   Legacy Modernization
                 </div>
-                <div className="self-stretch justify-start text-zinc-600 text-sm font-normal">
+                <div className="self-stretch justify-start text-neutral-400 group-hover:text-zinc-600 text-sm font-normal transition-colors duration-300">
                   Rebuilding aging systems without breaking what works.
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[5%] items-center">
-        <FadeInUp delay={0.2} duration={0.5} className="text-center">
-          <h3 className="text-base">
-            Here are some{" "}
-            <span className="text-primary-500 font-semibold">tech stacks</span>{" "}
-            we used to develop
-          </h3>
-        </FadeInUp>
-        <div className="flex flex-wrap justify-evenly gap-1">
-          <div className="min-h-[100px] flex items-center">
-            <img src={Power} alt="microsoft logo" />
-          </div>
-          <div className="min-h-[100px] flex items-center">
-            <img src={Azure} alt="microsoft logo" />
-          </div>
-          <div className="min-h-[100px] flex items-center">
-            <img src={ReactLogo} alt="microsoft logo" />
-          </div>
-          <div className="min-h-[100px] flex items-center">
-            <img src={Next} alt="microsoft logo" />
-          </div>
-          <div className="min-h-[100px] flex items-center">
-            <img src={Node} alt="microsoft logo" />
-          </div>
-          <div className="min-h-[100px] flex items-center">
-            <img src={Mongo} alt="microsoft logo" />
+        {/* Tech Stack Slider section */}
+        <div className="self-stretch flex flex-col justify-start items-center gap-6 pt-4">
+          <FadeInUp delay={0.2} duration={0.5} className="text-center">
+            <h3 className="text-base text-black font-normal">
+              Here are some{" "}
+              <span className="text-rose-700 font-medium">tech stacks</span>{" "}
+              we used to develop
+            </h3>
+          </FadeInUp>
+          <div className="w-full flex flex-wrap justify-evenly gap-1">
+            <div className="min-h-[100px] flex items-center">
+              <img src={Power} alt="Power Platform" />
+            </div>
+            <div className="min-h-[100px] flex items-center">
+              <img src={Azure} alt="Azure" />
+            </div>
+            <div className="min-h-[100px] flex items-center">
+              <img src={ReactLogo} alt="React" />
+            </div>
+            <div className="min-h-[100px] flex items-center">
+              <img src={Next} alt="Next.js" />
+            </div>
+            <div className="min-h-[100px] flex items-center">
+              <img src={Node} alt="Node.js" />
+            </div>
+            <div className="min-h-[100px] flex items-center">
+              <img src={Mongo} alt="MongoDB" />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="pb-[5%]">
+      <section className="pt-12 pb-[5%] space-y-8">
         <ProductList
           name="Our Finished Works Catalog"
           type={"it_training"}

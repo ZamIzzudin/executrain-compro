@@ -79,7 +79,7 @@ export default function TestimoniList() {
         <FadeInUp delay={0.5} duration={0.5}>
           <button
             type="button"
-            onClick={() => navigate("/strategic-solution")}
+            onClick={() => navigate("/course-catalog")}
             className="px-3 py-2.5 rounded-[48px] outline outline-2 outline-offset-[-2px] outline-rose-700 inline-flex justify-center items-center gap-2.5 text-rose-700 hover:bg-rose-50 transition-colors duration-300 cursor-pointer"
           >
             <span className="text-sm font-medium">View User Case Studies</span>

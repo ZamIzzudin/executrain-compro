@@ -28,11 +28,11 @@ export default function ProductDetail() {
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/product">
-          Ready-to-use IT Products
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/it-product">
+          Ready-to-Use IT Products
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/product/${product._id}`}>
+        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/it-product/${product._id}`}>
           {product.product_name}
         </Link>
       </div>
@@ -233,12 +233,22 @@ export default function ProductDetail() {
             <span className="text-zinc-500 text-sm font-normal">
               DEPLOYMENT OPTIONS
             </span>
-            <div className="self-stretch flex flex-col sm:flex-row justify-start items-start gap-4">
+            <div className="self-stretch flex flex-col sm:flex-row justify-start items-stretch gap-4">
               {/* On-Premise */}
-              <div className="flex-1 px-4 pt-4 pb-5 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 flex flex-col justify-center items-center gap-3">
+              <div
+                id="deploy-card-1"
+                className="flex-1 px-4 pt-4 pb-5 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-center gap-3 transition-all duration-300 group cursor-pointer"
+              >
                 <div className="self-stretch inline-flex justify-start items-center gap-3">
-                  <div className="p-1.5 bg-stone-50 rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
-                    <img className="w-10 h-10 object-contain" src={OnPremise} alt="On-Premise" />
+                  <div className="p-1 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex justify-start items-center overflow-hidden transition-colors duration-300">
+                    <LordIcons
+                      src="https://cdn.lordicon.com/iavpsuhi.json"
+                      trigger="hover"
+                      target="#deploy-card-1"
+                      state="hover-pinch"
+                      colors="primary:#ffc738,secondary:#bf1e40,tertiary:#bf1e40,quaternary:#3a3347,quinary:#ebe6ef,senary:#be1e40"
+                      size={40}
+                    />
                   </div>
                   <div className="flex-1 flex flex-col justify-end items-start gap-0 overflow-hidden">
                     <span className="text-rose-700 text-base font-medium">On-Premise</span>
@@ -246,16 +256,26 @@ export default function ProductDetail() {
                   </div>
                 </div>
                 <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
-                <p className="self-stretch text-zinc-500 text-xs font-normal leading-relaxed">
+                <p className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed">
                   Hosted locally on your internal servers for maximum data control and strict security compliance.
                 </p>
               </div>
 
               {/* Cloud */}
-              <div className="flex-1 px-4 pt-4 pb-5 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 flex flex-col justify-center items-center gap-3">
+              <div
+                id="deploy-card-2"
+                className="flex-1 px-4 pt-4 pb-5 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 flex flex-col justify-start items-center gap-3 transition-all duration-300 group cursor-pointer"
+              >
                 <div className="self-stretch inline-flex justify-start items-center gap-3">
-                  <div className="p-1.5 bg-stone-50 rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex justify-start items-center gap-2.5 overflow-hidden">
-                    <img className="w-10 h-10 object-contain" src={Cloud} alt="Cloud" />
+                  <div className="p-1 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex justify-start items-center overflow-hidden transition-colors duration-300">
+                    <LordIcons
+                      src="https://cdn.lordicon.com/vbfznnhs.json"
+                      trigger="hover"
+                      target="#deploy-card-2"
+                      state="hover-pinch"
+                      colors="primary:#bf1e40"
+                      size={40}
+                    />
                   </div>
                   <div className="flex-1 flex flex-col justify-end items-start gap-0 overflow-hidden">
                     <span className="text-rose-700 text-base font-medium">Cloud</span>
@@ -263,7 +283,7 @@ export default function ProductDetail() {
                   </div>
                 </div>
                 <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
-                <p className="self-stretch text-zinc-500 text-xs font-normal leading-relaxed">
+                <p className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed">
                   Hosted securely in the cloud for easy remote access, seamless scalability, and zero maintenance.
                 </p>
               </div>

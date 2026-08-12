@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "lucide-react";
 
 export default function ProductCard({
   data,
-  basePath = "/product",
+  basePath = "/it-product",
 }: Readonly<{
   data: any;
   basePath?: string;

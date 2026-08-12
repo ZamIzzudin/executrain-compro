@@ -111,76 +111,168 @@ export default function CertificationDetail() {
 
   return (
     <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
+      {/* Breadcrumbs */}
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
         <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/certification">
-          Technology & Licensing Service
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/licensing">
+          Technology & Cloud Licensing
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/certification/${id}`}>
-          {selected?.name}
+        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/licensing/${id}`}>
+          {selected?.name || "Detail"}
         </Link>
       </div>
-      {/* DARI SINI */}
+
       {!selected ? (
         <div className="px-[5%] md:px-[7%] lg:px-[10%] py-10 text-center text-gray-500">
           Vendor not found.
         </div>
       ) : (
-        <div className="px-[5%] md:px-[7%] lg:px-[10%] my-[5%]">
-          <div
-            className="bg-white rounded-[24px] shadow-[0_10px_30px_rgba(0,0,0,0.04)] p-6 md:px-16 md:py-14"
-            style={{
-              fontFamily:
-                "'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif",
-            }}
-          >
-            {/* Header */}
-            <div className="flex flex-col md:flex-row items-center justify-start gap-4 mb-10">
-              {selected.logo && (
-                <img
-                  src={selected.logo}
-                  alt={`${selected.name} logo`}
-                  className="w-[100px] h-auto object-contain shrink-0"
-                />
-              )}
-              <h1 className="font-semibold text-3xl">{selected.name}</h1>
-            </div>
-            <p className="text-sm text-gray-500 mb-10">{selected.desc}</p>
+        <div className="px-[5%] md:px-[7%] lg:px-[10%] mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            {/* Left Column Content */}
+            <div className="flex flex-col gap-6 lg:col-span-3">
+              {/* Card Container */}
+              <div className="p-6 md:p-8 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 flex flex-col justify-start items-start gap-6">
+                {/* Header with Logo and Name */}
+                <div className="flex items-center justify-start gap-4">
+                  {selected.logo && (
+                    <div className="p-3 bg-stone-50 rounded-2xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex items-center justify-center overflow-hidden">
+                      <img
+                        src={selected.logo}
+                        alt={`${selected.name} logo`}
+                        className="h-12 w-auto object-contain shrink-0"
+                      />
+                    </div>
+                  )}
+                  <h1 className="text-neutral-800 text-2xl md:text-3xl font-semibold">
+                    {selected.name}
+                  </h1>
+                </div>
 
-            <div className=" flex flex-wrap justify-between gap-5 mt-5 space-y-5">
-              <InfoItem
-                icon={<Globe className="w-5 h-5 text-primary-500" />}
-                label="Company Website"
-                value={selected.site}
-                href={selected.site}
-              />
-              <InfoItem
-                icon={<FacebookIcon className="w-5 h-5 text-primary-500" />}
-                label="Facebook"
-                value={selected.facebook}
-                href={selected.facebook}
-              />
-              <InfoItem
-                icon={<XIcon className="w-4 h-4 text-primary-500" />}
-                label="X"
-                value={selected.twitter}
-                href={selected.twitter}
-              />
-              <InfoItem
-                icon={<LinkedinIcon className="w-5 h-5 text-primary-500" />}
-                label="LinkedIn"
-                value={selected.linkedin}
-                href={selected.linkedin}
-              />
+                <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
+
+                {/* Description */}
+                <p className="text-neutral-900 text-base font-normal leading-relaxed text-justify">
+                  {selected.desc}
+                </p>
+
+                <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
+
+                {/* Social & Web Links as interactive Red-hover Buttons */}
+                <div className="self-stretch flex flex-col justify-start items-start gap-3">
+                  <span className="text-zinc-500 text-sm font-normal">
+                    OFFICIAL CHANNELS & SOCIAL MEDIA
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                    {/* Website Button */}
+                    <a
+                      href={selected.site}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
+                    >
+                      <div className="p-2 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 transition-colors duration-300 text-neutral-800 group-hover:text-rose-700">
+                        <Globe size={20} />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-xs text-zinc-500 font-normal">Website</span>
+                        <span className="text-sm font-medium text-neutral-800 group-hover:text-rose-700 truncate transition-colors duration-300">
+                          {selected.name} Official Site
+                        </span>
+                      </div>
+                    </a>
+
+                    {/* Facebook Button */}
+                    <a
+                      href={selected.facebook}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
+                    >
+                      <div className="p-2 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 transition-colors duration-300 text-neutral-800 group-hover:text-rose-700">
+                        <FacebookIcon className="w-5 h-5" />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-xs text-zinc-500 font-normal">Facebook</span>
+                        <span className="text-sm font-medium text-neutral-800 group-hover:text-rose-700 truncate transition-colors duration-300">
+                          {selected.name} Facebook
+                        </span>
+                      </div>
+                    </a>
+
+                    {/* X Button */}
+                    <a
+                      href={selected.twitter}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
+                    >
+                      <div className="p-2 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 transition-colors duration-300 text-neutral-800 group-hover:text-rose-700">
+                        <XIcon className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-xs text-zinc-500 font-normal">X (Twitter)</span>
+                        <span className="text-sm font-medium text-neutral-800 group-hover:text-rose-700 truncate transition-colors duration-300">
+                          {selected.name} X
+                        </span>
+                      </div>
+                    </a>
+
+                    {/* LinkedIn Button */}
+                    <a
+                      href={selected.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
+                    >
+                      <div className="p-2 bg-stone-50 group-hover:bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 transition-colors duration-300 text-neutral-800 group-hover:text-rose-700">
+                        <LinkedinIcon className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-xs text-zinc-500 font-normal">LinkedIn</span>
+                        <span className="text-sm font-medium text-neutral-800 group-hover:text-rose-700 truncate transition-colors duration-300">
+                          {selected.name} LinkedIn
+                        </span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column Sticky Sidebar */}
+            <div className="flex flex-col gap-8 lg:col-span-2 sticky top-28 self-start">
+              {/* MORE */}
+              <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
+                <span className="text-zinc-500 text-sm font-normal">
+                  GET LICENSED
+                </span>
+                <div className="self-stretch flex flex-col justify-start items-start gap-2">
+                  <h3 className="self-stretch text-neutral-800 text-2xl font-semibold">
+                    Need {selected.name} Licenses?
+                  </h3>
+                  <p className="self-stretch text-zinc-500 text-base font-normal">
+                    Contact our sales & licensing specialists to get official pricing and compliance support for your enterprise.
+                  </p>
+                </div>
+                <div className="inline-flex justify-start items-center gap-3 pt-2">
+                  <Link
+                    to="/contact"
+                    className="h-10 px-5 py-2.5 bg-rose-700 hover:bg-rose-800 transition-colors duration-300 rounded-[48px] inline-flex justify-center items-center gap-2 text-white text-sm font-medium cursor-pointer"
+                  >
+                    <span>Contact Licensing Team</span>
+                    <ChevronRight size={18} className="text-white" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
-      {/* HINGGA SINI */}
     </section>
   );
 }

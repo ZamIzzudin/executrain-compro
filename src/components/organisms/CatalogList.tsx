@@ -49,7 +49,7 @@ export default function CatalogList({
     }
     return products.slice(0, 3).map((each: FreeTrialProductProps) => (
       <StaggerItem key={each._id} direction="up">
-        <CourseCard data={each} basePath="/strategic-solution" />
+        <CourseCard data={each} basePath="/course-catalog" />
       </StaggerItem>
     ));
   };

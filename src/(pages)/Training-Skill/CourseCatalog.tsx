@@ -21,7 +21,7 @@ export default function CourseCatalog() {
         title="Course Catalog"
         subtitle="Course Catalog"
         description="Whether you want to master a new software, sharpen your leadership abilities, or earn an industry-recognized credential, your next breakthrough is right here."
-        path="/strategic-solution"
+        path="/course-catalog"
       />
       <section className="px-[5%] md:px-[7%] lg:px-[10%] pt-12 pb-[5%] space-y-8">
         <CatalogFilter

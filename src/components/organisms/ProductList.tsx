@@ -16,7 +16,7 @@ import Pagination from "../atoms/Pagination";
 export default function ProductList({
   type,
   name,
-  basePath = "/product",
+  basePath = "/it-product",
   children,
 }: Readonly<{
   type: string;
