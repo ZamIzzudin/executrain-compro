@@ -3,6 +3,7 @@
 "use client";
 
 import { Link } from "react-router-dom";
+import { Tooltip } from "antd";
 
 import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 
@@ -168,9 +169,14 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <span className="text-gray-500 block text-center text-xs py-2 border-t mx-[3%] pt-5 pb-10">
-        Copyright © {new Date().getFullYear()} - by ExecuTrain of Jakarta
-      </span>
+      <Tooltip
+        placement="top"
+        title="All product names, logos, brands, and trademarks mentioned within this website, brochure, or training materials are the sole property of their respective owners. These trademarks include all products by Microsoft (Microsoft Corporation), CAPM, PMP (Project Management Institute, Inc.), CompTIA, PeopleCert, and any other third-party brands taught in our courses. The use of these names and trademarks is strictly for nominative identification purposes to describe the training curriculum and topic coverage for our students."
+      >
+        <span className="text-gray-500 block text-center text-xs py-2 border-t mx-[3%] pt-5 pb-10 cursor-help">
+          Copyright © {new Date().getFullYear()} - by ExecuTrain of Jakarta. All rights reserved. Microsoft®, CompTIA®, PMP® are trademarks of their respective owners.
+        </span>
+      </Tooltip>
     </footer>
   );
 }
