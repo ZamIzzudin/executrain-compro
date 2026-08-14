@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import TestimoniCard from "../molecules/card/Testimoni";
 import { TestimonialCardSkeleton } from "./Skeleton";
 import { FadeInUp } from "../atoms/Motion";
-import Button from "../atoms/Button";
 
 import { useTestimonial } from "@/services/testimoni/hook";
 

@@ -75,36 +75,6 @@ const LinkedinIcon = ({ className }: SocialIconProps) => (
   </svg>
 );
 
-type InfoItemProps = {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href?: string;
-};
-
-const InfoItem = ({ icon, label, value, href }: InfoItemProps) => (
-  <div className="flex items-start gap-2">
-    <span className="w-5 h-5">{icon}</span>
-    <div className="flex flex-col min-w-0">
-      <span className="text-xs font-semibold">{label}</span>
-      {href ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          className="text-xs font-normal text-gray-400 break-words transition-all duration-200 ease-in-out hover:text-[#1D4ED8] hover:underline underline-offset-2 cursor-pointer"
-        >
-          {value}
-        </a>
-      ) : (
-        <span className="text-xs font-normal text-gray-400 break-words">
-          {value}
-        </span>
-      )}
-    </div>
-  </div>
-);
-
 export default function CertificationDetail() {
   const { id } = useParams<{ id: string }>();
   const selected = data.find((each) => each.id === id);

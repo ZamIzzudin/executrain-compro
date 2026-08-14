@@ -9,8 +9,6 @@ import { LordIcons } from "@/components/atoms";
 
 import CaraouselA from "@/assets/v2/caraousel-1.jpg";
 import CaraouselB from "@/assets/v2/caraousel-2.jpg";
-import OnPremise from "@/assets/v2/onpremise.png";
-import Cloud from "@/assets/v2/cloud.png";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();

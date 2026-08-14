@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 
 import HeroBG from "@/assets/banner.jpg";
-import Button from "@/components/atoms/Button";
 import { ArrowRightIcon, ClockIcon } from "lucide-react";
 import { formatDate } from "@/utils/helper";
 

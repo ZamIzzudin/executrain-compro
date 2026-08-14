@@ -15,7 +15,6 @@ import { useProductDetail } from "@/services/strategic-solution/hook";
 import { formatDate } from "@/utils/helper";
 import { LordIcons } from "@/components/atoms";
 
-import OnPremise from "@/assets/v2/onpremise.png";
 import Article from "@/assets/v2/article.jpg";
 
 const CATEGORY_LABEL: Record<string, string> = {

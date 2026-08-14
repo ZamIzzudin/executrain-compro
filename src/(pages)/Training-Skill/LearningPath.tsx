@@ -3,11 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CTA from "@/components/organisms/CTA";
-import { FadeInUp } from "@/components/atoms";
 import {
   ChevronDown,
   ChevronUp,
-  ArrowRight,
   CornerDownRight,
 } from "lucide-react";
 
@@ -511,10 +509,18 @@ export default function LearningPath() {
                     </svg>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full items-start relative z-20">
                       {dummyCourses[key].map((course, i) => {
-                        const isHoveredFamily = Boolean(hoveredTarget) && (
-                          (hoveredTarget?.familyId && course.familyId === hoveredTarget.familyId) ||
-                          (hoveredTarget?.continuationText && course.title.toLowerCase().includes(hoveredTarget.continuationText.toLowerCase())) ||
-                          (course.continuationText && hoveredTarget?.title.toLowerCase().includes(course.continuationText.toLowerCase()))
+                        const isHoveredFamily = Boolean(
+                          hoveredTarget &&
+                            ((hoveredTarget?.familyId &&
+                              course.familyId === hoveredTarget.familyId) ||
+                              (hoveredTarget?.continuationText &&
+                                course.title
+                                  .toLowerCase()
+                                  .includes(hoveredTarget.continuationText.toLowerCase())) ||
+                              (course.continuationText &&
+                                hoveredTarget?.title
+                                  .toLowerCase()
+                                  .includes(course.continuationText.toLowerCase())))
                         );
 
                         return (
