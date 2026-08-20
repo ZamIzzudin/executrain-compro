@@ -3,11 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CTA from "@/components/organisms/CTA";
-import {
-  ChevronDown,
-  ChevronUp,
-  CornerDownRight,
-} from "lucide-react";
+import { ChevronDown, ChevronUp, CornerDownRight } from "lucide-react";
 
 type SectionKey =
   | "fundamental"
@@ -67,9 +63,24 @@ const sections: {
 // Dummy courses with familyId for inheritance relation highlighting on hover
 const dummyCourses: Record<SectionKey, CourseItem[]> = {
   fundamental: [
-    { title: "Azure Data Fundamentals", code: "DP-900", familyId: "dp900", variant: "dashed" },
-    { title: "Azure AI Fundamentals", code: "AI-900", familyId: "ai-family", variant: "dashed" },
-    { title: "Azure Fundamentals", code: "AZ-900", familyId: "az-family", variant: "active" },
+    {
+      title: "Azure Data Fundamentals",
+      code: "DP-900",
+      familyId: "dp900",
+      variant: "dashed",
+    },
+    {
+      title: "Azure AI Fundamentals",
+      code: "AI-900",
+      familyId: "ai-family",
+      variant: "dashed",
+    },
+    {
+      title: "Azure Fundamentals",
+      code: "AZ-900",
+      familyId: "az-family",
+      variant: "active",
+    },
   ],
   roleBased: [
     {
@@ -128,7 +139,12 @@ const dummyCourses: Record<SectionKey, CourseItem[]> = {
       familyId: "dp900",
       variant: "normal",
     },
-    { title: "SQL AI Developer Associate", code: "DA-206", familyId: "ai-family", variant: "normal" },
+    {
+      title: "SQL AI Developer Associate",
+      code: "DA-206",
+      familyId: "ai-family",
+      variant: "normal",
+    },
   ],
   speciality: [
     {
@@ -151,9 +167,24 @@ const dummyCourses: Record<SectionKey, CourseItem[]> = {
     },
   ],
   business: [
-    { title: "AI Business Fundamentals", code: "AI-B01", familyId: "ai-family", variant: "dashed" },
-    { title: "Power Platform Fundamentals", code: "PL-900", familyId: "power-family", variant: "normal" },
-    { title: "Dynamics 365 Fundamentals", code: "MB-901", familyId: "dyn-family", variant: "normal" },
+    {
+      title: "AI Business Fundamentals",
+      code: "AI-B01",
+      familyId: "ai-family",
+      variant: "dashed",
+    },
+    {
+      title: "Power Platform Fundamentals",
+      code: "PL-900",
+      familyId: "power-family",
+      variant: "normal",
+    },
+    {
+      title: "Dynamics 365 Fundamentals",
+      code: "MB-901",
+      familyId: "dyn-family",
+      variant: "normal",
+    },
   ],
   outsidePath: [
     {
@@ -180,7 +211,12 @@ const dummyCourses: Record<SectionKey, CourseItem[]> = {
       familyId: "dp900",
       variant: "normal",
     },
-    { title: "SQL AI Developer Associate", code: "DA-206", familyId: "ai-family", variant: "normal" },
+    {
+      title: "SQL AI Developer Associate",
+      code: "DA-206",
+      familyId: "ai-family",
+      variant: "normal",
+    },
   ],
 };
 
@@ -224,7 +260,9 @@ function CourseCard({
         <div className="self-stretch inline-flex justify-between items-start gap-1">
           <h4
             className={`text-sm font-medium leading-snug line-clamp-2 transition-colors duration-300 ${
-              isHoveredFamily ? "text-rose-700 font-semibold" : "text-neutral-800 group-hover:text-rose-700"
+              isHoveredFamily
+                ? "text-rose-700 font-semibold"
+                : "text-neutral-800 group-hover:text-rose-700"
             }`}
           >
             {course.title}
@@ -248,7 +286,9 @@ function CourseCard({
           </span>
           <span
             className={`inline-flex items-center gap-1 text-xs font-normal underline ${
-              isHoveredFamily ? "text-rose-700 font-medium" : "text-neutral-800 group-hover:text-rose-700"
+              isHoveredFamily
+                ? "text-rose-700 font-medium"
+                : "text-neutral-800 group-hover:text-rose-700"
             }`}
           >
             <CornerDownRight className="w-3.5 h-3.5 shrink-0" />
@@ -336,7 +376,7 @@ function FilterDropdown({
         <div
           ref={listRef}
           role="listbox"
-          className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-30 overflow-hidden"
+          className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden"
         >
           {dropdownOptions.map((option) => (
             <button
@@ -430,7 +470,7 @@ export default function LearningPath() {
 
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-white rounded-tl-[48px] rounded-tr-[48px] shadow-[0px_-2px_4px_0px_rgba(0,0,0,0.05)] border-t border-gray-200 flex flex-col justify-center items-start gap-6 relative">
         {/* Header & Dropdown */}
-        <div className="self-stretch flex flex-col md:flex-row justify-between items-start md:items-center gap-4 z-20">
+        <div className="self-stretch flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative z-40">
           <h2 className="text-neutral-800 text-2xl font-semibold">
             Learning Path According To Framework
           </h2>
@@ -511,16 +551,20 @@ export default function LearningPath() {
                       {dummyCourses[key].map((course, i) => {
                         const isHoveredFamily = Boolean(
                           hoveredTarget &&
-                            ((hoveredTarget?.familyId &&
-                              course.familyId === hoveredTarget.familyId) ||
-                              (hoveredTarget?.continuationText &&
-                                course.title
-                                  .toLowerCase()
-                                  .includes(hoveredTarget.continuationText.toLowerCase())) ||
-                              (course.continuationText &&
-                                hoveredTarget?.title
-                                  .toLowerCase()
-                                  .includes(course.continuationText.toLowerCase())))
+                          ((hoveredTarget?.familyId &&
+                            course.familyId === hoveredTarget.familyId) ||
+                            (hoveredTarget?.continuationText &&
+                              course.title
+                                .toLowerCase()
+                                .includes(
+                                  hoveredTarget.continuationText.toLowerCase(),
+                                )) ||
+                            (course.continuationText &&
+                              hoveredTarget?.title
+                                .toLowerCase()
+                                .includes(
+                                  course.continuationText.toLowerCase(),
+                                ))),
                         );
 
                         return (
@@ -528,7 +572,13 @@ export default function LearningPath() {
                             key={`${key}-${i}`}
                             course={course}
                             isHoveredFamily={isHoveredFamily}
-                            onMouseEnter={() => setHoveredTarget({ familyId: course.familyId, title: course.title, continuationText: course.continuationText })}
+                            onMouseEnter={() =>
+                              setHoveredTarget({
+                                familyId: course.familyId,
+                                title: course.title,
+                                continuationText: course.continuationText,
+                              })
+                            }
                             onMouseLeave={() => setHoveredTarget(null)}
                           />
                         );
