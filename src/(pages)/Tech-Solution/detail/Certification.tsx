@@ -4,6 +4,7 @@ import "@fontsource-variable/inter";
 
 import Sophos from "@/assets/dummy/sophos.png";
 import Microsoft from "@/assets/dummy/microsoft3.png";
+import { handleImageError } from "@/utils/helper";
 
 const data = [
   {
@@ -114,6 +115,7 @@ export default function CertificationDetail() {
                       <img
                         src={selected.logo}
                         alt={`${selected.name} logo`}
+                        onError={handleImageError}
                         className="h-12 w-auto object-contain shrink-0"
                       />
                     </div>

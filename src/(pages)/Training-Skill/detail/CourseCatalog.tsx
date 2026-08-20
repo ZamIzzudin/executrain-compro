@@ -16,6 +16,7 @@ import {
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import RelatedList from "@/components/organisms/Related";
 import { useProductDetail } from "@/services/strategic-solution/hook";
+import { handleImageError } from "@/utils/helper";
 
 const CATEGORY_LABEL: Record<string, string> = {
   DATA_ANALYTICS: "Data Analytics",
@@ -76,6 +77,7 @@ export default function CourseCatalogDetail() {
               <img
                 src={product.banner.url}
                 alt={product.product_name}
+                onError={handleImageError}
                 className="w-full h-full object-cover rounded-3xl"
               />
             ) : (

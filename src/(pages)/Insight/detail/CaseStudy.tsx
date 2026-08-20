@@ -12,7 +12,7 @@ import {
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 
 import { useProductDetail } from "@/services/strategic-solution/hook";
-import { formatDate } from "@/utils/helper";
+import { formatDate, handleImageError } from "@/utils/helper";
 import { LordIcons } from "@/components/atoms";
 
 import Article from "@/assets/v2/article.jpg";
@@ -83,6 +83,7 @@ export default function CaseStudyDetail() {
               <img
                 src={study.banner.url}
                 alt={study.product_name}
+                onError={handleImageError}
                 className="w-full h-full object-cover rounded-3xl"
               />
             ) : (

@@ -16,6 +16,7 @@ import {
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import { useFreeTrialDetail } from "@/services/free-trial/hook";
 import RelatedList from "@/components/organisms/Related";
+import { handleImageError } from "@/utils/helper";
 
 const CATEGORY_LABEL: Record<string, string> = {
   DATA_ANALYTICS: "Data Analytics",
@@ -73,6 +74,7 @@ export default function FreeTrialDetail() {
               <img
                 src={product.banner.url}
                 alt={product.product_name}
+                onError={handleImageError}
                 className="w-full h-full object-cover rounded-3xl"
               />
             ) : (

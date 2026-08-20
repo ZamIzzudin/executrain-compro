@@ -11,6 +11,7 @@ import {
   WrenchIcon,
   ArrowRight,
 } from "lucide-react";
+import { handleImageError } from "@/utils/helper";
 
 export default function ITSupport() {
   const data = [
@@ -149,6 +150,7 @@ export default function ITSupport() {
                     <img
                       src={each.image}
                       alt={each.name}
+                      onError={handleImageError}
                       className="w-full h-full object-cover rounded-3xl"
                     />
                   </div>

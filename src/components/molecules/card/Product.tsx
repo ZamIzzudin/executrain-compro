@@ -3,6 +3,7 @@ import { Tooltip } from "antd";
 
 import HeroBG from "@/assets/banner.jpg";
 import { ArrowRightIcon } from "lucide-react";
+import { handleImageError } from "@/utils/helper";
 
 export default function ProductCard({
   data,
@@ -23,6 +24,7 @@ export default function ProductCard({
           <img
             src={data?.banner?.url || HeroBG}
             alt={data?.banner?.public_id || ""}
+            onError={handleImageError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

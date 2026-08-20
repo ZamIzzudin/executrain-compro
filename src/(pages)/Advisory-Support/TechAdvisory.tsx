@@ -9,7 +9,6 @@ import Advisory from "@/assets/v2/advisory.png";
 import PSA from "@/assets/v2/psa.png";
 import { LordIcons } from "@/components/atoms";
 
-
 export default function TechAdvisory() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -63,7 +62,9 @@ export default function TechAdvisory() {
                 <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
                   <div className="self-stretch justify-start text-base font-medium">
                     <span className="text-neutral-800">What </span>
-                    <span className="text-rose-700">framework <br /></span>
+                    <span className="text-rose-700">
+                      framework <br />
+                    </span>
                     <span className="text-neutral-800">do we use?</span>
                   </div>
                 </div>
@@ -95,7 +96,9 @@ export default function TechAdvisory() {
                 <div className="flex-1 inline-flex flex-col justify-end items-start gap-2 overflow-hidden">
                   <div className="self-stretch justify-start text-base font-medium">
                     <span className="text-neutral-800">How about the </span>
-                    <span className="text-rose-700">advisory <br /></span>
+                    <span className="text-rose-700">
+                      advisory <br />
+                    </span>
                     <span className="text-neutral-800">Method?</span>
                   </div>
                 </div>
@@ -174,7 +177,10 @@ export default function TechAdvisory() {
                 ].map((item, index, arr) => (
                   <div key={item} className="self-stretch flex flex-col gap-3">
                     <div className="self-stretch inline-flex justify-start items-center gap-2 overflow-hidden">
-                      <CheckCircleIcon className="text-rose-700 shrink-0" size={16} />
+                      <CheckCircleIcon
+                        className="text-rose-700 shrink-0"
+                        size={16}
+                      />
                       <div className="justify-start text-neutral-800 text-sm font-medium">
                         {item}
                       </div>
@@ -195,12 +201,11 @@ export default function TechAdvisory() {
           backgroundImage: `linear-gradient(#242424CC, #242424CC), url('./statHero.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       >
         <div className="text-white mb-4 lg:mb-0">
-          <span className="text-xs md:text-sm">
-            FREQUENTLY ASKED QUESTION
-          </span>
+          <span className="text-xs md:text-sm">FREQUENTLY ASKED QUESTION</span>
           <h4 className="text-xl md:text-3xl font-semibold">
             What this advisory is — and isn't
           </h4>
@@ -224,8 +229,9 @@ export default function TechAdvisory() {
                       {item.question}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-white cursor-pointer transition-transform duration-300 ${isOpen ? "rotate-180" : ""
-                        }`}
+                      className={`w-5 h-5 shrink-0 text-white cursor-pointer transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
                   <AnimatePresence initial={false}>
@@ -265,7 +271,10 @@ export default function TechAdvisory() {
                 ].map((item, index, arr) => (
                   <div key={item} className="self-stretch flex flex-col gap-3">
                     <div className="self-stretch inline-flex justify-start items-center gap-2 overflow-hidden">
-                      <CheckCircleIcon className="text-rose-700 shrink-0" size={16} />
+                      <CheckCircleIcon
+                        className="text-rose-700 shrink-0"
+                        size={16}
+                      />
                       <div className="justify-start text-neutral-800 text-sm font-medium">
                         {item}
                       </div>

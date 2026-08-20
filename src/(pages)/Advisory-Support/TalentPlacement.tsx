@@ -9,6 +9,7 @@ import { ArrowRight } from "lucide-react";
 
 import MatrixA from "@/assets/dummy/matrix-1.png";
 import MatrixB from "@/assets/dummy/matrix-2.png";
+import { handleImageError } from "@/utils/helper";
 
 export default function TalentPlacement() {
   const data = [
@@ -185,6 +186,7 @@ export default function TalentPlacement() {
                     <img
                       src={each.image}
                       alt={each.title}
+                      onError={handleImageError}
                       className="w-full h-full object-cover rounded-3xl"
                     />
                   </div>

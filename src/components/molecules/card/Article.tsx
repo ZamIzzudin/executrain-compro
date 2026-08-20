@@ -3,7 +3,7 @@ import { Tooltip } from "antd";
 
 import HeroBG from "@/assets/banner.jpg";
 import { ArrowRightIcon, ClockIcon } from "lucide-react";
-import { formatDate } from "@/utils/helper";
+import { formatDate, handleImageError } from "@/utils/helper";
 
 export default function ArticleCard({
   data,
@@ -24,6 +24,7 @@ export default function ArticleCard({
         <img
           src={data?.banner?.url || HeroBG}
           alt={data?.banner?.public_id || ""}
+          onError={handleImageError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>

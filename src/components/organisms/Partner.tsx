@@ -8,6 +8,7 @@ import { PartnerLogoSkeleton } from "./Skeleton";
 import { FadeInUp, FadeInDown } from "../atoms/Motion";
 
 import { type PartnerProps } from "@/utils/types/partner";
+import { handleImageError } from "@/utils/helper";
 
 interface CompProps {
   data?: PartnerProps[];
@@ -82,6 +83,7 @@ export default function PartnerList({
                         alt={each.partner_name}
                         width={100}
                         height={100}
+                        onError={handleImageError}
                         className="object-contain w-[80%] h-[80%]"
                       />
                     </div>

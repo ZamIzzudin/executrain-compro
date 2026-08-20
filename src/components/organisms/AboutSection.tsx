@@ -50,7 +50,9 @@ export function AboutDetailSection() {
       </div>
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 px-[5%] md:px-[7%] lg:px-[10%] gap-8 py-12 bg-gradient-to-b from-white to-zinc-100 items-center">
         <div className="lg:col-span-6 flex flex-col justify-center items-start gap-2">
-          <span className="text-neutral-400 text-sm font-normal">OUR AWARD</span>
+          <span className="text-neutral-400 text-sm font-normal">
+            OUR AWARD
+          </span>
           <div className="w-96 h-60 relative bg-gradient-to-b from-neutral-800/0 to-neutral-800/60 rounded-[19.59px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-gray-200 overflow-hidden group">
             <img
               alt="ExecuTrain Award"
@@ -94,8 +96,9 @@ function AboutCard() {
         </h2>
       </div>
       <p className="text-zinc-500 text-sm font-normal">
-        We believe technology only matters when it uplifts people. We walk alongside
-        you to turn complex challenges into meaningful, lasting growth.
+        We believe technology only matters when it uplifts people. We walk
+        alongside you to turn complex challenges into meaningful, lasting
+        growth.
       </p>
       <button
         type="button"
@@ -209,25 +212,28 @@ function AwardCard() {
         return (
           <div
             key={title}
-            className={`self-stretch min-h-12 px-4 py-3 rounded-[100px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group ${isFirst
-              ? "bg-gradient-to-b from-white to-pink-50 outline outline-1 outline-offset-[-1px] outline-rose-700"
-              : "bg-white outline outline-1 outline-offset-[-1px] outline-gray-200 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 hover:outline-rose-700"
-              }`}
+            className={`self-stretch min-h-12 px-4 py-3 rounded-[100px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group ${
+              isFirst
+                ? "bg-gradient-to-b from-white to-pink-50 outline outline-1 outline-offset-[-1px] outline-rose-700"
+                : "bg-white outline outline-1 outline-offset-[-1px] outline-gray-200 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 hover:outline-rose-700"
+            }`}
           >
             <div className="w-5 h-5 shrink-0 flex items-center justify-center">
               <AwardIcon
                 size={18}
-                className={`transition-colors duration-300 ${isFirst
-                  ? "text-rose-700"
-                  : "text-rose-700 group-hover:text-rose-700"
-                  }`}
+                className={`transition-colors duration-300 ${
+                  isFirst
+                    ? "text-rose-700"
+                    : "text-rose-700 group-hover:text-rose-700"
+                }`}
               />
             </div>
             <div
-              className={`flex-1 justify-start text-sm font-medium transition-colors duration-300 ${isFirst
-                ? "text-rose-700"
-                : "text-neutral-800 group-hover:text-rose-700"
-                }`}
+              className={`flex-1 justify-start text-sm font-medium transition-colors duration-300 ${
+                isFirst
+                  ? "text-rose-700"
+                  : "text-neutral-800 group-hover:text-rose-700"
+              }`}
             >
               {title}
             </div>
@@ -251,19 +257,21 @@ function ServiceCard() {
         src: "https://cdn.lordicon.com/mdgonzfn.json",
         trigger: "hover",
         state: "hover-pinch",
-        colors: "primary:#f9c9c0,secondary:#bf1e40,tertiary:#545454,quaternary:#ebe6ef,quinary:#3a3347,senary:#b26836",
+        colors:
+          "primary:#f9c9c0,secondary:#bf1e40,tertiary:#545454,quaternary:#ebe6ef,quinary:#3a3347,senary:#b26836",
       },
     },
     {
       id: "service-card-2",
       title: "Easing Everyday Work",
       desc: "Shaping thoughtful technology that fits your rhythm and brings peace of mind to operations.",
-      path: "/custom-app",
+      path: "/app-development",
       lordIcon: {
         src: "https://cdn.lordicon.com/apxgwajy.json",
         trigger: "hover",
         state: "hover-pinch",
-        colors: "primary:#be1e40,secondary:#ffc738,tertiary:#3a3347,quaternary:#ebe6ef,quinary:#545454",
+        colors:
+          "primary:#be1e40,secondary:#ffc738,tertiary:#3a3347,quaternary:#ebe6ef,quinary:#545454",
       },
     },
     {
@@ -275,7 +283,8 @@ function ServiceCard() {
         src: "https://cdn.lordicon.com/byicyhmi.json",
         trigger: "hover",
         state: "hover-pinch",
-        colors: "primary:#646e78,secondary:#f9c9c0,tertiary:#ebe6ef,quaternary:#b26836,quinary:#bf1e40",
+        colors:
+          "primary:#646e78,secondary:#f9c9c0,tertiary:#ebe6ef,quaternary:#b26836,quinary:#bf1e40",
       },
     },
   ];
@@ -320,7 +329,9 @@ function ServiceCard() {
   );
 }
 
-export function TechSlider({ bgColor = "bg-white" }: Readonly<{ bgColor?: string }>) {
+export function TechSlider({
+  bgColor = "bg-white",
+}: Readonly<{ bgColor?: string }>) {
   const techLogos = [
     { src: Microsoft, alt: "Microsoft logo" },
     { src: Google, alt: "Google logo" },
@@ -334,7 +345,8 @@ export function TechSlider({ bgColor = "bg-white" }: Readonly<{ bgColor?: string
     { src: Mongo, alt: "MongoDB logo" },
   ];
 
-  const fadeBgFrom = bgColor === "bg-[#FCFCFC]" ? "from-[#FCFCFC]" : "from-white";
+  const fadeBgFrom =
+    bgColor === "bg-[#FCFCFC]" ? "from-[#FCFCFC]" : "from-white";
 
   return (
     <div className={`space-y-3 pt-[5%] pb-10 ${bgColor}`}>
@@ -358,8 +370,12 @@ export function TechSlider({ bgColor = "bg-white" }: Readonly<{ bgColor?: string
             ))}
           </div>
         </div>
-        <div className={`absolute top-0 left-0 w-20 h-full bg-gradient-to-r ${fadeBgFrom} to-transparent pointer-events-none z-10`} />
-        <div className={`absolute top-0 right-0 w-20 h-full bg-gradient-to-l ${fadeBgFrom} to-transparent pointer-events-none z-10`} />
+        <div
+          className={`absolute top-0 left-0 w-20 h-full bg-gradient-to-r ${fadeBgFrom} to-transparent pointer-events-none z-10`}
+        />
+        <div
+          className={`absolute top-0 right-0 w-20 h-full bg-gradient-to-l ${fadeBgFrom} to-transparent pointer-events-none z-10`}
+        />
       </div>
     </div>
   );

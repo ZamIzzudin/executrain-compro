@@ -4,6 +4,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { handleImageError } from "@/utils/helper";
 
 export interface CarouselSlide {
   image: string;
@@ -58,6 +59,7 @@ export default function Carousel({
                 <img
                   src={slide.image}
                   alt={slide.title || `Slide ${index + 1}`}
+                  onError={handleImageError}
                   className="w-full h-full object-cover"
                 />
               </div>

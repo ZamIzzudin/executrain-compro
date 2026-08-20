@@ -9,6 +9,7 @@ import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 
 import { useSocmed } from "@/services/socmed/hook";
 import { useSocmedLogo } from "@/hooks/useSocmedLogo";
+import { handleImageError } from "@/utils/helper";
 
 const footerLinks: { title: string; items: { label: string; path: string }[] }[] = [
   {
@@ -153,6 +154,7 @@ export default function Footer() {
                             <img
                               src={each.icon}
                               alt={each.name || `socmed ${index}`}
+                              onError={handleImageError}
                             />
                           </Link>
                         ))

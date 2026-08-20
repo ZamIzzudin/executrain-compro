@@ -18,6 +18,7 @@ import Carousel from "@/components/molecules/Carousel";
 
 import CaraouselA from "@/assets/v2/caraousel-1.jpg";
 import CaraouselB from "@/assets/v2/caraousel-2.jpg";
+import { handleImageError } from "@/utils/helper";
 
 export default function CustomAppDetail() {
   const { id } = useParams<{ id: string }>();
@@ -31,11 +32,17 @@ export default function CustomAppDetail() {
     <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
       {/* Breadcrumb */}
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
+        <Link
+          className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+          to="/"
+        >
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/app-development">
+        <Link
+          className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+          to="/app-development"
+        >
           Custom App Development
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
@@ -53,7 +60,7 @@ export default function CustomAppDetail() {
       </h1>
 
       {/* Main Grid Layout */}
-      <div className="px-[5%] md:px-[7%] lg:px-[10%] mt-6 grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] mt-6 grid grid-cols-1 lg:grid-cols-6 gap-8">
         {/* Left Column Content */}
         <div className="flex flex-col gap-6 lg:col-span-3">
           {/* Banner */}
@@ -62,6 +69,7 @@ export default function CustomAppDetail() {
               <img
                 src={product.banner.url}
                 alt={product.product_name}
+                onError={handleImageError}
                 className="w-full h-full object-cover rounded-3xl"
               />
             ) : (
@@ -78,16 +86,24 @@ export default function CustomAppDetail() {
             </span>
             <div className="self-stretch flex flex-wrap gap-3">
               <div className="px-2.5 py-1.5 bg-pink-400/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-pink-400 text-xs font-medium">Power Apps</span>
+                <span className="text-pink-400 text-xs font-medium">
+                  Power Apps
+                </span>
               </div>
               <div className="px-2.5 py-1.5 bg-blue-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-blue-300 text-xs font-medium">Power Automate</span>
+                <span className="text-blue-300 text-xs font-medium">
+                  Power Automate
+                </span>
               </div>
               <div className="px-2.5 py-1.5 bg-orange-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-orange-300 text-xs font-medium">Power BI</span>
+                <span className="text-orange-300 text-xs font-medium">
+                  Power BI
+                </span>
               </div>
               <div className="px-2.5 py-1.5 bg-lime-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-green-400 text-xs font-medium">SharePoint</span>
+                <span className="text-green-400 text-xs font-medium">
+                  SharePoint
+                </span>
               </div>
             </div>
           </div>
@@ -102,7 +118,8 @@ export default function CustomAppDetail() {
                 </span>
               </div>
               <span className="text-zinc-500 text-sm font-normal">
-                Manual, spreadsheet-based dispatch causing delayed pickups and idle trucks.
+                Manual, spreadsheet-based dispatch causing delayed pickups and
+                idle trucks.
               </span>
             </div>
             <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
@@ -145,7 +162,7 @@ export default function CustomAppDetail() {
         </div>
 
         {/* Right Column Sticky Sidebar */}
-        <div className="flex flex-col gap-8 lg:col-span-2 sticky top-28 self-start">
+        <div className="flex flex-col gap-8 lg:col-span-3 sticky top-28 self-start">
           {/* PROJECT DETAILS */}
           <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
             <span className="text-zinc-500 text-sm font-normal">
@@ -175,7 +192,8 @@ export default function CustomAppDetail() {
                     </span>
                   </div>
                   <span className="text-zinc-500 text-sm font-medium">
-                    9 weeks <span className="font-normal">· discovery to launch</span>
+                    9 weeks{" "}
+                    <span className="font-normal">· discovery to launch</span>
                   </span>
                 </div>
 
@@ -204,7 +222,8 @@ export default function CustomAppDetail() {
                   </span>
                 </div>
                 <p className="self-stretch text-zinc-500 text-sm font-normal">
-                  Role-based dispatch access, encrypted location data in transit and at rest, SOC 2-aligned infrastructure.
+                  Role-based dispatch access, encrypted location data in transit
+                  and at rest, SOC 2-aligned infrastructure.
                 </p>
               </div>
             </div>
@@ -212,9 +231,7 @@ export default function CustomAppDetail() {
 
           {/* MORE */}
           <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
-            <span className="text-zinc-500 text-sm font-normal">
-              MORE
-            </span>
+            <span className="text-zinc-500 text-sm font-normal">MORE</span>
             <div className="self-stretch flex flex-col justify-start items-start gap-2">
               <h3 className="self-stretch text-neutral-800 text-2xl font-semibold">
                 Want something like this?

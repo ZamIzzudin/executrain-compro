@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { useSocmed } from "@/services/socmed/hook";
 import { useSocmedLogo } from "@/hooks/useSocmedLogo";
 import { type SocmedDataProps } from "@/utils/types/socmed";
+import { handleImageError } from "@/utils/helper";
 
 export default function ContactUs() {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
@@ -152,6 +153,7 @@ export default function ContactUs() {
                   <img
                     src={each.icon}
                     alt={each.name || `socmed ${index}`}
+                    onError={handleImageError}
                     className="w-6 h-6 object-contain brightness-0 invert"
                   />
                 </a>

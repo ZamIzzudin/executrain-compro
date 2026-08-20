@@ -8,6 +8,7 @@ export default function StatSection() {
         backgroundImage: `linear-gradient(#242424CC, #242424CC), url('./statHero.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="text-white col-span-2">

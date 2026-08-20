@@ -9,6 +9,7 @@ import { LordIcons } from "@/components/atoms";
 
 import CaraouselA from "@/assets/v2/caraousel-1.jpg";
 import CaraouselB from "@/assets/v2/caraousel-2.jpg";
+import { handleImageError } from "@/utils/helper";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -22,15 +23,24 @@ export default function ProductDetail() {
     <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
       {/* Breadcrumb */}
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
+        <Link
+          className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+          to="/"
+        >
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/it-product">
+        <Link
+          className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+          to="/it-product"
+        >
           Ready-to-Use IT Products
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/it-product/${product._id}`}>
+        <Link
+          className="text-rose-700 hover:opacity-80 transition-opacity duration-200"
+          to={`/it-product/${product._id}`}
+        >
           {product.product_name}
         </Link>
       </div>
@@ -41,7 +51,7 @@ export default function ProductDetail() {
       </h1>
 
       {/* Main Grid Layout */}
-      <div className="px-[5%] md:px-[7%] lg:px-[10%] mt-6 grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="px-[5%] md:px-[7%] lg:px-[10%] mt-6 grid grid-cols-1 lg:grid-cols-6 gap-8">
         {/* Left Column Content */}
         <div className="flex flex-col gap-6 lg:col-span-3">
           {/* Banner */}
@@ -50,6 +60,7 @@ export default function ProductDetail() {
               <img
                 src={product.banner.url}
                 alt={product.product_name}
+                onError={handleImageError}
                 className="w-full h-full object-cover rounded-3xl"
               />
             ) : (
@@ -66,23 +77,32 @@ export default function ProductDetail() {
             </span>
             <div className="self-stretch flex flex-wrap gap-3">
               <div className="px-2.5 py-1.5 bg-pink-400/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-pink-400 text-xs font-medium">Power Apps</span>
+                <span className="text-pink-400 text-xs font-medium">
+                  Power Apps
+                </span>
               </div>
               <div className="px-2.5 py-1.5 bg-blue-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-blue-300 text-xs font-medium">Power Automate</span>
+                <span className="text-blue-300 text-xs font-medium">
+                  Power Automate
+                </span>
               </div>
               <div className="px-2.5 py-1.5 bg-orange-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-orange-300 text-xs font-medium">Power BI</span>
+                <span className="text-orange-300 text-xs font-medium">
+                  Power BI
+                </span>
               </div>
               <div className="px-2.5 py-1.5 bg-lime-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-green-400 text-xs font-medium">SharePoint</span>
+                <span className="text-green-400 text-xs font-medium">
+                  SharePoint
+                </span>
               </div>
             </div>
           </div>
 
           {/* Description */}
           <p className="text-justify text-neutral-900 text-base font-normal leading-relaxed whitespace-pre-line">
-            {product.product_description || "A correspondence management system used to record, manage, and monitor the flow of incoming and outgoing letters within an organization. Users can assign responsible parties and track the status of letters in real-time."}
+            {product.product_description ||
+              "A correspondence management system used to record, manage, and monitor the flow of incoming and outgoing letters within an organization. Users can assign responsible parties and track the status of letters in real-time."}
           </p>
 
           {/* PROBLEM STATEMENT */}
@@ -92,7 +112,9 @@ export default function ProductDetail() {
             </span>
             <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 flex flex-col justify-center items-center gap-4">
               <p className="self-stretch text-zinc-500 text-sm font-normal">
-                Organizations often struggle with misplaced correspondence, delayed responses, and a lack of clear accountability when manually managing the flow of incoming and outgoing letters.
+                Organizations often struggle with misplaced correspondence,
+                delayed responses, and a lack of clear accountability when
+                manually managing the flow of incoming and outgoing letters.
               </p>
               <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
               <div className="self-stretch flex flex-col justify-center items-start gap-2">
@@ -128,7 +150,8 @@ export default function ProductDetail() {
                   </span>
                 </div>
                 <p className="self-stretch text-zinc-500 text-sm font-normal">
-                  Role-based dispatch access, encrypted location data in transit and at rest, SOC 2-aligned infrastructure.
+                  Role-based dispatch access, encrypted location data in transit
+                  and at rest, SOC 2-aligned infrastructure.
                 </p>
               </div>
             </div>
@@ -225,7 +248,7 @@ export default function ProductDetail() {
         </div>
 
         {/* Right Column Sticky Sidebar */}
-        <div className="flex flex-col gap-8 lg:col-span-2 sticky top-28 self-start">
+        <div className="flex flex-col gap-8 lg:col-span-3 sticky top-28 self-start">
           {/* DEPLOYMENT OPTIONS */}
           <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
             <span className="text-zinc-500 text-sm font-normal">
@@ -249,13 +272,18 @@ export default function ProductDetail() {
                     />
                   </div>
                   <div className="flex-1 flex flex-col justify-end items-start gap-0 overflow-hidden">
-                    <span className="text-rose-700 text-base font-medium">On-Premise</span>
-                    <span className="text-neutral-800 text-sm font-normal">Environment</span>
+                    <span className="text-rose-700 text-base font-medium">
+                      On-Premise
+                    </span>
+                    <span className="text-neutral-800 text-sm font-normal">
+                      Environment
+                    </span>
                   </div>
                 </div>
                 <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
                 <p className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed">
-                  Hosted locally on your internal servers for maximum data control and strict security compliance.
+                  Hosted locally on your internal servers for maximum data
+                  control and strict security compliance.
                 </p>
               </div>
 
@@ -276,13 +304,18 @@ export default function ProductDetail() {
                     />
                   </div>
                   <div className="flex-1 flex flex-col justify-end items-start gap-0 overflow-hidden">
-                    <span className="text-rose-700 text-base font-medium">Cloud</span>
-                    <span className="text-neutral-800 text-sm font-normal">Environment</span>
+                    <span className="text-rose-700 text-base font-medium">
+                      Cloud
+                    </span>
+                    <span className="text-neutral-800 text-sm font-normal">
+                      Environment
+                    </span>
                   </div>
                 </div>
                 <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
                 <p className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed">
-                  Hosted securely in the cloud for easy remote access, seamless scalability, and zero maintenance.
+                  Hosted securely in the cloud for easy remote access, seamless
+                  scalability, and zero maintenance.
                 </p>
               </div>
             </div>
@@ -290,9 +323,7 @@ export default function ProductDetail() {
 
           {/* MORE */}
           <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
-            <span className="text-zinc-500 text-sm font-normal">
-              MORE
-            </span>
+            <span className="text-zinc-500 text-sm font-normal">MORE</span>
             <div className="self-stretch flex flex-col justify-start items-start gap-2">
               <h3 className="self-stretch text-neutral-800 text-2xl font-semibold">
                 Need this kind of Product?

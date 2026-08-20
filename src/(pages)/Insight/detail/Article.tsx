@@ -4,7 +4,7 @@ import { ChevronRight, ClockIcon, ArrowRight } from "lucide-react";
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 
 import { useProductDetail } from "@/services/strategic-solution/hook";
-import { formatDate } from "@/utils/helper";
+import { formatDate, handleImageError } from "@/utils/helper";
 
 import Article from "@/assets/v2/article.jpg";
 
@@ -61,6 +61,7 @@ export default function ArticleDetail() {
             <img
               src={article.banner.url}
               alt={article.product_name}
+              onError={handleImageError}
               className="w-full h-full object-cover rounded-4xl"
             />
           ) : (
