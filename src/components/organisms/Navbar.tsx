@@ -21,11 +21,11 @@ export default function Navbar() {
 
   // Pages without a hero should always show a solid navbar
   const noHeroMatches = [
-    useMatch("/free-trial/:id"),
-    useMatch("/strategic-solution/:id"),
-    useMatch("/product/:id"),
+    useMatch("/skill-accelerator/:id"),
+    useMatch("/course-catalog/:id"),
+    useMatch("/it-product/:id"),
     useMatch("/app-development/:id"),
-    useMatch("/certification/:id"),
+    useMatch("/licensing/:id"),
     useMatch("/article/:id"),
     useMatch("/case-study/:id"),
     useMatch("/contact"),
@@ -64,26 +64,25 @@ export default function Navbar() {
       key: "training",
       label: "Training & Skills",
       items: [
-        { label: "Skill Accelerator (Free Trial)", path: "/free-trial" },
-        { label: "Training Calendar", path: "/schedule" },
+        { label: "Skill Accelerator ", path: "/skill-accelerator" },
         { label: "Learning Paths", path: "/learning-path" },
-        { label: "Course Catalog", path: "/strategic-solution" },
+        { label: "Course Catalog", path: "/course-catalog" },
       ],
     },
     {
       key: "tech",
       label: "Tech Solutions",
       items: [
-        { label: "Ready-to-Use IT Products", path: "/product" },
+        { label: "Ready-to-Use IT Products", path: "/it-product" },
         { label: "Custom App Development", path: "/app-development" },
-        { label: "Software & Cloud Licensing", path: "/certification" },
+        { label: "Technology & Cloud Licensing", path: "/licensing" },
       ],
     },
     {
       key: "advisory",
       label: "Advisory Support",
       items: [
-        { label: "Support Advisory", path: "/tech-advisory" },
+        { label: "Tech Advisory", path: "/tech-advisory" },
         { label: "Implementation & Support", path: "/implementation-support" },
         { label: "IT Talent Placement", path: "/talent-placement" },
       ],

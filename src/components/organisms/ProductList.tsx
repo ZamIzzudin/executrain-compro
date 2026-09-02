@@ -16,7 +16,7 @@ import Pagination from "../atoms/Pagination";
 export default function ProductList({
   type,
   name,
-  basePath = "/product",
+  basePath = "/it-product",
   children,
 }: Readonly<{
   type: string;
@@ -66,7 +66,7 @@ export default function ProductList({
       <FadeInUp
         delay={0.1}
         duration={0.5}
-        className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 mb-5"
+        className="flex flex-col items-start gap-4 mb-5"
       >
         <h2 className="font-semibold text-2xl capitalize">{name}</h2>
         {children}

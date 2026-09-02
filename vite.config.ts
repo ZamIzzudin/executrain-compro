@@ -16,12 +16,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // Local dev proxy: /api/* is forwarded to the target below.
-      // Replace the demo target with your own backend URL.
+      // Local dev proxy: /api/* is forwarded to the revamp API (v2) on port 8000.
       '/api': {
-        target: 'https://jsonplaceholder.typicode.com',
+        target: 'http://localhost:8000',
         changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/api/, ''),
       },
     },
   },

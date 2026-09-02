@@ -62,7 +62,7 @@ export default function ArticleList({
   };
 
   return (
-    <section className="px-[5%] md:px-[7%] lg:px-[10%] w-full">
+    <section className="w-full">
       <FadeInUp
         delay={0.1}
         duration={0.5}

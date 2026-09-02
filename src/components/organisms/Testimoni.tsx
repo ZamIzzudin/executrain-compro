@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import TestimoniCard from "../molecules/card/Testimoni";
 import { TestimonialCardSkeleton } from "./Skeleton";
 import { FadeInUp } from "../atoms/Motion";
-import Button from "../atoms/Button";
 
 import { useTestimonial } from "@/services/testimoni/hook";
 
@@ -35,10 +34,10 @@ export default function TestimoniList() {
   }, [testimonial]);
 
   return (
-    <section className="my-10 w-full space-y-10 pb-10">
+    <section className="py-12 w-full space-y-8 bg-[#fcfcfc]">
       <div className="text-black w-full">
         {/* Center-aligned Heading */}
-        <h2 className="w-full font-semibold text-2xl md:text-3xl lg:text-4xl text-center text-[#111] mb-8 md:mb-12 leading-8 md:leading-13">
+        <h2 className="w-full font-semibold text-2xl md:text-3xl text-center text-neutral-800 mb-8">
           What They Say About Us
         </h2>
 
@@ -48,19 +47,19 @@ export default function TestimoniList() {
           </div>
         ) : testimonial.length === 0 ? (
           <div className="flex flex-col items-center p-8 gap-4">
-            <span className="font-[400] text-slate-500 text-[16px] md:text-[18px]">
+            <span className="font-normal text-slate-500 text-base">
               No Testimonial Found
             </span>
           </div>
         ) : (
           <div className="relative w-full">
             <div className="overflow-hidden">
-              <div className="flex gap-5 animate-infinite-scroll hover:pause-animation py-3">
+              <div className="flex gap-4 animate-infinite-scroll hover:pause-animation py-3">
                 {[...duplicatedData, ...duplicatedData, ...duplicatedData].map(
                   (item, index: number) => (
                     <div
                       key={`${item._id}-${index}`}
-                      className="flex-shrink-0 w-[280px] md:w-[360px]"
+                      className="flex-shrink-0 w-80 md:w-96"
                     >
                       <TestimoniCard data={item} />
                     </div>
@@ -77,14 +76,14 @@ export default function TestimoniList() {
       </div>
       <div className="flex items-center justify-center">
         <FadeInUp delay={0.5} duration={0.5}>
-          <Button
-            label="View User Case Studies"
-            rounded
-            size="sm"
-            type="outline-primary"
-            icon={<ArrowRightIcon size={18} />}
-            onClick={() => navigate("/strategic-solution")}
-          />
+          <button
+            type="button"
+            onClick={() => navigate("/course-catalog")}
+            className="px-3 py-2.5 rounded-[48px] outline outline-2 outline-offset-[-2px] outline-rose-700 inline-flex justify-center items-center gap-2.5 text-rose-700 hover:bg-rose-50 transition-colors duration-300 cursor-pointer"
+          >
+            <span className="text-sm font-medium">View User Case Studies</span>
+            <ArrowRightIcon size={18} className="text-rose-700" />
+          </button>
         </FadeInUp>
       </div>
     </section>

@@ -18,11 +18,11 @@ function ScrollToTop() {
 
 export default function RootLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
+    <div className="flex min-h-screen flex-col bg-[#FCFCFC] text-slate-900">
       <ScrollToTop />
       <AssetProvider>
         <Navbar />
-        <main className="flex-1 mt-[-7%] overflow-x-hidden">
+        <main className="flex-1 mt-[-7%]">
           <Outlet />
         </main>
         <Footer />

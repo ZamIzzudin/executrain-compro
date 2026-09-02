@@ -41,6 +41,22 @@ export const formatDate = (date: Date | number = new Date()) => {
   });
 };
 
+export const IMAGE_FALLBACK =
+  "https://storagewebsitetoj.blob.core.windows.net/image/1787026702579_dbec0a46a28d1563.jpg";
+
+/**
+ * Handler untuk <img onError> — ganti src dengan gambar fallback
+ * saat URL gambar dari fetch data gagal dimuat (404/rusak).
+ */
+export const handleImageError = (
+  e: React.SyntheticEvent<HTMLImageElement>
+) => {
+  const img = e.currentTarget;
+  if (img.src !== IMAGE_FALLBACK) {
+    img.src = IMAGE_FALLBACK;
+  }
+};
+
 /**
  * Hitung end date berdasarkan start date dan duration (dalam hari).
  * End date = start date + (days - 1), karena hari pertama sudah dihitung sebagai start.

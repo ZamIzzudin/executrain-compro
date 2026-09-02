@@ -1,6 +1,5 @@
 /** @format */
 
-import { useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 
 import { type SocmedDataProps } from "@/utils/types/socmed";
@@ -12,13 +11,13 @@ export default function CTA({
   title = "Ready to Train Your Team?",
   description = "Get the full proposal and training details by clicking the button below.",
   cta = "Request Proposal",
+  bgGradient = "bg-gradient-to-b from-[#FCFCFC] to-[#E0E0E0]",
 }: Readonly<{
   title?: string;
   description?: string;
   cta?: string;
+  bgGradient?: string;
 }>) {
-  const navigate = useNavigate();
-
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
 
   const contactList = socmedData.find(
@@ -26,11 +25,14 @@ export default function CTA({
       item.socmed_link && ["WHATSAPP"].includes(item.socmed_name),
   )?.socmed_link;
 
-  const handleCTA = () =>
-    navigate(buildWhatsAppLink(contactList, WHATSAPP_TEMPLATES.general));
+  const waLink = buildWhatsAppLink(contactList, WHATSAPP_TEMPLATES.general);
+
+  const handleCTA = () => {
+    window.open(waLink, "_blank", "noopener,noreferrer");
+  };
 
   return (
-    <div className="w-full bg-gradient-to-b from-white to-primary-100 px-[5%] md:px-[7%] lg:px-[10%] text-center pb-[5%] flex flex-col items-center">
+    <div className={`w-full ${bgGradient} px-[5%] md:px-[7%] lg:px-[10%] text-center pb-[5%] flex flex-col items-center`}>
       <h2 className="text-2xl md:text-[32px] font-semibold">{title}</h2>
       <p className="text-[14px] md:text-[16px] text-gray-600 mb-4">
         {description}

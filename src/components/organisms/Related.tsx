@@ -14,7 +14,7 @@ import { type FreeTrialProductProps } from "@/utils/types/free-trial";
 export default function RelatedList({
   type,
   name,
-  basePath = "/product",
+  basePath = "/it-product",
 }: Readonly<{ type: string; name: string; basePath?: string; children?: ReactNode }>) {
   const { data, isLoading } = useProductFiltered({
     page: 1,

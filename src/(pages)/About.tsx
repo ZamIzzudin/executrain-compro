@@ -1,16 +1,21 @@
 import {
   AboutDetailSection,
-  AboutSectionFlat,
+  TechSlider,
 } from "@/components/organisms/AboutSection";
 import StatSection from "@/components/organisms/Stats";
 import Step from "@/components/organisms/Step";
 import ServiceList from "@/components/organisms/Service";
 import CTA from "@/components/organisms/CTA";
 import CustomHero from "@/components/organisms/hero/CustomHero";
+import GallerySlider from "@/components/organisms/GallerySlider";
+
+import { useGallery } from "@/services/gallery/hook";
 
 export default function About() {
+  const { data: gallery = [], isLoading: galleryLoading } = useGallery();
+
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="About Us"
         subtitle="About"
@@ -19,10 +24,11 @@ export default function About() {
         banner="./aboutHero.png"
       />
       <AboutDetailSection />
+      <GallerySlider data={gallery} isLoading={galleryLoading} />
       <StatSection />
       <Step />
       <ServiceList />
-      <AboutSectionFlat />
+      <TechSlider bgColor="bg-[#FCFCFC]" />
       <CTA
         title="Ready to Work With Us?"
         description="Chat our sales for detailed information"

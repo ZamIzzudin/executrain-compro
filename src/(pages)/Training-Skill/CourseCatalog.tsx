@@ -1,41 +1,40 @@
 import { useState } from "react";
 import CustomHero from "@/components/organisms/hero/CustomHero";
-import CatalogList from "@/components/organisms/CatalogList";
+import CourseCatalogList from "@/components/organisms/CourseCatalogList";
 import CTA from "@/components/organisms/CTA";
 import CatalogFilter from "@/components/molecules/filter/CatalogFilter";
-
-const FRAMEWORK_LIST = [
-  "CyberSecurity Framework",
-  "Artificial Intellegence Framework",
-  "Project Management Framework",
-];
+import { useCatalogFilters } from "@/services/course-catalog/filters";
 
 export default function CourseCatalog() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [framework, setFramework] = useState<string | undefined>(undefined);
+  const { data: filterOpts } = useCatalogFilters();
 
   return (
-    <section>
+    <section className="bg-[#FCFCFC]">
       <CustomHero
         title="Course Catalog"
         subtitle="Course Catalog"
         description="Whether you want to master a new software, sharpen your leadership abilities, or earn an industry-recognized credential, your next breakthrough is right here."
-        path="/strategic-solution"
-      >
+        path="/course-catalog"
+      />
+      <section className="px-[5%] md:px-[7%] lg:px-[10%] pt-12 pb-[5%] space-y-8">
         <CatalogFilter
           searchValue={search}
           categoryValue={category}
           frameworkValue={framework}
+          categories={filterOpts?.categories}
+          frameworks={filterOpts?.framework_types}
           onSearchChange={setSearch}
           onCategoryChange={setCategory}
           onFrameworkChange={setFramework}
         />
-      </CustomHero>
-      <section className="py-[5%] space-y-5">
-        {FRAMEWORK_LIST.map((each) => (
-          <CatalogList name={each} type={"it_training"} key={each} />
-        ))}
+        <CourseCatalogList
+          search={search}
+          category={category}
+          framework={framework}
+        />
       </section>
 
       <CTA />

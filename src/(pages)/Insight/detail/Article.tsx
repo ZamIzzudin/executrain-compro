@@ -4,7 +4,7 @@ import { ChevronRight, ClockIcon, ArrowRight } from "lucide-react";
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 
 import { useProductDetail } from "@/services/strategic-solution/hook";
-import { formatDate } from "@/utils/helper";
+import { formatDate, handleImageError } from "@/utils/helper";
 
 import Article from "@/assets/v2/article.jpg";
 
@@ -27,17 +27,17 @@ export default function ArticleDetail() {
     CATEGORY_LABEL[article.product_category] ?? article.product_category;
 
   return (
-    <section className="pt-0 md:pt-[10%] pb-[8%]">
+    <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
       <div className="font-[500] flex gap-3 text-xs md:text-sm items-center flex-wrap px-[5%] md:px-[7%] lg:px-[10%]">
-        <Link className="opacity-50" to="/">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/">
           Home
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="opacity-50" to="/free-trial">
+        <Link className="opacity-50 hover:opacity-100 transition-opacity duration-200" to="/article">
           Article
         </Link>
         <ChevronRight className="w-4 h-4 opacity-50" />
-        <Link className="text-primary-500" to={`/free-trial/${article._id}`}>
+        <Link className="text-rose-700 hover:opacity-80 transition-opacity duration-200" to={`/article/${article._id}`}>
           {article.product_name}
         </Link>
       </div>
@@ -61,6 +61,7 @@ export default function ArticleDetail() {
             <img
               src={article.banner.url}
               alt={article.product_name}
+              onError={handleImageError}
               className="w-full h-full object-cover rounded-4xl"
             />
           ) : (
@@ -135,71 +136,112 @@ export default function ArticleDetail() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col gap-6 lg:col-span-2">
-          <div className="border border-gray-200 rounded-2xl p-5 bg-[#ECECEC]">
-            <p className="text-xs tracking-wide text-gray-400 mb-1">
+        <div className="flex flex-col gap-8 lg:col-span-2">
+          {/* OUR RELATED PRODUCT */}
+          <div className="w-full p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
+            <span className="text-neutral-800 text-sm font-normal">
               OUR RELATED PRODUCT
-            </p>
-            <div className="p-3 bg-white rounded-2xl flex gap-2 items-center flex-col">
-              <div className="flex gap-3 items-center">
-                <img alt="" src={Article} className="h-15 w-15 rounded-xl" />
-                <div className="space-y-1">
-                  <span className="inline-block text-xs bg-primary-50 text-primary-500 rounded-full px-3 py-1">
-                    {categoryLabel.replaceAll("_", " ")}
-                  </span>
-                  <h3 className="font-medium">Letter Correspondence App</h3>
+            </span>
+            <div className="self-stretch p-4 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 flex flex-col justify-center items-center gap-3 group cursor-pointer">
+              <div className="self-stretch inline-flex justify-start items-center gap-3">
+                <div className="w-20 h-20 relative bg-slate-100 rounded-3xl border-2 border-gray-200 overflow-hidden shrink-0">
+                  <img
+                    alt="Product banner"
+                    src={Article}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="flex-1 flex flex-col justify-center items-start gap-2 overflow-hidden">
+                  <div className="inline-flex justify-start items-center gap-2 flex-wrap">
+                    <div className="px-2.5 py-1 bg-pink-400/20 rounded-[64px] flex justify-center items-center">
+                      <span className="text-pink-400 text-xs font-medium">
+                        Power Apps
+                      </span>
+                    </div>
+                    <div className="px-2.5 py-1 bg-zinc-500/20 rounded-[64px] flex justify-center items-center">
+                      <span className="text-zinc-500 text-xs font-medium">
+                        +3
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="self-stretch text-neutral-800 group-hover:text-rose-700 text-base font-medium line-clamp-2 transition-colors duration-300 text-left">
+                    Letter Correspondence App
+                  </h3>
                 </div>
               </div>
-              <a
-                href={article.link || "#"}
-                target={article.link ? "_blank" : undefined}
-                rel={article.link ? "noreferrer" : undefined}
-                className="inline-flex items-center gap-1 text-primary-500 text-sm font-medium px-3 py-2 transition-colors w-full justify-center pt-3 border-t border-gray-300"
+              <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
+              <Link
+                to="/custom-app"
+                className="inline-flex justify-start items-center gap-2.5 text-rose-700 text-sm font-medium hover:underline"
               >
-                View Product Detail <ArrowRight className="w-4 h-4" />
-              </a>
+                <span>View Product Detail</span>
+                <ArrowRight size={16} className="text-rose-700 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
             </div>
           </div>
-          <div className="border border-gray-200 rounded-2xl p-5 bg-[#ECECEC]">
-            <p className="text-xs tracking-wide text-gray-400 mb-1">
+
+          {/* OTHER RELATED ARTICLE */}
+          <div className="w-full p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-4 overflow-hidden">
+            <span className="text-neutral-800 text-sm font-normal">
               OTHER RELATED ARTICLE
-            </p>
-            <div className="space-y-2 py-3">
+            </span>
+            <div className="self-stretch flex flex-col justify-start items-start gap-4">
               {[
-                "Choosing the Right Training Program for Your Team",
-                "Measuring the Impact of Professional Training",
-                "How Continuous Learning Drives Career Growth",
-              ].map((each: string, index) => (
+                {
+                  title: "Choosing the Right Training Program for Your Team",
+                  category: "Corporate Training",
+                  bgTag: "bg-fuchsia-400/20",
+                  textTag: "text-fuchsia-400",
+                  dotBg: "bg-fuchsia-400",
+                },
+                {
+                  title: "Measuring the Impact of Professional Training",
+                  category: "Development",
+                  bgTag: "bg-green-500/20",
+                  textTag: "text-green-500",
+                  dotBg: "bg-green-500",
+                },
+                {
+                  title: "How Continuous Learning Drives Career Growth",
+                  category: "Career Development",
+                  bgTag: "bg-blue-300/20",
+                  textTag: "text-blue-300",
+                  dotBg: "bg-blue-300",
+                },
+              ].map((item) => (
                 <div
-                  key={index + 1}
-                  className="p-3 bg-white rounded-2xl flex gap-3 items-center flex-col"
+                  key={item.title}
+                  className="self-stretch p-3 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group"
                 >
-                  <div className="flex gap-3 items-center">
+                  <div className="w-20 h-20 relative bg-slate-100 rounded-3xl border-2 border-gray-200 overflow-hidden shrink-0">
                     <img
-                      alt=""
+                      alt={item.title}
                       src={Article}
-                      className="h-15 w-15 rounded-xl"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="space-y-1">
-                      <span className="inline-block text-xs bg-primary-50 text-primary-500 rounded-full px-3 py-1">
-                        ● Corporate Training
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center items-start gap-2 overflow-hidden text-left">
+                    <div className={`px-2.5 py-1 ${item.bgTag} rounded-[64px] inline-flex justify-center items-center gap-1.5`}>
+                      <div className={`w-1.5 h-1.5 ${item.dotBg} rounded-full`} />
+                      <span className={`${item.textTag} text-xs font-medium`}>
+                        {item.category}
                       </span>
-                      <h3 className="font-medium">{each}</h3>
                     </div>
+                    <h4 className="self-stretch text-neutral-800 group-hover:text-rose-700 text-sm font-medium line-clamp-2 transition-colors duration-300">
+                      {item.title}
+                    </h4>
                   </div>
                 </div>
               ))}
             </div>
 
-            <a
-              href={article.link || "#"}
-              target={article.link ? "_blank" : undefined}
-              rel={article.link ? "noreferrer" : undefined}
-              className="inline-flex items-center gap-1 bg-primary-500 text-white text-sm font-medium rounded-full px-3 py-2 hover:bg-primary-600 transition-colors w-full justify-center"
+            <Link
+              to="/article"
+              className="self-stretch h-10 px-3 py-2.5 bg-rose-700 hover:bg-rose-800 transition-colors duration-300 rounded-[48px] inline-flex justify-center items-center gap-2.5 text-white text-sm font-medium cursor-pointer"
             >
-              View All Related Article
-              <ArrowRight className="w-4 h-4" />
-            </a>
+              <span>View All Related Article</span>
+              <ArrowRight size={18} className="text-white" />
+            </Link>
           </div>
         </div>
       </div>

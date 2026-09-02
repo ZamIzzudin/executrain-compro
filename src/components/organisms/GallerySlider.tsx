@@ -8,6 +8,7 @@ import { GalleryLogoSkeleton } from "./Skeleton";
 import { FadeInUp } from "../atoms/Motion";
 
 import { type GalleryItem } from "@/utils/types/gallery";
+import { handleImageError } from "@/utils/helper";
 
 interface GallerySliderProps {
   data?: GalleryItem[];
@@ -59,6 +60,7 @@ export default function GallerySlider({
                       <img
                         src={item.image.url}
                         alt={item.title || "Gallery image"}
+                        onError={handleImageError}
                         className="transition-transform duration-300 group-hover:scale-105 min-h-full"
                       />
                     </div>

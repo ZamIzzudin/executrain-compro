@@ -4,6 +4,8 @@ import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { useSocmed } from "@/services/socmed/hook";
 import { useSocmedLogo } from "@/hooks/useSocmedLogo";
 import { type SocmedDataProps } from "@/utils/types/socmed";
+import { handleImageError } from "@/utils/helper";
+import { ContactSubmitService } from "@/services/contact/handler";
 
 export default function ContactUs() {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
@@ -36,6 +38,10 @@ export default function ContactUs() {
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -46,73 +52,109 @@ export default function ContactUs() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatus(null);
     try {
-      // TODO: sambungkan ke endpoint kirim pesan kamu
-      // await sendContactMessage(form);
+      await ContactSubmitService(form);
+      setStatus({
+        type: "success",
+        message: "Your message has been sent. Our team will get back to you shortly.",
+      });
       setForm({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        message: err?.response?.data?.message || "Failed to send your message. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-[15%] grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    <section className="w-full min-h-screen px-[5%] md:px-[7%] lg:px-[10%] pt-28 md:pt-32 pb-12 lg:pb-16 bg-gradient-to-b from-[#FCFCFC] from-[85%] to-[#E0E0E0] flex flex-col lg:flex-row justify-center items-center gap-12 bg-[#FCFCFC]">
       {/* Left column */}
-      <div>
+      <div className="flex-1 flex flex-col justify-start items-start gap-8">
+        {/* Logo */}
         <img
           src="/logogray.png"
           alt="ExecuTrain"
-          className="h-10 md:h-12 mb-8"
+          className="h-12 w-48 object-contain"
         />
 
-        <h1 className="text-2xl md:text-3xl font-semibold mb-2">Contact Us</h1>
-        <p className="text-sm text-gray-500 mb-6">
-          Ready to elevate your team's performance?
-        </p>
+        {/* Title */}
+        <div className="flex flex-col justify-start items-start gap-2">
+          <h1 className="text-neutral-800 text-3xl font-semibold">
+            Contact Us
+          </h1>
+          <p className="text-zinc-500 text-sm font-medium">
+            Ready to elevate your team's performance?
+          </p>
+        </div>
 
-        <div className="bg-[#ECECEC] rounded-2xl p-5">
-          <p className="text-xs tracking-wide text-gray-400 mb-3">
+        {/* GET IN TOUCH card */}
+        <div className="self-stretch p-6 bg-stone-50 rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3">
+          <p className="text-neutral-400 text-sm font-medium tracking-wide">
             GET IN TOUCH
           </p>
-          <div className="flex flex-col gap-3">
-            {CONTACT_INFO.map(({ icon: Icon, label, href }) =>
-              href ? (
-                <a
-                  key={label}
-                  href={href}
-                  className={`flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-colors border border-primary-500 bg-white`}
-                >
-                  <Icon className="w-4 h-4 shrink-0 text-primary-500" />
-                  {label}
-                </a>
-              ) : (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium bg-white border border-primary-500"
-                >
-                  <Icon className="w-4 h-4 shrink-0 text-primary-500" />
-                  {label}
+
+          <div className="self-stretch flex flex-col justify-center items-start gap-2.5">
+            {CONTACT_INFO.map(({ icon: Icon, label, href }, index) => {
+              const cardBase =
+                "self-stretch py-3 px-5 rounded-full shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group";
+              const defaultStyle =
+                "bg-white outline outline-1 outline-offset-[-1px] outline-gray-200 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 hover:outline-rose-700";
+
+              const content = (
+                <>
+                  <Icon
+                    className={`w-5 h-5 shrink-0 text-neutral-400 group-hover:text-rose-700 transition-colors duration-300 ${index === 0 ? "group-hover:text-rose-700" : ""}`}
+                  />
+                  <div className="flex-1 flex flex-col justify-start items-start gap-2">
+                    <span
+                      className={`text-base font-semibold transition-colors duration-300 text-neutral-800 group-hover:text-rose-700`}
+                    >
+                      {label}
+                    </span>
+                  </div>
+                </>
+              );
+
+              if (href) {
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    className={`${cardBase} ${defaultStyle}`}
+                  >
+                    {content}
+                  </a>
+                );
+              }
+              return (
+                <div key={label} className={`${cardBase} ${defaultStyle}`}>
+                  {content}
                 </div>
-              ),
-            )}
+              );
+            })}
           </div>
         </div>
 
-        <div className="mt-8">
-          <p className="text-xs font-semibold tracking-wide text-gray-400 mb-3">
+        {/* FOLLOW US */}
+        <div className="flex flex-col justify-start items-start gap-3">
+          <p className="text-neutral-400 text-sm font-medium tracking-wide">
             FOLLOW US
           </p>
           {socmedLoading ? (
-            <div className="flex gap-3">
-              {[1, 2, 3, 4].map((i) => (
+            <div className="flex gap-4">
+              {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="w-9 h-9 rounded-lg bg-gray-200 animate-pulse"
+                  className="w-14 h-14 rounded-2xl bg-gray-200 animate-pulse"
                 />
               ))}
             </div>
           ) : socmedList.length > 0 ? (
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               {socmedList.map((each, index) => (
                 <a
                   key={index}
@@ -120,9 +162,14 @@ export default function ContactUs() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={each.name}
-                  className="w-9 h-9 rounded-xl bg-primary-500 text-white flex items-center justify-center hover:bg-primary-600 transition-colors p-2"
+                  className="p-4 bg-rose-700 rounded-2xl flex justify-center items-center hover:bg-rose-800 transition-colors duration-300"
                 >
-                  <img src={each.icon} alt={each.name || `socmed ${index}`} />
+                  <img
+                    src={each.icon}
+                    alt={each.name || `socmed ${index}`}
+                    onError={handleImageError}
+                    className="w-6 h-6 object-contain brightness-0 invert"
+                  />
                 </a>
               ))}
             </div>
@@ -134,19 +181,30 @@ export default function ContactUs() {
         </div>
       </div>
 
-      {/* Right column: form */}
-      <div className="border border-primary-200 rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg md:text-xl font-bold mb-1">
-          Any Question In Mind?
-        </h2>
-        <p className="text-sm text-gray-500 mb-6">
-          Have a question or want to discuss your training needs? Fill out the
-          form below and our team will get back to you shortly.
-        </p>
+      {/* Right column: form card */}
+      <div className="w-full lg:w-[560px] p-6 bg-white rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-rose-700 flex flex-col justify-center items-start gap-8">
+        {/* Form header */}
+        <div className="self-stretch flex flex-col justify-start items-start gap-2">
+          <h2 className="text-neutral-800 text-2xl font-semibold">
+            Any Question In Mind?
+          </h2>
+          <p className="text-neutral-400 text-base font-normal">
+            Have a question or want to discuss your training needs? Fill out the
+            form below and our team will get back to you shortly.
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-1.5">
+        {/* Form fields */}
+        <form
+          onSubmit={handleSubmit}
+          className="self-stretch flex flex-col justify-start items-start gap-4"
+        >
+          {/* Name */}
+          <div className="self-stretch flex flex-col justify-start items-start gap-2">
+            <label
+              htmlFor="name"
+              className="text-neutral-800 text-sm font-medium"
+            >
               Name
             </label>
             <input
@@ -157,12 +215,16 @@ export default function ContactUs() {
               value={form.name}
               onChange={handleChange}
               placeholder="Enter your full name"
-              className="w-full rounded-lg bg-gray-50 border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+              className="self-stretch h-12 px-4 py-3 bg-gray-100 rounded-[100px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-sm font-normal text-neutral-800 placeholder:text-gray-400 focus:outline-rose-700 focus:bg-white transition-all duration-300 focus:ring-0"
             />
           </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1.5">
+          {/* Email */}
+          <div className="self-stretch flex flex-col justify-start items-start gap-2">
+            <label
+              htmlFor="email"
+              className="text-neutral-800 text-sm font-medium"
+            >
               Email Address
             </label>
             <input
@@ -173,14 +235,15 @@ export default function ContactUs() {
               value={form.email}
               onChange={handleChange}
               placeholder="Enter your email address"
-              className="w-full rounded-lg bg-gray-50 border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+              className="self-stretch h-12 px-4 py-3 bg-gray-100 rounded-[100px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-sm font-normal text-neutral-800 placeholder:text-gray-400 focus:outline-rose-700 focus:bg-white transition-all duration-300 focus:ring-0"
             />
           </div>
 
-          <div>
+          {/* Message */}
+          <div className="self-stretch flex flex-col justify-start items-start gap-2">
             <label
               htmlFor="message"
-              className="block text-sm font-medium mb-1.5"
+              className="text-neutral-800 text-sm font-medium"
             >
               Message
             </label>
@@ -188,22 +251,33 @@ export default function ContactUs() {
               id="message"
               name="message"
               required
-              rows={4}
+              rows={3}
               value={form.message}
               onChange={handleChange}
               placeholder="Tell us about your training or any question you may have"
-              className="w-full rounded-lg bg-gray-50 border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+              className="self-stretch h-20 px-4 py-3 bg-stone-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 text-sm font-normal text-neutral-800 placeholder:text-gray-400 resize-none focus:outline-rose-700 transition-all duration-300 focus:ring-0"
             />
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-2 w-full bg-primary-500 hover:bg-primary-600 disabled:opacity-60 text-white text-sm font-medium rounded-full py-3 flex items-center justify-center gap-2 transition-colors"
+            className="self-stretch h-10 px-3 py-2.5 bg-rose-700 rounded-[48px] inline-flex justify-center items-center gap-2.5 hover:bg-rose-800 disabled:opacity-60 transition-colors duration-300 cursor-pointer"
           >
-            {isSubmitting ? "Sending..." : "Send Message"}
-            <ArrowRight className="w-4 h-4" />
+            <span className="text-white text-sm font-medium">
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </span>
+            <ArrowRight className="w-4 h-4 text-white" />
           </button>
+
+          {status && (
+            <p
+              className={`self-stretch text-sm font-medium ${status.type === "success" ? "text-green-600" : "text-red-600"}`}
+            >
+              {status.message}
+            </p>
+          )}
         </form>
       </div>
     </section>

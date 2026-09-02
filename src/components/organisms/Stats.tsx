@@ -8,10 +8,11 @@ export default function StatSection() {
         backgroundImage: `linear-gradient(#242424CC, #242424CC), url('./statHero.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="text-white col-span-2">
-        <span className="text-base">MORE</span>
+        <span className="text-sm">MORE</span>
         <h4 className="text-3xl font-semibold">Why Choose Us?</h4>
       </div>
       <div className="h-full flex items-end w-full col-span-3">

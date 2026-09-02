@@ -37,35 +37,41 @@ export default function ArticleFilter({
   onSortChange,
 }: Readonly<ArticleFilterProps>) {
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-start w-full max-w-4xl">
-      <SearchBar
-        label="Search"
-        value={searchValue}
-        onChange={onSearchChange}
-        placeholder="Search for article..."
-        variant="glass"
-        className="flex-1"
-      />
+    <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
+      <div className="w-full sm:w-[466px]">
+        <SearchBar
+          label="Search Article"
+          value={searchValue}
+          onChange={onSearchChange}
+          placeholder="Search for an article"
+          variant="default"
+          className="w-full"
+        />
+      </div>
 
-      <FilterDropdown
-        label="Category"
-        value={categoryValue}
-        onChange={onCategoryChange}
-        options={CATEGORIES}
-        placeholder="All Categories"
-        variant="primary"
-        className="w-full md:w-52"
-      />
+      <div className="w-full sm:w-44">
+        <FilterDropdown
+          label="Category"
+          value={categoryValue}
+          onChange={onCategoryChange}
+          options={CATEGORIES}
+          placeholder="All Category"
+          variant="primary"
+          className="w-full"
+        />
+      </div>
 
-      <FilterDropdown
-        label="Sort"
-        value={sortValue}
-        onChange={onSortChange}
-        options={SORT}
-        placeholder="Newest First"
-        variant="primary"
-        className="w-full md:w-52"
-      />
+      <div className="w-full sm:w-44">
+        <FilterDropdown
+          label="Sort By"
+          value={sortValue}
+          onChange={onSortChange}
+          options={SORT}
+          placeholder="Newest first"
+          variant="primary"
+          className="w-full"
+        />
+      </div>
     </div>
   );
 }

@@ -67,7 +67,7 @@ export default function FreeTrialList() {
     }
     return products.map((each: FreeTrialProductProps) => (
       <StaggerItem key={each._id} direction="up">
-        <ProductCard data={each} basePath="/free-trial" />
+        <ProductCard data={each} basePath="/skill-accelerator" />
       </StaggerItem>
     ));
   };
