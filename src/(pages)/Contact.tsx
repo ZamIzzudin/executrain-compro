@@ -5,6 +5,7 @@ import { useSocmed } from "@/services/socmed/hook";
 import { useSocmedLogo } from "@/hooks/useSocmedLogo";
 import { type SocmedDataProps } from "@/utils/types/socmed";
 import { handleImageError } from "@/utils/helper";
+import { ContactSubmitService } from "@/services/contact/handler";
 
 export default function ContactUs() {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
@@ -37,6 +38,10 @@ export default function ContactUs() {
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -47,10 +52,19 @@ export default function ContactUs() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatus(null);
     try {
-      // TODO: sambungkan ke endpoint kirim pesan kamu
-      // await sendContactMessage(form);
+      await ContactSubmitService(form);
+      setStatus({
+        type: "success",
+        message: "Your message has been sent. Our team will get back to you shortly.",
+      });
       setForm({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        message: err?.response?.data?.message || "Failed to send your message. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -256,6 +270,14 @@ export default function ContactUs() {
             </span>
             <ArrowRight className="w-4 h-4 text-white" />
           </button>
+
+          {status && (
+            <p
+              className={`self-stretch text-sm font-medium ${status.type === "success" ? "text-green-600" : "text-red-600"}`}
+            >
+              {status.message}
+            </p>
+          )}
         </form>
       </div>
     </section>

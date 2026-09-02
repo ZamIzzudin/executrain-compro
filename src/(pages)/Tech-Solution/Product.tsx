@@ -1,13 +1,17 @@
 import { useState } from "react";
 import CustomHero from "@/components/organisms/hero/CustomHero";
+import SearchBar from "@/components/atoms/SearchBar";
 import ProductFilter from "@/components/molecules/filter/ProductFilter";
+import ITProductList from "@/components/organisms/ITProductList";
 import CTA from "@/components/organisms/CTA";
-import ProductList from "@/components/organisms/ProductList";
 import { LordIcons } from "@/components/atoms";
+import { useITProductFilters } from "@/services/it-product/filters";
 
 export default function Product() {
+  const [search, setSearch] = useState("");
   const [tech, setTech] = useState<string | undefined>(undefined);
   const [deployment, setDeployment] = useState<string | undefined>(undefined);
+  const { data: filterOpts } = useITProductFilters();
 
   return (
     <section className="bg-[#FCFCFC]">
@@ -133,17 +137,23 @@ export default function Product() {
       </section>
 
       <section className="pt-12 pb-[5%] space-y-8">
-        <ProductList
-          name="Our Ready-to-use IT Product Catalog"
-          type={"it_training"}
-        >
+        <div className="px-[5%] md:px-[7%] lg:px-[10%] flex flex-col gap-6">
+          <div className="w-full max-w-md">
+            <SearchBar
+              value={search}
+              onChange={setSearch}
+              placeholder="Search IT Products..."
+            />
+          </div>
           <ProductFilter
             techValue={tech}
             deployValue={deployment}
+            techOptions={filterOpts?.tech_stacks}
             onTechChange={setTech}
             onDeployChange={setDeployment}
           />
-        </ProductList>
+        </div>
+        <ITProductList search={search} tech={tech} />
       </section>
       <CTA />
     </section>

@@ -1,19 +1,15 @@
 import { useState } from "react";
 import CustomHero from "@/components/organisms/hero/CustomHero";
-import CatalogList from "@/components/organisms/CatalogList";
+import CourseCatalogList from "@/components/organisms/CourseCatalogList";
 import CTA from "@/components/organisms/CTA";
 import CatalogFilter from "@/components/molecules/filter/CatalogFilter";
-
-const FRAMEWORK_LIST = [
-  "CyberSecurity Framework",
-  "Artificial Intellegence Framework",
-  "Project Management Framework",
-];
+import { useCatalogFilters } from "@/services/course-catalog/filters";
 
 export default function CourseCatalog() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [framework, setFramework] = useState<string | undefined>(undefined);
+  const { data: filterOpts } = useCatalogFilters();
 
   return (
     <section className="bg-[#FCFCFC]">
@@ -28,15 +24,17 @@ export default function CourseCatalog() {
           searchValue={search}
           categoryValue={category}
           frameworkValue={framework}
+          categories={filterOpts?.categories}
+          frameworks={filterOpts?.framework_types}
           onSearchChange={setSearch}
           onCategoryChange={setCategory}
           onFrameworkChange={setFramework}
         />
-        <div className="space-y-8">
-          {FRAMEWORK_LIST.map((each) => (
-            <CatalogList name={each} type={"it_training"} key={each} />
-          ))}
-        </div>
+        <CourseCatalogList
+          search={search}
+          category={category}
+          framework={framework}
+        />
       </section>
 
       <CTA />

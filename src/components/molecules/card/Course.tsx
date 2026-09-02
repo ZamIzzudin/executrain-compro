@@ -9,12 +9,29 @@ import { Tooltip } from "antd";
 import HeroBG from "@/assets/banner.jpg";
 import { handleImageError } from "@/utils/helper";
 
+/** Format nilai enum menjadi title-case, akronim (IT/AI) tetap kapital. */
+function titleCase(value?: string): string {
+  if (!value) return "-";
+  return value
+    .replaceAll("_", " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => {
+      const upper = word.toUpperCase();
+      if (upper === "IT" || upper === "AI") return upper;
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
 export interface ProductCardData {
   _id: string;
   product_name: string;
   product_category: string;
   skill_level: string;
   max_participant: number;
+  framework_type?: string;
+  card_type?: "course" | "skill" | "default";
   banner?: {
     public_id: string;
     url: string;
@@ -63,13 +80,35 @@ export default function CourseCard({
             </h3>
           </Tooltip>
         </div>
-        <div className="flex gap-3 text-xs mt-3">
-          <span className="bg-red-200 text-primary-500 font-medium px-2 py-1 rounded-full">
-            ● Free Class
-          </span>
-          <span className="bg-blue-200 text-blue-500 font-medium px-2 py-1 rounded-full">
-            ● Programming
-          </span>
+        <div className="flex flex-wrap gap-3 text-xs mt-3">
+          {data?.card_type === "course" ? (
+            <>
+              <span className="bg-blue-200 text-blue-500 font-medium px-2 py-1 rounded-full">
+                ● {titleCase(data.product_category)}
+              </span>
+              <span className="bg-red-200 text-primary-500 font-medium px-2 py-1 rounded-full">
+                ● {titleCase(data.framework_type)}
+              </span>
+            </>
+          ) : data?.card_type === "skill" ? (
+            <>
+              <span className="bg-red-200 text-primary-500 font-medium px-2 py-1 rounded-full">
+                ● Free Class
+              </span>
+              <span className="bg-blue-200 text-blue-500 font-medium px-2 py-1 rounded-full">
+                ● {titleCase(data.product_category)}
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="bg-red-200 text-primary-500 font-medium px-2 py-1 rounded-full">
+                ● Free Class
+              </span>
+              <span className="bg-blue-200 text-blue-500 font-medium px-2 py-1 rounded-full">
+                ● Programming
+              </span>
+            </>
+          )}
         </div>
       </div>
     </div>

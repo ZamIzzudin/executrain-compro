@@ -4,25 +4,20 @@
 
 import FilterDropdown from "../../atoms/FilterDropdown";
 
-const TECH: { label: string; value?: string }[] = [
-  { label: "All Tech Stack" },
-  { label: "Data Analytics", value: "DATA_ANALYTICS" },
-  { label: "Automation", value: "AUTOMATION" },
-  { label: "Cybersecurity", value: "CYBERSECURITY" },
-  { label: "Project Management", value: "PROJECT_MANAGEMENT" },
-  { label: "Emotional Intelligence", value: "EMOTIONAL_INTELLIGENCE" },
-];
-
+/**
+ * Deployment filter — HARDCODED (belum ada data di DB).
+ * Nanti bisa diintegrasikan ke master data / kolom deployment.
+ */
 const DEPLOY: { label: string; value?: string }[] = [
   { label: "All Deployment" },
-  { label: "Cybersecurity", value: "CYBERSECURITY" },
-  { label: "Artificial Intelligence", value: "AI" },
-  { label: "Project Management", value: "PROJECT_MANAGEMENT" },
+  { label: "On Cloud", value: "ON_CLOUD" },
+  { label: "On Premise", value: "ON_PREMISE" },
 ];
 
-export interface CatalogFilterProps {
+export interface ProductFilterProps {
   techValue?: string;
   deployValue?: string;
+  techOptions?: { value: string; label: string }[];
   onTechChange: (value: string | undefined) => void;
   onDeployChange: (value: string | undefined) => void;
 }
@@ -30,9 +25,18 @@ export interface CatalogFilterProps {
 export default function ProductFilter({
   techValue,
   deployValue,
+  techOptions,
   onTechChange,
   onDeployChange,
-}: Readonly<CatalogFilterProps>) {
+}: Readonly<ProductFilterProps>) {
+  const TECH: { label: string; value?: string }[] = [
+    { label: "All Tech Stack" },
+    ...(techOptions ?? []).map((o) => ({
+      label: o.label || o.value,
+      value: o.value,
+    })),
+  ];
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
       <div className="w-full sm:w-44">

@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import ProductList from "@/components/organisms/ProductList";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CTA from "@/components/organisms/CTA";
-import ProductFilter from "@/components/molecules/filter/ProductFilter";
+import SearchBar from "@/components/atoms/SearchBar";
+import AppDevelopmentFilter from "@/components/molecules/filter/AppDevelopmentFilter";
+import AppDevelopmentList from "@/components/organisms/AppDevelopmentList";
 
 import { FadeInUp, LordIcons } from "@/components/atoms";
 
@@ -14,9 +15,13 @@ import Next from "@/assets/dummy/next.png";
 import Node from "@/assets/dummy/node.png";
 import Mongo from "@/assets/dummy/mongo.png";
 
+import { useAppDevelopmentFilters } from "@/services/app-development/filters";
+
 export default function CustomApp() {
+  const [search, setSearch] = useState("");
   const [tech, setTech] = useState<string | undefined>(undefined);
-  const [deployment, setDeployment] = useState<string | undefined>(undefined);
+  const [method, setMethod] = useState<string | undefined>(undefined);
+  const { data: filterOpts } = useAppDevelopmentFilters();
 
   return (
     <section className="bg-[#FCFCFC]">
@@ -172,18 +177,30 @@ export default function CustomApp() {
       </section>
 
       <section className="pt-12 pb-[5%] space-y-8">
-        <ProductList
-          name="Our Finished Works Catalog"
-          type={"it_training"}
-          basePath="/app-development"
-        >
-          <ProductFilter
+        <div className="px-[5%] md:px-[7%] lg:px-[10%] flex flex-col gap-6">
+          <div className="w-full max-w-md">
+            <SearchBar
+              value={search}
+              onChange={setSearch}
+              placeholder="Search Custom App Development..."
+            />
+          </div>
+          <AppDevelopmentFilter
             techValue={tech}
-            deployValue={deployment}
+            methodValue={method}
+            techOptions={filterOpts?.tech_stacks}
+            methodOptions={filterOpts?.methodologies}
             onTechChange={setTech}
-            onDeployChange={setDeployment}
+            onMethodChange={setMethod}
           />
-        </ProductList>
+        </div>
+        <AppDevelopmentList
+          search={search}
+          tech={tech}
+          method={method}
+          techOptions={filterOpts?.tech_stacks}
+          methodOptions={filterOpts?.methodologies}
+        />
       </section>
       <CTA />
     </section>

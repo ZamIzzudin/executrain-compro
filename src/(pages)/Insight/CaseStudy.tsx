@@ -2,12 +2,15 @@ import { useState } from "react";
 
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CaseStudyFilter from "@/components/molecules/filter/CaseStudyFilter";
-import ArticleList from "@/components/organisms/ArticleList";
+import CaseStudyList from "@/components/organisms/CaseStudyList";
+
+import { useCaseStudyFilters } from "@/services/case-study/filters";
 
 export default function CaseStudy() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [sort, setSort] = useState<string | undefined>(undefined);
+  const { data: filterOpts } = useCaseStudyFilters();
 
   return (
     <section className="bg-[#FCFCFC]">
@@ -22,11 +25,17 @@ export default function CaseStudy() {
           searchValue={search}
           categoryValue={category}
           sortValue={sort}
+          categoryOptions={filterOpts?.categories}
           onSearchChange={setSearch}
           onCategoryChange={setCategory}
           onSortChange={setSort}
         />
-        <ArticleList name="Showing Newest Case Studies" type={"it_training"} basePath="/case-study" />
+        <CaseStudyList
+          search={search}
+          category={category}
+          sort={sort}
+          categoryOptions={filterOpts?.categories}
+        />
       </section>
     </section>
   );

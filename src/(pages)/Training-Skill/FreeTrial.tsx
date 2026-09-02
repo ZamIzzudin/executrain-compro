@@ -3,7 +3,7 @@ import { CheckCircleIcon } from "lucide-react";
 import { LordIcons } from "@/components/atoms";
 
 import CTA from "@/components/organisms/CTA";
-import FreeTrialList from "@/components/organisms/FreeTrialList";
+import SkillAcceleratorClassList from "@/components/organisms/SkillAcceleratorClassList";
 
 import PSA from "@/assets/v2/psa.png";
 
@@ -85,7 +85,7 @@ export default function FreeTrial() {
           </div>
         </div>
       </section>
-      <FreeTrialList />
+      <SkillAcceleratorClassList />
       <CTA />
     </section>
   );

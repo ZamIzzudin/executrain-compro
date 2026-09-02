@@ -30,14 +30,28 @@ export default function ProductCard({
         </div>
         <div className="p-5 space-y-3">
           <div className="flex gap-2 text-xs flex-wrap">
-            <span className="px-2.5 py-1 bg-rose-700/20 text-rose-700 font-medium rounded-[64px] flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-rose-700 rounded-full shrink-0" />
-              Power Apps
-            </span>
-            <span className="px-2.5 py-1 bg-blue-300/20 text-blue-400 font-medium rounded-[64px] flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-blue-300 rounded-full shrink-0" />
-              Custom App
-            </span>
+            {data?.tech_stack && data.tech_stack.length > 0 ? (
+              data.tech_stack.slice(0, 2).map((ts: string) => (
+                <span
+                  key={ts}
+                  className="px-2.5 py-1 bg-rose-700/20 text-rose-700 font-medium rounded-[64px] flex items-center gap-1"
+                >
+                  <span className="w-1.5 h-1.5 bg-rose-700 rounded-full shrink-0" />
+                  {ts.replaceAll("_", " ")}
+                </span>
+              ))
+            ) : (
+              <>
+                <span className="px-2.5 py-1 bg-rose-700/20 text-rose-700 font-medium rounded-[64px] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 bg-rose-700 rounded-full shrink-0" />
+                  Power Apps
+                </span>
+                <span className="px-2.5 py-1 bg-blue-300/20 text-blue-400 font-medium rounded-[64px] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 bg-blue-300 rounded-full shrink-0" />
+                  Custom App
+                </span>
+              </>
+            )}
           </div>
           <Tooltip placement="top" title={data?.product_name || "-"}>
             <h3 className="text-base font-semibold text-neutral-800 group-hover:text-rose-700 transition-colors duration-300 text-left line-clamp-1">
@@ -45,7 +59,8 @@ export default function ProductCard({
             </h3>
           </Tooltip>
           <p className="text-sm line-clamp-2 text-zinc-500 text-left">
-            A correspondence management system used to record, manage, and monitor the flow of incoming and outgoing letters within an organization.
+            {data?.product_description ||
+              "A correspondence management system used to record, manage, and monitor the flow of incoming and outgoing letters within an organization."}
           </p>
         </div>
       </div>

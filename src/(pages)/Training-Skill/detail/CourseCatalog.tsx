@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   ChevronRight,
@@ -14,9 +15,10 @@ import {
 } from "lucide-react";
 
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
-import RelatedList from "@/components/organisms/Related";
-import { useProductDetail } from "@/services/strategic-solution/hook";
+import RelatedCatalog from "@/components/organisms/RelatedCatalog";
+import RegisterModal from "@/components/molecules/RegisterModal";
 import { handleImageError } from "@/utils/helper";
+import { useCatalogDetail } from "@/services/course-catalog/hook";
 
 const CATEGORY_LABEL: Record<string, string> = {
   DATA_ANALYTICS: "Data Analytics",
@@ -32,7 +34,8 @@ const SKILL_LABEL: Record<string, string> = {
 
 export default function CourseCatalogDetail() {
   const { id } = useParams<{ id: string }>();
-  const { data: product, isLoading } = useProductDetail({ id: id! });
+  const { data: product, isLoading } = useCatalogDetail({ id: id! });
+  const [registerOpen, setRegisterOpen] = useState(false);
 
   if (isLoading || !product) {
     return <HeroProductDetailSkeleton />;
@@ -288,23 +291,27 @@ export default function CourseCatalogDetail() {
               </p>
             </div>
             <div className="inline-flex justify-start items-start gap-3">
-              <a
-                href={product.link || "#"}
-                target={product.link ? "_blank" : undefined}
-                rel={product.link ? "noreferrer" : undefined}
+              <button
+                onClick={() => setRegisterOpen(true)}
                 className="h-10 px-4 py-2.5 bg-rose-700 hover:bg-rose-800 transition-colors duration-300 rounded-[48px] inline-flex justify-center items-center gap-2.5 text-white text-sm font-medium cursor-pointer"
               >
                 <span>Request Schedule</span>
                 <ArrowRight size={18} className="text-white" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <RelatedList
-        type="it_training"
+      <RelatedCatalog
+        source="course"
         name="Related Courses"
         basePath="/course-catalog"
+        category={product.product_category}
+      />
+      <RegisterModal
+        open={registerOpen}
+        onClose={() => setRegisterOpen(false)}
+        productName={product.product_name}
       />
     </section>
   );

@@ -1,19 +1,20 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import { ChevronRight, ArrowRight, Globe, Shield, Target } from "lucide-react";
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 
-import { useProductDetail } from "@/services/strategic-solution/hook";
+import { useITProductDetail } from "@/services/it-product/hook";
 import Carousel from "@/components/molecules/Carousel";
+import InquiryModal from "@/components/molecules/InquiryModal";
 import { LordIcons } from "@/components/atoms";
 
-import CaraouselA from "@/assets/v2/caraousel-1.jpg";
-import CaraouselB from "@/assets/v2/caraousel-2.jpg";
 import { handleImageError } from "@/utils/helper";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
-  const { data: product, isLoading } = useProductDetail({ id: id! });
+  const { data: product, isLoading } = useITProductDetail({ id: id! });
+  const [inquiryOpen, setInquiryOpen] = useState(false);
 
   if (isLoading || !product) {
     return <HeroProductDetailSkeleton />;
@@ -76,26 +77,24 @@ export default function ProductDetail() {
               TECH STACK
             </span>
             <div className="self-stretch flex flex-wrap gap-3">
-              <div className="px-2.5 py-1.5 bg-pink-400/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-pink-400 text-xs font-medium">
-                  Power Apps
-                </span>
-              </div>
-              <div className="px-2.5 py-1.5 bg-blue-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-blue-300 text-xs font-medium">
-                  Power Automate
-                </span>
-              </div>
-              <div className="px-2.5 py-1.5 bg-orange-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-orange-300 text-xs font-medium">
-                  Power BI
-                </span>
-              </div>
-              <div className="px-2.5 py-1.5 bg-lime-300/20 rounded-[64px] inline-flex justify-center items-center gap-2">
-                <span className="text-green-400 text-xs font-medium">
-                  SharePoint
-                </span>
-              </div>
+              {(product.tech_stack ?? []).length > 0 ? (
+                product.tech_stack.map((ts: string) => (
+                  <div
+                    key={ts}
+                    className="px-2.5 py-1.5 bg-pink-400/20 rounded-[64px] inline-flex justify-center items-center gap-2"
+                  >
+                    <span className="text-pink-400 text-xs font-medium">
+                      {ts.replaceAll("_", " ")}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className="px-2.5 py-1.5 bg-pink-400/20 rounded-[64px] inline-flex justify-center items-center gap-2">
+                  <span className="text-pink-400 text-xs font-medium">
+                    Tech Stack
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -112,9 +111,8 @@ export default function ProductDetail() {
             </span>
             <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 flex flex-col justify-center items-center gap-4">
               <p className="self-stretch text-zinc-500 text-sm font-normal">
-                Organizations often struggle with misplaced correspondence,
-                delayed responses, and a lack of clear accountability when
-                manually managing the flow of incoming and outgoing letters.
+                {product.problem ||
+                  "Organizations often struggle with manual processes that lead to inefficiency, delays, and a lack of clear accountability."}
               </p>
               <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
               <div className="self-stretch flex flex-col justify-center items-start gap-2">
@@ -126,20 +124,24 @@ export default function ProductDetail() {
                 </div>
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                {[
-                  "Easily record, organize, and manage all incoming and outgoing organizational correspondence in one secure platform.",
-                  "Instantly assign specific letters to the responsible individuals or departments to ensure timely replies and clear accountability.",
-                  "Monitor the exact location and processing status of any letter at a glance to prevent delays and bottlenecks.",
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="self-stretch p-3 bg-stone-50 rounded-xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden"
-                  >
+                {(product.feature ?? []).length > 0 ? (
+                  product.feature.map((item: string, idx: number) => (
+                    <div
+                      key={idx}
+                      className="self-stretch p-3 bg-stone-50 rounded-xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden"
+                    >
+                      <p className="self-stretch text-zinc-500 text-sm font-normal">
+                        {item}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="self-stretch p-3 bg-stone-50 rounded-xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
                     <p className="self-stretch text-zinc-500 text-sm font-normal">
-                      {item}
+                      Feature information coming soon.
                     </p>
                   </div>
-                ))}
+                )}
               </div>
               <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
               <div className="self-stretch flex flex-col justify-center items-start gap-2">
@@ -150,8 +152,8 @@ export default function ProductDetail() {
                   </span>
                 </div>
                 <p className="self-stretch text-zinc-500 text-sm font-normal">
-                  Role-based dispatch access, encrypted location data in transit
-                  and at rest, SOC 2-aligned infrastructure.
+                  {product.compliance ||
+                    "Enterprise-grade security, encrypted data in transit and at rest."}
                 </p>
               </div>
             </div>
@@ -164,26 +166,23 @@ export default function ProductDetail() {
             </span>
             <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 flex flex-col justify-center items-center gap-4">
               <Carousel
-                slides={[
-                  {
-                    image: CaraouselB,
-                    title: "Automated Letter Sending",
-                    description:
-                      "Organizations often struggle with misplaced correspondence, delayed responses, and a lack of clear accountability when manually managing the flow of incoming and outgoing letters.",
-                  },
-                  {
-                    image: CaraouselA,
-                    title: "Smart Assignment",
-                    description:
-                      "Route incoming letters to the right person or department instantly with transparent audit logs.",
-                  },
-                  {
-                    image: CaraouselB,
-                    title: "Real-time Status Tracking",
-                    description:
-                      "Monitor the exact location and processing status of any letter at a glance to prevent bottlenecks.",
-                  },
-                ]}
+                slides={
+                  (product.highlight ?? []).length > 0
+                    ? product.highlight.map((h: any) => ({
+                        image: h.image,
+                        title: h.title,
+                        description: h.description,
+                      }))
+                    : [
+                        {
+                          image: "",
+                          title: product.product_name,
+                          description:
+                            product.product_description ||
+                            "Highlight information coming soon.",
+                        },
+                      ]
+                }
               />
             </div>
           </div>
@@ -342,19 +341,23 @@ export default function ProductDetail() {
                 <span>View Live Demo</span>
                 <Globe size={18} className="text-rose-700" />
               </a>
-              <a
-                href={product.link || "#"}
-                target={product.link ? "_blank" : undefined}
-                rel={product.link ? "noreferrer" : undefined}
+              <button
+                onClick={() => setInquiryOpen(true)}
                 className="h-10 px-5 py-2.5 bg-rose-700 hover:bg-rose-800 transition-colors duration-300 rounded-[48px] inline-flex justify-center items-center gap-2 text-white text-sm font-medium cursor-pointer"
               >
                 <span>Contact Us</span>
                 <ArrowRight size={18} className="text-white" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <InquiryModal
+        open={inquiryOpen}
+        onClose={() => setInquiryOpen(false)}
+        productName={product.product_name}
+        productType="IT_PRODUCT"
+      />
     </section>
   );
 }

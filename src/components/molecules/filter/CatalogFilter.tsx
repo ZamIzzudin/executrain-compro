@@ -4,27 +4,36 @@
 
 import SearchBar from "../../atoms/SearchBar";
 import FilterDropdown from "../../atoms/FilterDropdown";
+import type { FilterOption } from "@/services/course-catalog/filters";
 
-const CATEGORIES: { label: string; value?: string }[] = [
-  { label: "All Categories" },
-  { label: "Data Analytics", value: "DATA_ANALYTICS" },
-  { label: "Automation", value: "AUTOMATION" },
-  { label: "Cybersecurity", value: "CYBERSECURITY" },
-  { label: "Project Management", value: "PROJECT_MANAGEMENT" },
-  { label: "Emotional Intelligence", value: "EMOTIONAL_INTELLIGENCE" },
-];
+const FALLBACK_CATEGORIES: FilterOption[] = [
+  "DATA_ANALYTICS",
+  "AUTOMATION",
+  "CYBERSECURITY",
+  "PROJECT_MANAGEMENT",
+  "LEADERSHIP",
+  "EMOTIONAL_INTELLIGENCE",
+].map((v) => ({ value: v, label: v.replaceAll("_", " ") }));
 
-const FRAMEWORKS: { label: string; value?: string }[] = [
-  { label: "All Frameworks" },
-  { label: "Cybersecurity", value: "CYBERSECURITY" },
-  { label: "Artificial Intelligence", value: "AI" },
-  { label: "Project Management", value: "PROJECT_MANAGEMENT" },
-];
+function toOptions(
+  values: FilterOption[] | undefined,
+  allLabel: string,
+): { label: string; value?: string }[] {
+  return [
+    { label: allLabel },
+    ...(values ?? []).map((o) => ({
+      label: o.label || o.value,
+      value: o.value,
+    })),
+  ];
+}
 
 export interface CatalogFilterProps {
   searchValue: string;
   categoryValue?: string;
   frameworkValue?: string;
+  categories?: FilterOption[];
+  frameworks?: FilterOption[];
   onSearchChange: (value: string) => void;
   onCategoryChange: (value: string | undefined) => void;
   onFrameworkChange: (value: string | undefined) => void;
@@ -34,10 +43,14 @@ export default function CatalogFilter({
   searchValue,
   categoryValue,
   frameworkValue,
+  categories,
+  frameworks,
   onSearchChange,
   onCategoryChange,
   onFrameworkChange,
 }: Readonly<CatalogFilterProps>) {
+  const categoryOptions = toOptions(categories ?? FALLBACK_CATEGORIES, "All Category");
+  const frameworkOptions = toOptions(frameworks, "All Framework");
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
       <div className="w-full sm:w-[466px]">
@@ -56,7 +69,7 @@ export default function CatalogFilter({
           label="Category"
           value={categoryValue}
           onChange={onCategoryChange}
-          options={CATEGORIES}
+          options={categoryOptions}
           placeholder="All Category"
           variant="primary"
           className="w-full"
@@ -68,7 +81,7 @@ export default function CatalogFilter({
           label="Framework"
           value={frameworkValue}
           onChange={onFrameworkChange}
-          options={FRAMEWORKS}
+          options={frameworkOptions}
           placeholder="All Framework"
           variant="primary"
           className="w-full"
