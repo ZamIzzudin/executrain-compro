@@ -8,7 +8,7 @@ import { AssetsService } from "./handler";
 
 const DEFAULT_ASSETS: AssetMap = {
   hero_background: {
-    url: "https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg",
+    url: "https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg",
     fallback_url: "/hero4.webp",
     type: "image",
   },
@@ -28,7 +28,7 @@ const DEFAULT_ASSETS: AssetMap = {
     type: "image",
   },
   cta_schedule_image: {
-    url: "https://res.cloudinary.com/dgd3iusxa/image/upload/v1763043354/pup0wtnjecrh92iyk3it.webp",
+    url: "https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg",
     fallback_url: "/hero4.webp",
     type: "image",
   },
@@ -41,10 +41,10 @@ const DEFAULT_ASSETS: AssetMap = {
 
 // Static assets - tidak diambil dari API
 export const STATIC_ASSETS = {
-  banner_plain: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png",
-  banner_overlay: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233519/Subtract_2x_jy4hvi.png",
-  footer_background: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026760/Logo_1_y8uzeh.png",
-  body_pattern: "https://res.cloudinary.com/dyn73qnjx/image/upload/v1768026761/Logo_objudb.png",
+  banner_plain: "https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg",
+  banner_overlay: "https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg",
+  footer_background: "https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg",
+  body_pattern: "https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg",
 };
 
 export const useAssets = (): UseQueryResult<AssetMap> => {
