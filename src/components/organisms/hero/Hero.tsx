@@ -11,7 +11,10 @@ import Button from "@/components/atoms/Button";
 
 import { ArrowRightIcon } from "lucide-react";
 
-export default function Hero() {
+export default function Hero({
+  title,
+  description,
+}: Readonly<{ title?: string; description?: string }>) {
   const { getAssetUrl, isLoading } = useAssetContext();
   const navigate = useNavigate();
 
@@ -60,12 +63,12 @@ export default function Hero() {
         <FadeInUp delay={0.2} duration={0.6} className="md:w-[70%]">
           <div className="space-y-5 md:space-y-6 text-center">
             <h1 className="text-[32px] md:text-[45px] lg:text-[55px] font-semibold leading-10 md:leading-15">
-              {"The Strategic IT Partner Behind Today's Leading Enterprise"}
+              {title ||
+                "The Strategic IT Partner Behind Today's Leading Enterprise"}
             </h1>
             <p className="">
-              Delivering world-class IT training, business skills, and
-              technology solutions to help your organization stay ahead in a
-              rapidly evolving digital landscape.
+              {description ||
+                "Delivering world-class IT training, business skills, and technology solutions to help your organization stay ahead in a rapidly evolving digital landscape."}
             </p>
           </div>
           <div className="flex gap-4 items-center justify-center pt-8">

@@ -26,7 +26,7 @@ type CoreData = {
 };
 
 // ── Data (matching example.html) ───────────────────────────────────
-const SEGMENTS: Segment[] = [
+const BASE_SEGMENTS: Segment[] = [
   // ---- outer ring (r125–150) ----
   {
     id: "ai",
@@ -133,7 +133,7 @@ const SEGMENTS: Segment[] = [
   },
 ];
 
-const CORE: CoreData = {
+const BASE_CORE: CoreData = {
   id: "core",
   label: "People Skill Development",
   desc: "Inti framework: pengembangan keterampilan sumber daya manusia.",
@@ -203,11 +203,23 @@ function fullRingPath(outerR: number, innerR: number) {
 }
 
 // ── Component ──────────────────────────────────────────────────────
-export default function FrameworkWheel() {
+export default function FrameworkWheel({
+  items = {},
+}: Readonly<{ items?: Record<string, string[]> }>) {
   const { getAssetUrl } = useAssetContext();
   const frameworkBanner = getAssetUrl("framework_banner");
   const [activeId, setActiveId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  // Items tiap scope bisa di-override dari CMS (hanya item, scope tetap).
+  const SEGMENTS: Segment[] = BASE_SEGMENTS.map((seg) => ({
+    ...seg,
+    items: items[seg.id] || seg.items,
+  }));
+  const CORE: CoreData = {
+    ...BASE_CORE,
+    items: items["core"] || BASE_CORE.items,
+  };
 
   const active: Segment | CoreData | undefined =
     activeId === "core" ? CORE : SEGMENTS.find((s) => s.id === activeId);

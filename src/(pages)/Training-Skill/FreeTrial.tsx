@@ -7,13 +7,45 @@ import SkillAcceleratorClassList from "@/components/organisms/SkillAcceleratorCl
 
 import PSA from "@/assets/v2/psa.png";
 
+import { useSkillAcceleratorPage } from "@/services/skill-accelerator-page/hook";
+
+const FALLBACK = {
+  title_page: "Skill Accelerator",
+  description_page:
+    "An intensive, outcome-focused program designed to rapidly build or upgrade a specific set of competencies.",
+  title_about_psa: "What is Professional Skill Accelerator Program?",
+  description_about_psa:
+    "Skill Accelerator provide a fast, practical learning experience that enables organizations and professional to assess skill relevance, engage employees, and support performance improvement prior to broader capability development initiatives",
+  points: [
+    "90 minutes of focused, practical learning.",
+    "Demonstrations of real workplace tools and frameworks.",
+    "Hands-on demonstrations and applied discussion.",
+    "Suitable for busy proffessional and teams.",
+  ],
+  cta: {
+    title: "Ready to Train Your Team?",
+    description:
+      "Get the full proposal and training details by clicking the button below.",
+    label: "Request Proposal",
+    link: "",
+  },
+};
+
 export default function FreeTrial() {
+  const { data: pageContent } = useSkillAcceleratorPage();
+
+  const content = {
+    ...FALLBACK,
+    ...(pageContent?.content || {}),
+    cta: { ...FALLBACK.cta, ...(pageContent?.content?.cta || {}) },
+  };
+
   return (
     <section className="bg-[#FCFCFC]">
       <CustomHero
-        title="Skill Accelerator "
+        title={content.title_page}
         subtitle="Skill Accelerator"
-        description="An intensive, outcome-focused program designed to rapidly build or upgrade a specific set of competencies."
+        description={content.description_page}
         path="/skill-accelerator"
       />
       <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-gradient-to-b from-white to-neutral-100 rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200">
@@ -39,28 +71,23 @@ export default function FreeTrial() {
                     ABOUT PSA
                   </span>
                   <h3 className="self-stretch text-neutral-800 group-hover:text-rose-700 text-2xl font-semibold transition-colors duration-300">
-                    What is Professional Skill Accelerator Program?
+                    {content.title_about_psa}
                   </h3>
                 </div>
               </div>
 
-              <p className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed">
-                Skill Accelerator provide a fast, practical learning experience that
-                enables organizations and professional to assess skill relevance,
-                engage employees, and support performance improvement prior to
-                broader capability development initiatives
+              <p className="self-stretch text-zinc-500 text-sm font-normal leading-relaxed whitespace-pre-line">
+                {content.description_about_psa}
               </p>
 
               <div className="self-stretch flex flex-col justify-start items-start gap-3">
-                {[
-                  "90 minutes of focused, practical learning.",
-                  "Demonstrations of real workplace tools and frameworks.",
-                  "Hands-on demonstrations and applied discussion.",
-                  "Suitable for busy proffessional and teams.",
-                ].map((item, index, arr) => (
+                {(content.points || []).map((item, index, arr) => (
                   <div key={item} className="self-stretch flex flex-col gap-3">
                     <div className="self-stretch inline-flex justify-start items-center gap-2 overflow-hidden">
-                      <CheckCircleIcon className="text-rose-700 shrink-0" size={16} />
+                      <CheckCircleIcon
+                        className="text-rose-700 shrink-0"
+                        size={16}
+                      />
                       <span className="justify-start text-neutral-800 text-sm font-medium">
                         {item}
                       </span>
@@ -86,7 +113,12 @@ export default function FreeTrial() {
         </div>
       </section>
       <SkillAcceleratorClassList />
-      <CTA />
+      <CTA
+        title={content.cta.title}
+        description={content.cta.description}
+        cta={content.cta.label}
+        link={content.cta.link}
+      />
     </section>
   );
 }

@@ -6,26 +6,31 @@ import Sophos from "@/assets/dummy/sophos.png";
 import Microsoft from "@/assets/dummy/microsoft3.png";
 import { handleImageError } from "@/utils/helper";
 
-const data = [
+import { useTechnologyCloudLicensingPage } from "@/services/technology-cloud-licensing/hook";
+import { slugifyVendorName } from "@/utils/types/technology-cloud-licensing";
+
+const FALLBACK_VENDORS = [
   {
-    id: "sophos",
     name: "Sophos",
-    desc: "Sophos is a worldwide leader and innovator of advanced cybersecurity solutions, including Managed Detection and Response (MDR) and incident response services and a broad portfolio of endpoint, network, email, and cloud security technologies that help organizations defeat cyberattacks.",
-    site: "https://sophos.com/",
-    facebook: "https://facebook.com/securitybysophos",
-    linkedin: "http://www.linkedin.com/company/sophos",
-    twitter: "https://twitter.com/Sophos",
-    logo: Sophos,
+    logo: { url: Sophos, public_id: "" },
+    description:
+      "Sophos is a worldwide leader and innovator of advanced cybersecurity solutions, including Managed Detection and Response (MDR) and incident response services and a broad portfolio of endpoint, network, email, and cloud security technologies that help organizations defeat cyberattacks.",
+    website_url: "https://sophos.com/",
+    facebook_url: "https://facebook.com/securitybysophos",
+    linkedin_url: "http://www.linkedin.com/company/sophos",
+    twitter_url: "https://twitter.com/Sophos",
+    contact_link: "/contact",
   },
   {
-    id: "microsoft",
     name: "Microsoft",
-    desc: "Microsoft was founded in 1975. Our mission is to enable people and businesses throughout the world to realize their full potential by creating technology that transforms the way people work, play, and communicate. We develop and market software, services, and hardware devices that deliver new opportunities, greater convenience, and enhanced value to people's lives. We do business worldwide and have offices in more than 100 countries.",
-    site: "https://www.microsoft.com/",
-    facebook: "https://www.facebook.com/Microsoft/",
-    linkedin: "https://www.linkedin.com/company/microsoft",
-    twitter: "https://x.com/microsoft",
-    logo: Microsoft,
+    logo: { url: Microsoft, public_id: "" },
+    description:
+      "Microsoft was founded in 1975. Our mission is to enable people and businesses throughout the world to realize their full potential by creating technology that transforms the way people work, play, and communicate. We develop and market software, services, and hardware devices that deliver new opportunities, greater convenience, and enhanced value to people's lives. We do business worldwide and have offices in more than 100 countries.",
+    website_url: "https://www.microsoft.com/",
+    facebook_url: "https://www.facebook.com/Microsoft/",
+    linkedin_url: "https://www.linkedin.com/company/microsoft",
+    twitter_url: "https://x.com/microsoft",
+    contact_link: "/contact",
   },
 ];
 
@@ -78,7 +83,16 @@ const LinkedinIcon = ({ className }: SocialIconProps) => (
 
 export default function CertificationDetail() {
   const { id } = useParams<{ id: string }>();
-  const selected = data.find((each) => each.id === id);
+  const { data: pageContent } = useTechnologyCloudLicensingPage();
+
+  const vendors =
+    pageContent?.content?.vendors && pageContent.content.vendors.length > 0
+      ? pageContent.content.vendors
+      : FALLBACK_VENDORS;
+
+  const selected = vendors.find(
+    (v: any) => slugifyVendorName(v.name) === (id || ""),
+  );
 
   return (
     <section className="pt-0 md:pt-[10%] pb-[8%] bg-[#FCFCFC]">
@@ -113,7 +127,7 @@ export default function CertificationDetail() {
                   {selected.logo && (
                     <div className="p-3 bg-stone-50 rounded-2xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex items-center justify-center overflow-hidden">
                       <img
-                        src={selected.logo}
+                        src={selected.logo.url}
                         alt={`${selected.name} logo`}
                         onError={handleImageError}
                         className="h-12 w-auto object-contain shrink-0"
@@ -129,7 +143,7 @@ export default function CertificationDetail() {
 
                 {/* Description */}
                 <p className="text-neutral-900 text-base font-normal leading-relaxed text-justify">
-                  {selected.desc}
+                  {selected.description}
                 </p>
 
                 <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200" />
@@ -142,7 +156,7 @@ export default function CertificationDetail() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
                     {/* Website Button */}
                     <a
-                      href={selected.site}
+                      href={selected.website_url}
                       target="_blank"
                       rel="noreferrer"
                       className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
@@ -160,7 +174,7 @@ export default function CertificationDetail() {
 
                     {/* Facebook Button */}
                     <a
-                      href={selected.facebook}
+                      href={selected.facebook_url}
                       target="_blank"
                       rel="noreferrer"
                       className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
@@ -178,7 +192,7 @@ export default function CertificationDetail() {
 
                     {/* X Button */}
                     <a
-                      href={selected.twitter}
+                      href={selected.twitter_url}
                       target="_blank"
                       rel="noreferrer"
                       className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
@@ -196,7 +210,7 @@ export default function CertificationDetail() {
 
                     {/* LinkedIn Button */}
                     <a
-                      href={selected.linkedin}
+                      href={selected.linkedin_url}
                       target="_blank"
                       rel="noreferrer"
                       className="w-full p-4 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 rounded-2xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 hover:outline-rose-700 flex items-center gap-3 transition-all duration-300 group cursor-pointer"
@@ -233,7 +247,7 @@ export default function CertificationDetail() {
                 </div>
                 <div className="inline-flex justify-start items-center gap-3 pt-2">
                   <Link
-                    to="/contact"
+                    to={selected.contact_link || "/contact"}
                     className="h-10 px-5 py-2.5 bg-rose-700 hover:bg-rose-800 transition-colors duration-300 rounded-[48px] inline-flex justify-center items-center gap-2 text-white text-sm font-medium cursor-pointer"
                   >
                     <span>Contact Licensing Team</span>
