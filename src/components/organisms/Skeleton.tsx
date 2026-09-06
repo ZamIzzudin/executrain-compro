@@ -177,7 +177,7 @@ export const HeroProductDetailSkeleton = () => {
     <div
       className="w-full min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg')`,
+        backgroundImage: `url('https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -202,7 +202,7 @@ export const HeroScheduleDetailSkeleton = () => {
     <div
       className="w-full min-h-[80dvh] text-white flex items-center justify-start px-[5%] md:px-[7%] lg:px-[10%]"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dyn73qnjx/image/upload/v1771233518/Subtract_hwkrrr.png'), url('https://res.cloudinary.com/dgd3iusxa/image/upload/v1777208395/executrain/assets/ddxseg9njypotvqwkgdb.jpg')`,
+        backgroundImage: `url('https://storagewebsitetoj.blob.core.windows.net/image/assets/p17fxfbbbld4llzlz3ys.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
