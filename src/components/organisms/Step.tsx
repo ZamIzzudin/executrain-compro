@@ -1,28 +1,41 @@
-import { PhoneIcon, Share2Icon, CalendarIcon, StarIcon } from "lucide-react";
+import {
+  PhoneIcon,
+  Share2Icon,
+  CalendarIcon,
+  StarIcon,
+} from "lucide-react";
 
-export default function Step() {
-  const steps = [
-    {
-      icon: PhoneIcon,
-      title: "Contact Sales",
-      desc: "Reach out to our sales team to get detailed information and initial consultation.",
-    },
-    {
-      icon: Share2Icon,
-      title: "Share Your Sales",
-      desc: "Explain your goals and requirements so we can tailor the training to you.",
-    },
-    {
-      icon: CalendarIcon,
-      title: "Set Your Schedule",
-      desc: "Work with us to arrange a training schedule that suits your availability.",
-    },
-    {
-      icon: StarIcon,
-      title: "Ready To Train",
-      desc: "Your program is prepared, and you are ready to begin your training journey.",
-    },
-  ];
+import { type AboutJoinStep } from "@/utils/types/about";
+
+const STEP_ICONS = [PhoneIcon, Share2Icon, CalendarIcon, StarIcon];
+
+const DEFAULT_STEPS: AboutJoinStep[] = [
+  {
+    title: "Contact Sales",
+    description:
+      "Reach out to our sales team to get detailed information and initial consultation.",
+  },
+  {
+    title: "Share Your Sales",
+    description:
+      "Explain your goals and requirements so we can tailor the training to you.",
+  },
+  {
+    title: "Set Your Schedule",
+    description:
+      "Work with us to arrange a training schedule that suits your availability.",
+  },
+  {
+    title: "Ready To Train",
+    description:
+      "Your program is prepared, and you are ready to begin your training journey.",
+  },
+];
+
+export default function Step({
+  steps = DEFAULT_STEPS,
+}: Readonly<{ steps?: AboutJoinStep[] }>) {
+  const list = steps.length > 0 ? steps : DEFAULT_STEPS;
 
   return (
     <div className="w-full px-[5%] md:px-[7%] lg:px-[10%] py-12 bg-white rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200 inline-flex flex-col justify-start items-center gap-6">
@@ -32,13 +45,15 @@ export default function Step() {
             Join In 4 Easy Steps
           </h2>
           <p className="self-stretch text-neutral-400 text-base font-normal">
-            We’ve simplified the process so you can focus on what matters: learning.
+            We&rsquo;ve simplified the process so you can focus on what matters:
+            learning.
           </p>
         </div>
         <div className="self-stretch grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
-          {steps.map(({ icon: Icon, title, desc }, index) => {
+          {list.map(({ title, description }, index) => {
+            const Icon = STEP_ICONS[index % STEP_ICONS.length];
             const isFirst = index === 0;
-            const isLast = index === steps.length - 1;
+            const isLast = index === list.length - 1;
             return (
               <div key={title} className="relative flex-1 flex flex-col">
                 <div
@@ -71,7 +86,7 @@ export default function Step() {
                           : "text-neutral-400 group-hover:text-zinc-600"
                         }`}
                     >
-                      {desc}
+                      {description}
                     </p>
                   </div>
                 </div>
@@ -86,4 +101,3 @@ export default function Step() {
     </div>
   );
 }
-

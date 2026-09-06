@@ -6,19 +6,89 @@ import PartnerList from "@/components/organisms/Partner";
 import CTA from "@/components/organisms/CTA";
 
 import { usePartner } from "@/services/partner/hook";
+import { useHomePage } from "@/services/home-page/hook";
+
+const FALLBACK = {
+  title_page:
+    "The Strategic IT Partner Behind Today's Leading Enterprise",
+  description_page:
+    "Delivering world-class IT training, business skills, and technology solutions to help your organization stay ahead in a rapidly evolving digital landscape.",
+  about: {
+    title: "We Transform Result Into Impact",
+    description:
+      "We believe technology only matters when it uplifts people. We walk alongside you to turn complex challenges into meaningful, lasting growth.",
+  },
+  services: {
+    items: [
+      {
+        title: "Building Real Skills",
+        description:
+          "Equipping people with practical skills to turn daily challenges into lasting impacts.",
+      },
+      {
+        title: "Easing Everyday Work",
+        description:
+          "Shaping thoughtful technology that fits your rhythm and brings peace of mind to operations.",
+      },
+      {
+        title: "Reliable IT Consulting",
+        description:
+          "Working as a trusted, steady partner to guide your technology journey with clarity.",
+      },
+    ],
+  },
+  framework: {
+    items: {},
+  },
+  cta: {
+    title: "Ready to Train Your Team?",
+    description:
+      "Get the full proposal and training details by clicking the button below.",
+    label: "Request Proposal",
+    link: "",
+  },
+};
 
 export default function Home() {
   const { data: partner = [], isLoading: partnerLoading } = usePartner();
+  const { data: homePage } = useHomePage();
+
+  const raw = homePage?.content || {};
+  const content = {
+    ...FALLBACK,
+    ...raw,
+    about: { ...FALLBACK.about, ...(raw.about || {}) },
+    services: {
+      items: (raw.services?.items || []).map((item: any, i: number) => ({
+        ...(FALLBACK.services.items[i] || {}),
+        ...item,
+      })),
+    },
+    framework: {
+      items: raw.framework?.items || {},
+    },
+    cta: { ...FALLBACK.cta, ...(raw.cta || {}) },
+  };
 
   return (
     <section className="bg-[#FCFCFC]">
-      <Hero />
+      <Hero title={content.title_page} description={content.description_page} />
       <TechSlider />
-      <AboutSection />
-      <FrameworkBanner />
+      <AboutSection
+        content={{
+          about: content.about,
+          services: content.services.items,
+        }}
+      />
+      <FrameworkBanner items={content.framework.items} />
       <PartnerList data={partner} isLoading={partnerLoading} />
       <TestimoniList />
-      <CTA />
+      <CTA
+        title={content.cta.title}
+        description={content.cta.description}
+        cta={content.cta.label}
+        link={content.cta.link}
+      />
     </section>
   );
 }

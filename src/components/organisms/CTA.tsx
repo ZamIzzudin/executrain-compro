@@ -11,11 +11,13 @@ export default function CTA({
   title = "Ready to Train Your Team?",
   description = "Get the full proposal and training details by clicking the button below.",
   cta = "Request Proposal",
+  link,
   bgGradient = "bg-gradient-to-b from-[#FCFCFC] to-[#E0E0E0]",
 }: Readonly<{
   title?: string;
   description?: string;
   cta?: string;
+  link?: string;
   bgGradient?: string;
 }>) {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
@@ -28,7 +30,13 @@ export default function CTA({
   const waLink = buildWhatsAppLink(contactList, WHATSAPP_TEMPLATES.general);
 
   const handleCTA = () => {
-    window.open(waLink, "_blank", "noopener,noreferrer");
+    // Link dari CMS diprioritaskan; fallback ke WhatsApp.
+    const target = link?.trim() || waLink;
+    if (/^(https?:|mailto:|tel:)/i.test(target)) {
+      window.open(target, "_blank", "noopener,noreferrer");
+    } else if (target.startsWith("/")) {
+      window.open(target, "_self", "noopener,noreferrer");
+    }
   };
 
   return (

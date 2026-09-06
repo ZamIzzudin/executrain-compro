@@ -19,24 +19,111 @@ import Mongo from "@/assets/dummy/mongo.png";
 import PSA from "@/assets/v2/psa.png";
 import Award from "@/assets/v2/award.png";
 
-export default function AboutSection() {
+/** Props konten copywriting halaman About (dari CMS PageContent "about"). */
+export interface AboutDetailContentProps {
+  title_about?: string;
+  description_about?: string;
+  vision?: string;
+  mission?: string;
+  awards?: string[];
+}
+
+const DEFAULT_ABOUT = {
+  title_about: "We Transform Result Into Impact",
+  description_about:
+    "We believe technology only matters when it uplifts people. We walk alongside you to turn complex challenges into meaningful, lasting growth.\n\nFounded on June 14, 1995, ExecuTrain of Jakarta is a worldwide corporate training provider and world leader in business education training. The privately held U.S. based company has franchise locations in 8 countries of 53 locations.\n\nExecuTrain provides design, development, and implementation of professional development solutions for companies worldwide",
+  vision:
+    "Developing people skills and behaviors through quality training and providing technology services to empower your business.",
+  mission:
+    "To increase productivity by providing the best and reliable quality service.",
+  awards: [
+    "The Best Microsoft Authorized Training Center",
+    "The Best Microsoft Certified Technical Education Center (CTEC)",
+    "The Best Microsoft CPLS of the Year",
+    "Allianz Top Training Provider Performer 2023",
+    "Top IT Training 2016 at Top IT & Telco 2016 Award",
+    "Top IT Training 2017",
+  ],
+};
+
+/** Data default kartu "What We Can Do" di home. */
+export const DEFAULT_SERVICE_CARDS = [
+  {
+    id: "service-card-1",
+    title: "Building Real Skills",
+    desc: "Equipping people with practical skills to turn daily challenges into lasting impacts.",
+    path: "/course-catalog",
+    lordIcon: {
+      src: "https://cdn.lordicon.com/mdgonzfn.json",
+      trigger: "hover",
+      state: "hover-pinch",
+      colors:
+        "primary:#f9c9c0,secondary:#bf1e40,tertiary:#545454,quaternary:#ebe6ef,quinary:#3a3347,senary:#b26836",
+    },
+  },
+  {
+    id: "service-card-2",
+    title: "Easing Everyday Work",
+    desc: "Shaping thoughtful technology that fits your rhythm and brings peace of mind to operations.",
+    path: "/app-development",
+    lordIcon: {
+      src: "https://cdn.lordicon.com/apxgwajy.json",
+      trigger: "hover",
+      state: "hover-pinch",
+      colors:
+        "primary:#be1e40,secondary:#ffc738,tertiary:#3a3347,quaternary:#ebe6ef,quinary:#545454",
+    },
+  },
+  {
+    id: "service-card-3",
+    title: "Reliable IT Consulting",
+    desc: "Working as a trusted, steady partner to guide your technology journey with clarity.",
+    path: "/tech-advisory",
+    lordIcon: {
+      src: "https://cdn.lordicon.com/byicyhmi.json",
+      trigger: "hover",
+      state: "hover-pinch",
+      colors:
+        "primary:#646e78,secondary:#f9c9c0,tertiary:#ebe6ef,quaternary:#b26836,quinary:#bf1e40",
+    },
+  },
+];
+
+/** Props konten home untuk komponen AboutSection (dari CMS home-page). */
+interface HomeSectionContentProps {
+  about?: {
+    title?: string;
+    description?: string;
+  };
+  services?: Array<{
+    title?: string;
+    description?: string;
+  }>;
+}
+
+export default function AboutSection({
+  content = {},
+}: Readonly<{ content?: HomeSectionContentProps }>) {
   return (
     <section className="w-full px-[5%] md:px-[7%] lg:px-[10%] pb-12 pt-0 bg-gradient-to-b from-white to-zinc-100 rounded-bl-[64px] rounded-br-[64px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] border-b border-gray-200">
       <div className="w-full flex flex-col justify-start items-start gap-6">
-        <AboutCard />
-        <ServiceCard />
+        <AboutCard content={content} />
+        <ServiceCard content={content} />
       </div>
     </section>
   );
 }
 
-export function AboutDetailSection() {
+export function AboutDetailSection({
+  content = {},
+}: Readonly<{ content?: AboutDetailContentProps }>) {
+  const about = { ...DEFAULT_ABOUT, ...content };
   return (
     <section>
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 px-[5%] md:px-[7%] lg:px-[10%] gap-8 py-12 bg-gradient-to-b from-white to-zinc-100 rounded-bl-[64px] rounded-br-[64px] items-center">
         <div className="lg:col-span-7 flex flex-col gap-6 w-full">
-          <AboutDetailCard />
-          <VisionCard />
+          <AboutDetailCard title={about.title_about} description={about.description_about} />
+          <VisionCard vision={about.vision} mission={about.mission} />
         </div>
         <div className="lg:col-span-5 flex justify-center lg:justify-end items-center w-full">
           <div className="w-96 h-60 relative bg-gradient-to-b from-neutral-800/0 to-neutral-800/60 rounded-[19.59px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-gray-200 overflow-hidden group">
@@ -62,7 +149,7 @@ export function AboutDetailSection() {
           </div>
         </div>
         <div className="lg:col-span-6 flex flex-col justify-start items-start gap-3 w-full">
-          <AwardCard />
+          <AwardCard awards={about.awards} />
         </div>
       </div>
     </section>
@@ -85,21 +172,21 @@ export function AboutSectionFlat() {
   );
 }
 
-function AboutCard() {
+function AboutCard({
+  content = {},
+}: Readonly<{ content?: HomeSectionContentProps }>) {
   const navigate = useNavigate();
+  const title = content?.about?.title || DEFAULT_ABOUT.title_about;
+  const description =
+    content?.about?.description ||
+    "We believe technology only matters when it uplifts people. We walk alongside you to turn complex challenges into meaningful, lasting growth.";
   return (
     <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3">
       <div className="self-stretch flex flex-col justify-start items-start gap-2">
         <span className="text-zinc-500 text-sm font-normal">ABOUT</span>
-        <h2 className="text-neutral-800 text-2xl font-semibold">
-          We Transform Result Into Impact
-        </h2>
+        <h2 className="text-neutral-800 text-2xl font-semibold">{title}</h2>
       </div>
-      <p className="text-zinc-500 text-sm font-normal">
-        We believe technology only matters when it uplifts people. We walk
-        alongside you to turn complex challenges into meaningful, lasting
-        growth.
-      </p>
+      <p className="text-zinc-500 text-sm font-normal">{description}</p>
       <button
         type="button"
         onClick={() => navigate("/about")}
@@ -112,7 +199,10 @@ function AboutCard() {
   );
 }
 
-function AboutDetailCard() {
+function AboutDetailCard({
+  title,
+  description,
+}: Readonly<{ title: string; description: string }>) {
   return (
     <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-6">
       <div className="self-stretch flex flex-col justify-start items-start gap-2">
@@ -120,29 +210,20 @@ function AboutDetailCard() {
           ABOUT
         </div>
         <div className="self-stretch justify-start text-neutral-800 text-2xl font-semibold">
-          We Transform Result Into Impact
+          {title}
         </div>
       </div>
-      <div className="self-stretch text-justify justify-start text-zinc-500 text-sm font-normal leading-relaxed">
-        We believe technology only matters when it uplifts people. We walk
-        alongside you to turn complex challenges into meaningful, lasting
-        growth.
-        <br />
-        <br />
-        Founded on June 14, 1995, ExecuTrain of Jakarta is a worldwide corporate
-        training provider and world leader in business education training. The
-        privately held U.S. based company has franchise locations in 8 countries
-        of 53 locations.
-        <br />
-        <br />
-        ExecuTrain provides design, development, and implementation of
-        professional development solutions for companies worldwide
+      <div className="self-stretch text-justify justify-start text-zinc-500 text-sm font-normal leading-relaxed whitespace-pre-line">
+        {description}
       </div>
     </div>
   );
 }
 
-function VisionCard() {
+function VisionCard({
+  vision,
+  mission,
+}: Readonly<{ vision: string; mission: string }>) {
   return (
     <div
       id="vision-mission-card"
@@ -164,8 +245,7 @@ function VisionCard() {
             />
           </div>
           <div className="flex-1 justify-start text-neutral-800 text-sm font-normal">
-            Developing people skills and behaviors through quality training and
-            providing technology services to empower your business.
+            {vision}
           </div>
         </div>
       </div>
@@ -186,8 +266,7 @@ function VisionCard() {
             />
           </div>
           <div className="flex-1 justify-start text-neutral-800 text-sm font-normal">
-            To increase productivity by providing the best and reliable quality
-            service.
+            {mission}
           </div>
         </div>
       </div>
@@ -195,16 +274,7 @@ function VisionCard() {
   );
 }
 
-function AwardCard() {
-  const awards = [
-    "The Best Microsoft Authorized Training Center",
-    "The Best Microsoft Certified Technical Education Center (CTEC)",
-    "The Best Microsoft CPLS of the Year",
-    "Allianz Top Training Provider Performer 2023",
-    "Top IT Training 2016 at Top IT & Telco 2016 Award",
-    "Top IT Training 2017",
-  ];
-
+function AwardCard({ awards }: Readonly<{ awards: string[] }>) {
   return (
     <div className="w-full flex flex-col justify-start items-start gap-3">
       {awards.map((title, index) => {
@@ -244,50 +314,19 @@ function AwardCard() {
   );
 }
 
-function ServiceCard() {
+function ServiceCard({
+  content = {},
+}: Readonly<{ content?: HomeSectionContentProps }>) {
   const navigate = useNavigate();
 
-  const cards = [
-    {
-      id: "service-card-1",
-      title: "Building Real Skills",
-      desc: "Equipping people with practical skills to turn daily challenges into lasting impacts.",
-      path: "/course-catalog",
-      lordIcon: {
-        src: "https://cdn.lordicon.com/mdgonzfn.json",
-        trigger: "hover",
-        state: "hover-pinch",
-        colors:
-          "primary:#f9c9c0,secondary:#bf1e40,tertiary:#545454,quaternary:#ebe6ef,quinary:#3a3347,senary:#b26836",
-      },
-    },
-    {
-      id: "service-card-2",
-      title: "Easing Everyday Work",
-      desc: "Shaping thoughtful technology that fits your rhythm and brings peace of mind to operations.",
-      path: "/app-development",
-      lordIcon: {
-        src: "https://cdn.lordicon.com/apxgwajy.json",
-        trigger: "hover",
-        state: "hover-pinch",
-        colors:
-          "primary:#be1e40,secondary:#ffc738,tertiary:#3a3347,quaternary:#ebe6ef,quinary:#545454",
-      },
-    },
-    {
-      id: "service-card-3",
-      title: "Reliable IT Consulting",
-      desc: "Working as a trusted, steady partner to guide your technology journey with clarity.",
-      path: "/tech-advisory",
-      lordIcon: {
-        src: "https://cdn.lordicon.com/byicyhmi.json",
-        trigger: "hover",
-        state: "hover-pinch",
-        colors:
-          "primary:#646e78,secondary:#f9c9c0,tertiary:#ebe6ef,quaternary:#b26836,quinary:#bf1e40",
-      },
-    },
-  ];
+  const cards = DEFAULT_SERVICE_CARDS.map((card, index) => {
+    const item = content?.services?.[index];
+    return {
+      ...card,
+      title: item?.title || card.title,
+      desc: item?.description || card.desc,
+    };
+  });
 
   return (
     <div className="self-stretch p-6 bg-white rounded-3xl shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3">
