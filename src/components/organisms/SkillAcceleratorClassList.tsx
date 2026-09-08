@@ -8,6 +8,7 @@ import CourseCard from "../molecules/card/Course";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import { useSkillAcceleratorFiltered } from "@/services/skill-accelerator/hook";
 import type { SkillAcceleratorItemProps } from "@/services/skill-accelerator/types";
 
@@ -29,7 +30,7 @@ const PER_PAGE = 6;
 
 export default function SkillAcceleratorClassList() {
   const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [page, setPage] = useState(1);
 
@@ -43,12 +44,8 @@ export default function SkillAcceleratorClassList() {
   ];
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
+    setPage(1);
+  }, [debouncedSearch]);
 
   const { data, isLoading, isFetching } = useSkillAcceleratorFiltered({
     page,

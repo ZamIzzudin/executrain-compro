@@ -4,6 +4,7 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import ArticleCard from "../molecules/card/Article";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
@@ -29,15 +30,11 @@ export default function ArticleList({
   children?: ReactNode;
 }>) {
   const [page, setPage] = useState(1);
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debouncedSearch = useDebounce(search ?? "", 500);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search ?? "");
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
+    setPage(1);
+  }, [debouncedSearch]);
 
   useEffect(() => {
     setPage(1);

@@ -4,6 +4,7 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import CaseStudyCard from "../molecules/card/CaseStudy";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
@@ -25,15 +26,11 @@ export default function CaseStudyList({
   categoryOptions?: { value: string; label: string }[];
 }>) {
   const [page, setPage] = useState(1);
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
+    setPage(1);
+  }, [debouncedSearch]);
 
   const { data, isLoading } = useCaseStudyFiltered({
     page,
