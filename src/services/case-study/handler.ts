@@ -15,6 +15,10 @@ export function mapCaseStudyToProps(item: any): CaseStudyProps {
   return {
     _id: item.id,
     title: item.title,
+    banner:
+      item.banner && item.banner.url
+        ? { url: item.banner.url, public_id: item.banner.public_id }
+        : null,
     category: item.category || undefined,
     description: item.description || "",
     industries: Array.isArray(item.industries) ? item.industries : [],

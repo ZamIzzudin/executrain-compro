@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CourseCatalogList from "@/components/organisms/CourseCatalogList";
@@ -21,14 +21,12 @@ const FALLBACK = {
 };
 
 export default function CourseCatalog() {
+  // URL adalah sumber kebenaran tunggal utk filter framework & category.
+  // Dengan begini tidak ada state ganda yang bisa bertabrakan (stale closure).
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<string | undefined>(
-    searchParams.get("category") || undefined,
-  );
-  const [framework, setFramework] = useState<string | undefined>(
-    searchParams.get("framework") || undefined,
-  );
+  const framework = searchParams.get("framework") || undefined;
+  const category = searchParams.get("category") || undefined;
   const { data: filterOpts } = useCatalogFilters();
   const { data: pageContent } = useCourseCatalogPage();
 
@@ -38,32 +36,30 @@ export default function CourseCatalog() {
     cta: { ...FALLBACK.cta, ...(pageContent?.content?.cta || {}) },
   };
 
-  // Bila URL berubah (mis. navigasi dari Home dengan query param),
-  // sinkronkan ke state filter.
   const handleSearchChange = (value: string) => setSearch(value);
+
+  // Gunakan functional updater supaya dua perubahan berurutan dalam satu
+  // event (CatalogFilter menelepon framework lalu category) tidak saling
+  // menimpa hasil dari snapshot URL yang basi.
   const handleFrameworkChange = (value: string | undefined) => {
-    setFramework(value);
-    setCategory(undefined);
-    const next = new URLSearchParams(searchParams);
-    if (value) next.set("framework", value);
-    else next.delete("framework");
-    next.delete("category");
-    setSearchParams(next, { replace: true });
-  };
-  const handleCategoryChange = (value: string | undefined) => {
-    setCategory(value);
-    const next = new URLSearchParams(searchParams);
-    if (value) next.set("category", value);
-    else next.delete("category");
-    setSearchParams(next, { replace: true });
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (value) next.set("framework", value);
+      else next.delete("framework");
+      // Ganti framework → kategori ikut direset.
+      next.delete("category");
+      return next;
+    });
   };
 
-  // Sinkronkan state dari query URL setiap kali URL berubah (mis. navigasi
-  // dari Home melalui link ber-query, atau tombol back/forward).
-  useEffect(() => {
-    setFramework(searchParams.get("framework") || undefined);
-    setCategory(searchParams.get("category") || undefined);
-  }, [searchParams]);
+  const handleCategoryChange = (value: string | undefined) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (value) next.set("category", value);
+      else next.delete("category");
+      return next;
+    });
+  };
 
   return (
     <section className="bg-[#FCFCFC]">

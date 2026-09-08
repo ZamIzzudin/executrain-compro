@@ -14,6 +14,7 @@ export interface CaseStudyTestimonial {
 export interface CaseStudyProps {
   _id: string;
   title: string;
+  banner?: { url: string; public_id: string } | null;
   category?: string;
   description: string;
   industries: string[];

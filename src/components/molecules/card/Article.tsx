@@ -13,7 +13,10 @@ export default function ArticleCard({
   basePath?: string;
 }>) {
   const navigate = useNavigate();
-  const now = Date.now();
+  const dateValue = data?.created_at ? new Date(data.created_at) : new Date();
+  const categoryValue = Array.isArray(data?.category)
+    ? data.category[0] || ""
+    : data?.category || "";
 
   return (
     <div
@@ -33,24 +36,28 @@ export default function ArticleCard({
           <div className="flex gap-3 items-center flex-wrap">
             <div className="flex items-center gap-1.5 text-neutral-800 text-sm font-medium">
               <ClockIcon size={16} className="text-rose-700 shrink-0" />
-              <span>{formatDate(now)}</span>
+              <span>{formatDate(dateValue)}</span>
             </div>
             <div className="px-2.5 py-1 bg-orange-400/20 rounded-[64px] flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 bg-orange-400 rounded-full shrink-0" />
               <span className="text-orange-400 text-xs font-medium">
-                {data?.product_category?.replace("_", " ") || "Workforce Development"}
+                {categoryValue.replaceAll("_", " ") || "Workforce Development"}
               </span>
             </div>
           </div>
-          <Tooltip placement="top" title={data?.product_name || "-"}>
+          <Tooltip placement="top" title={data?.title || "-"}>
             <h3 className="text-base font-medium text-left text-neutral-800 group-hover:text-rose-700 transition-colors duration-300 line-clamp-2">
-              {data?.product_name || "Building a Future-Ready Workforce Through Professional Training"}
+              {data?.title ||
+                "Building a Future-Ready Workforce Through Professional Training"}
             </h3>
           </Tooltip>
         </div>
         <div className="inline-flex items-center gap-2 text-rose-700 font-medium text-base pt-2">
           <span>Read More</span>
-          <ArrowRightIcon size={18} className="text-rose-700 group-hover:translate-x-1 transition-transform duration-300" />
+          <ArrowRightIcon
+            size={18}
+            className="text-rose-700 group-hover:translate-x-1 transition-transform duration-300"
+          />
         </div>
       </div>
     </div>

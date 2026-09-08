@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CTA from "@/components/organisms/CTA";
 import { ChevronDown, ChevronUp, CornerDownRight } from "lucide-react";
@@ -20,6 +21,7 @@ type CourseVariant =
   | "activeContinuation";
 
 type CourseItem = {
+  id?: string;
   title: string;
   code: string;
   familyId?: string;
@@ -38,13 +40,19 @@ function CourseCard({
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }) {
+  const navigate = useNavigate();
   const isDashed = course.variant === "dashed";
   const hasContinuation = Boolean(course.continuationText);
+
+  const handleClick = () => {
+    if (course.id) navigate(`/course-catalog/${course.id}`);
+  };
 
   return (
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={handleClick}
       className={`relative rounded-[20px] transition-all duration-300 cursor-pointer group flex flex-col justify-between overflow-hidden shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] z-20 h-fit self-start ${
         isHoveredFamily
           ? "bg-gradient-to-b from-white to-pink-50 outline outline-2 outline-offset-[-1px] outline-rose-700 scale-[1.02] shadow-xl"
@@ -364,6 +372,7 @@ export default function LearningPath() {
               const isOpen = expanded[key] ?? idx === 0;
               const courses: CourseItem[] = (stage.courses || []).map(
                 (c: LearningPathCourse) => ({
+                  id: c.id,
                   title: c.title,
                   code: c.code ?? "",
                   familyId: c.family_id,

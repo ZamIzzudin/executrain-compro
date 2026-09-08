@@ -58,6 +58,81 @@ export const handleImageError = (
 };
 
 /**
+ * Sanitasi HTML dari konten CMS (RichTextEditor) sebelum dirender via
+ * dangerouslySetInnerHTML. Membatasi tag & atribut berbahaya untuk
+ * mencegah XSS. Bukan pengganti DOMPurify penuh — konten dipercaya
+ * berasal dari CMS internal, ini lapisan pertahanan tambahan.
+ */
+export function sanitizeHtml(html: string): string {
+  if (!html) return "";
+
+  const ALLOWED_TAGS = new Set([
+    "P", "BR", "HR", "B", "STRONG", "I", "EM", "U", "S",
+    "H1", "H2", "H3", "H4", "H5", "H6",
+    "UL", "OL", "LI", "BLOCKQUOTE",
+    "CODE", "PRE", "SPAN", "DIV", "FIGCAPTION", "FIGURE",
+    "TABLE", "THEAD", "TBODY", "TR", "TH", "TD", "MARK", "SUB", "SUP",
+  ]);
+  const ALLOWED_ATTR = new Set([
+    "href", "src", "alt", "title", "target", "rel",
+    "class", "style", "width", "height", "colspan", "rowspan",
+  ]);
+
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT);
+  const DANGEROUS_TAGS = new Set(["SCRIPT", "IFRAME", "OBJECT", "EMBED", "LINK", "META", "STYLE", "FORM", "INPUT", "BUTTON", "TEXTAREA", "SELECT"]);
+  const nodes: Element[] = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode as Element);
+
+  nodes.forEach((node) => {
+    const tag = node.tagName;
+    // Tag berbahaya dihapus total beserta isinya
+    if (DANGEROUS_TAGS.has(tag)) {
+      node.remove();
+      return;
+    }
+    if (!ALLOWED_TAGS.has(tag)) {
+      // Bungkus teks anak tetap ada, ganti tag dengan div polos
+      const div = doc.createElement("div");
+      while (node.firstChild) div.appendChild(node.firstChild);
+      node.replaceWith(div);
+      return;
+    }
+    // Hapus atribut tidak diizinkan
+    Array.from(node.attributes).forEach((attr) => {
+      const name = attr.name.toLowerCase();
+      if (!ALLOWED_ATTR.has(name)) {
+        node.removeAttribute(attr.name);
+        return;
+      }
+      // href/src hanya protokol aman
+      if ((name === "href" || name === "src") && attr.value) {
+        const v = attr.value.trim().toLowerCase();
+        if (
+          !v.startsWith("http://") &&
+          !v.startsWith("https://") &&
+          !v.startsWith("data:image/") &&
+          !v.startsWith("/") &&
+          !v.startsWith("#") &&
+          !v.startsWith("mailto:") &&
+          !v.startsWith("tel:")
+        ) {
+          node.removeAttribute(attr.name);
+        }
+      }
+    });
+    // Buang <a> tanpa href agar tidak jadi link mati
+    if (tag === "A" && !node.getAttribute("href")) {
+      const div = doc.createElement("div");
+      while (node.firstChild) div.appendChild(node.firstChild);
+      node.replaceWith(div);
+    }
+  });
+
+  return doc.body.innerHTML;
+}
+
+/**
  * Hitung end date berdasarkan start date dan duration (dalam hari).
  * End date = start date + (days - 1), karena hari pertama sudah dihitung sebagai start.
  * Misal: start 3 Mei, durasi 3 hari -> end 5 Mei.

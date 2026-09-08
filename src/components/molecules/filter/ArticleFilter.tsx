@@ -5,24 +5,16 @@
 import SearchBar from "../../atoms/SearchBar";
 import FilterDropdown from "../../atoms/FilterDropdown";
 
-const CATEGORIES: { label: string; value?: string }[] = [
-  { label: "All Categories" },
-  { label: "Data Analytics", value: "DATA_ANALYTICS" },
-  { label: "Automation", value: "AUTOMATION" },
-  { label: "Cybersecurity", value: "CYBERSECURITY" },
-  { label: "Project Management", value: "PROJECT_MANAGEMENT" },
-  { label: "Emotional Intelligence", value: "EMOTIONAL_INTELLIGENCE" },
-];
-
 const SORT: { label: string; value?: string }[] = [
   { label: "Newest First" },
-  { label: "Oldest First", value: "DESC" },
+  { label: "Oldest First", value: "oldest" },
 ];
 
 export interface ArticleFilterProps {
   searchValue: string;
   categoryValue?: string;
   sortValue?: string;
+  categoryOptions?: { value: string; label: string }[];
   onSearchChange: (value: string) => void;
   onCategoryChange: (value: string | undefined) => void;
   onSortChange: (value: string | undefined) => void;
@@ -32,10 +24,19 @@ export default function ArticleFilter({
   searchValue,
   categoryValue,
   sortValue,
+  categoryOptions,
   onSearchChange,
   onCategoryChange,
   onSortChange,
 }: Readonly<ArticleFilterProps>) {
+  const CATEGORIES: { label: string; value?: string }[] = [
+    { label: "All Categories" },
+    ...(categoryOptions ?? []).map((o) => ({
+      label: o.label || o.value,
+      value: o.value,
+    })),
+  ];
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
       <div className="w-full sm:w-[466px]">
