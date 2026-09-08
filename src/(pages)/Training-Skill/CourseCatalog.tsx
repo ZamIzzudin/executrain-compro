@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CourseCatalogList from "@/components/organisms/CourseCatalogList";
 import CTA from "@/components/organisms/CTA";
@@ -20,9 +21,14 @@ const FALLBACK = {
 };
 
 export default function CourseCatalog() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<string | undefined>(undefined);
-  const [framework, setFramework] = useState<string | undefined>(undefined);
+  const [category, setCategory] = useState<string | undefined>(
+    searchParams.get("category") || undefined,
+  );
+  const [framework, setFramework] = useState<string | undefined>(
+    searchParams.get("framework") || undefined,
+  );
   const { data: filterOpts } = useCatalogFilters();
   const { data: pageContent } = useCourseCatalogPage();
 
@@ -31,6 +37,33 @@ export default function CourseCatalog() {
     ...(pageContent?.content || {}),
     cta: { ...FALLBACK.cta, ...(pageContent?.content?.cta || {}) },
   };
+
+  // Bila URL berubah (mis. navigasi dari Home dengan query param),
+  // sinkronkan ke state filter.
+  const handleSearchChange = (value: string) => setSearch(value);
+  const handleFrameworkChange = (value: string | undefined) => {
+    setFramework(value);
+    setCategory(undefined);
+    const next = new URLSearchParams(searchParams);
+    if (value) next.set("framework", value);
+    else next.delete("framework");
+    next.delete("category");
+    setSearchParams(next, { replace: true });
+  };
+  const handleCategoryChange = (value: string | undefined) => {
+    setCategory(value);
+    const next = new URLSearchParams(searchParams);
+    if (value) next.set("category", value);
+    else next.delete("category");
+    setSearchParams(next, { replace: true });
+  };
+
+  // Sinkronkan state dari query URL setiap kali URL berubah (mis. navigasi
+  // dari Home melalui link ber-query, atau tombol back/forward).
+  useEffect(() => {
+    setFramework(searchParams.get("framework") || undefined);
+    setCategory(searchParams.get("category") || undefined);
+  }, [searchParams]);
 
   return (
     <section className="bg-[#FCFCFC]">
@@ -47,9 +80,9 @@ export default function CourseCatalog() {
           frameworkValue={framework}
           categories={filterOpts?.categories}
           frameworks={filterOpts?.framework_types}
-          onSearchChange={setSearch}
-          onCategoryChange={setCategory}
-          onFrameworkChange={setFramework}
+          onSearchChange={handleSearchChange}
+          onCategoryChange={handleCategoryChange}
+          onFrameworkChange={handleFrameworkChange}
         />
         <CourseCatalogList
           search={search}
