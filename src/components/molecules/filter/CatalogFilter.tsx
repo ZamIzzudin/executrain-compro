@@ -2,18 +2,11 @@
 
 "use client";
 
+import { useMemo } from "react";
+
 import SearchBar from "../../atoms/SearchBar";
 import FilterDropdown from "../../atoms/FilterDropdown";
 import type { FilterOption } from "@/services/course-catalog/filters";
-
-const FALLBACK_CATEGORIES: FilterOption[] = [
-  "DATA_ANALYTICS",
-  "AUTOMATION",
-  "CYBERSECURITY",
-  "PROJECT_MANAGEMENT",
-  "LEADERSHIP",
-  "EMOTIONAL_INTELLIGENCE",
-].map((v) => ({ value: v, label: v.replaceAll("_", " ") }));
 
 function toOptions(
   values: FilterOption[] | undefined,
@@ -39,6 +32,11 @@ export interface CatalogFilterProps {
   onFrameworkChange: (value: string | undefined) => void;
 }
 
+/**
+ * Filter katalog: pilih Framework (scope) dulu, lalu Category (item FRAMEWORK_ITEM
+ * di dalam scope tsb). Saat category dipilih tanpa framework, framework di-set
+ * dari scope category tsb supaya konsisten.
+ */
 export default function CatalogFilter({
   searchValue,
   categoryValue,
@@ -49,8 +47,26 @@ export default function CatalogFilter({
   onCategoryChange,
   onFrameworkChange,
 }: Readonly<CatalogFilterProps>) {
-  const categoryOptions = toOptions(categories ?? FALLBACK_CATEGORIES, "All Category");
+  // Category yang valid utk framework terpilih. Tanpa framework → belum bisa pilih category.
+  const scopedCategories = useMemo(() => {
+    const all = categories ?? [];
+    if (!frameworkValue) return [];
+    return all.filter((c) => !c.scope || c.scope === frameworkValue);
+  }, [categories, frameworkValue]);
+
+  const categoryOptions = toOptions(scopedCategories, "All Category");
   const frameworkOptions = toOptions(frameworks, "All Framework");
+
+  const handleFrameworkChange = (value: string | undefined) => {
+    // Ganti framework → reset category (category harus item di scope baru).
+    onFrameworkChange(value);
+    onCategoryChange(undefined);
+  };
+
+  const handleCategoryChange = (value: string | undefined) => {
+    onCategoryChange(value);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-end w-full">
       <div className="w-full sm:w-[466px]">
@@ -66,11 +82,11 @@ export default function CatalogFilter({
 
       <div className="w-full sm:w-44">
         <FilterDropdown
-          label="Category"
-          value={categoryValue}
-          onChange={onCategoryChange}
-          options={categoryOptions}
-          placeholder="All Category"
+          label="Framework"
+          value={frameworkValue}
+          onChange={handleFrameworkChange}
+          options={frameworkOptions}
+          placeholder="All Framework"
           variant="primary"
           className="w-full"
         />
@@ -78,11 +94,11 @@ export default function CatalogFilter({
 
       <div className="w-full sm:w-44">
         <FilterDropdown
-          label="Framework"
-          value={frameworkValue}
-          onChange={onFrameworkChange}
-          options={frameworkOptions}
-          placeholder="All Framework"
+          label="Category"
+          value={categoryValue}
+          onChange={handleCategoryChange}
+          options={categoryOptions}
+          placeholder={frameworkValue ? "All Category" : "Select Framework First"}
           variant="primary"
           className="w-full"
         />

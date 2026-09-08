@@ -12,12 +12,15 @@ export default function CTA({
   description = "Get the full proposal and training details by clicking the button below.",
   cta = "Request Proposal",
   link,
+  waMessage,
   bgGradient = "bg-gradient-to-b from-[#FCFCFC] to-[#E0E0E0]",
 }: Readonly<{
   title?: string;
   description?: string;
   cta?: string;
   link?: string;
+  /** Template pesan WhatsApp. Jika diisi, CTA SELALU membuka WA sales (nomor dari master data) dengan template ini. */
+  waMessage?: string;
   bgGradient?: string;
 }>) {
   const { data: socmedData = [], isLoading: socmedLoading } = useSocmed();
@@ -30,6 +33,14 @@ export default function CTA({
   const waLink = buildWhatsAppLink(contactList, WHATSAPP_TEMPLATES.general);
 
   const handleCTA = () => {
+    // Template WA custom (dari CMS) → selalu ke WhatsApp sales.
+    if (waMessage && contactList) {
+      const customWa = buildWhatsAppLink(contactList, waMessage);
+      if (/^https?:\/\//i.test(customWa)) {
+        window.open(customWa, "_blank", "noopener,noreferrer");
+        return;
+      }
+    }
     // Link dari CMS diprioritaskan; fallback ke WhatsApp.
     const target = link?.trim() || waLink;
     if (/^(https?:|mailto:|tel:)/i.test(target)) {

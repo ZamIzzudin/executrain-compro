@@ -8,6 +8,7 @@ import { Tooltip } from "antd";
 
 import HeroBG from "@/assets/banner.jpg";
 import { handleImageError } from "@/utils/helper";
+import { frameworkScopeShortLabel } from "@/lib/frameworkScopes";
 
 /** Format nilai enum menjadi title-case, akronim (IT/AI) tetap kapital. */
 function titleCase(value?: string): string {
@@ -84,10 +85,10 @@ export default function CourseCard({
           {data?.card_type === "course" ? (
             <>
               <span className="bg-blue-200 text-blue-500 font-medium px-2 py-1 rounded-full">
-                ● {titleCase(data.product_category)}
+                ● {data.product_category}
               </span>
               <span className="bg-red-200 text-primary-500 font-medium px-2 py-1 rounded-full">
-                ● {titleCase(data.framework_type)}
+                ● {frameworkScopeShortLabel(data.framework_type)}
               </span>
             </>
           ) : data?.card_type === "skill" ? (

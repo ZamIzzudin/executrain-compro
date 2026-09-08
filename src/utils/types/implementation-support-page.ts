@@ -15,14 +15,14 @@ export interface SupportItem {
   description: string;
   points?: string[];
   thumbnail?: ImageValue | null;
-  link?: string;
+  wa_message?: string;
 }
 
 export interface ImplementationSupportCta {
   title: string;
   description: string;
   label: string;
-  link: string;
+  wa_message?: string;
 }
 
 export interface ImplementationSupportPageDataProps {

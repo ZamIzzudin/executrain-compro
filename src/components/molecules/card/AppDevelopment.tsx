@@ -37,9 +37,17 @@ export default function AppDevelopmentCard({
       className="rounded-[32px] overflow-hidden shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 cursor-pointer group flex flex-col justify-between"
     >
       <div>
-        {/* Visual header (app dev tidak punya banner) */}
+        {/* Visual header */}
         <div className="h-44 md:h-52 bg-gradient-to-br from-rose-700 to-rose-900 overflow-hidden rounded-[32px] border-2 border-gray-200 group-hover:border-rose-700 transition-colors duration-300 flex items-center justify-center relative">
-          <Boxes className="w-16 h-16 text-white/70 group-hover:scale-110 transition-transform duration-500" />
+          {data.banner?.url ? (
+            <img
+              src={data.banner.url}
+              alt={data.title || "Custom Application"}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <Boxes className="w-16 h-16 text-white/70 group-hover:scale-110 transition-transform duration-500" />
+          )}
           {data.methodology && (
             <span className="absolute top-3 right-3 px-2.5 py-1 bg-white/20 text-white text-xs font-medium rounded-[64px]">
               {methodLabel(data.methodology, methodOptions)}

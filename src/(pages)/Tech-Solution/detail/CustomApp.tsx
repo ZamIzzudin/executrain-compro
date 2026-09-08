@@ -74,9 +74,17 @@ export default function CustomAppDetail() {
       <div className="px-[5%] md:px-[7%] lg:px-[10%] mt-6 grid grid-cols-1 lg:grid-cols-6 gap-8">
         {/* Left Column Content */}
         <div className="flex flex-col gap-6 lg:col-span-3">
-          {/* Visual header (app dev tidak punya banner) */}
+          {/* Visual header */}
           <div className="w-full h-80 relative bg-gradient-to-br from-rose-700 to-rose-900 rounded-3xl border-2 border-gray-200 overflow-hidden flex items-center justify-center">
-            <Boxes className="w-24 h-24 text-white/70" />
+            {app.banner?.url ? (
+              <img
+                src={app.banner.url}
+                alt={app.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Boxes className="w-24 h-24 text-white/70" />
+            )}
             {app.methodology && (
               <span className="absolute top-4 right-4 px-3 py-1 bg-white/20 text-white text-xs font-medium rounded-[64px]">
                 {optionLabel(filterOpts?.methodologies ?? [], app.methodology)}

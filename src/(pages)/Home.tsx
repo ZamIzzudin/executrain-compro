@@ -7,6 +7,7 @@ import CTA from "@/components/organisms/CTA";
 
 import { usePartner } from "@/services/partner/hook";
 import { useHomePage } from "@/services/home-page/hook";
+import { useFrameworkItems } from "@/services/master-data/hook";
 
 const FALLBACK = {
   title_page:
@@ -37,9 +38,6 @@ const FALLBACK = {
       },
     ],
   },
-  framework: {
-    items: {},
-  },
   cta: {
     title: "Ready to Train Your Team?",
     description:
@@ -52,6 +50,7 @@ const FALLBACK = {
 export default function Home() {
   const { data: partner = [], isLoading: partnerLoading } = usePartner();
   const { data: homePage } = useHomePage();
+  const { data: frameworkItems = {} } = useFrameworkItems();
 
   const raw = homePage?.content || {};
   const content = {
@@ -64,10 +63,14 @@ export default function Home() {
         ...item,
       })),
     },
-    framework: {
-      items: raw.framework?.items || {},
-    },
     cta: { ...FALLBACK.cta, ...(raw.cta || {}) },
+  };
+
+  // Framework items datang dari Master Data (FRAMEWORK_ITEM, dikelompokkan per scope).
+  // `raw.framework?.items` hanya fallback untuk data lama bila masih ada.
+  const frameworkItemsMerged = {
+    ...frameworkItems,
+    ...(raw.framework?.items || {}),
   };
 
   return (
@@ -80,7 +83,7 @@ export default function Home() {
           services: content.services.items,
         }}
       />
-      <FrameworkBanner items={content.framework.items} />
+      <FrameworkBanner items={frameworkItemsMerged} />
       <PartnerList data={partner} isLoading={partnerLoading} />
       <TestimoniList />
       <CTA

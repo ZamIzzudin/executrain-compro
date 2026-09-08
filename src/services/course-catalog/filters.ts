@@ -2,10 +2,13 @@
 
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import AxiosClient from "@/lib/axios";
+import { frameworkScopeLabel } from "@/lib/frameworkScopes";
 
 export interface FilterOption {
   value: string;
   label: string;
+  /** scope/framework pemilik opsi (utk category FRAMEWORK_ITEM). */
+  scope?: string;
 }
 
 export interface CatalogFilterOptions {
@@ -24,7 +27,10 @@ async function CatalogFiltersService(): Promise<CatalogFilterOptions> {
       categories: data?.categories ?? [],
       skill_levels: data?.skill_levels ?? [],
       languages: data?.languages ?? [],
-      framework_types: data?.framework_types ?? [],
+      framework_types: (data?.framework_types ?? []).map((f: FilterOption) => ({
+        value: f.value,
+        label: frameworkScopeLabel(f.value),
+      })),
     };
   } catch (error) {
     console.log(error);
