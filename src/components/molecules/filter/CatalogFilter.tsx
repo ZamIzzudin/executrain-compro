@@ -58,9 +58,10 @@ export default function CatalogFilter({
   const frameworkOptions = toOptions(frameworks, "All Framework");
 
   const handleFrameworkChange = (value: string | undefined) => {
-    // Ganti framework → reset category (category harus item di scope baru).
+    // Reset category diserahkan ke parent (onFrameworkChange). Dipanggil sekali
+    // saja supaya tidak ada dua setSearchParams sinkron yang saling menimpa
+    // (React Router menghitung prev dari closure render lama).
     onFrameworkChange(value);
-    onCategoryChange(undefined);
   };
 
   const handleCategoryChange = (value: string | undefined) => {

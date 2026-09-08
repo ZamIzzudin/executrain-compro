@@ -29,6 +29,10 @@ export default function CourseCatalogList({
     return () => clearTimeout(timer);
   }, [search]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [category, framework]);
+
   const { data, isLoading, isFetching } = useCatalogFiltered({
     page,
     limit: 9,
