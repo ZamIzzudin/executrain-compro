@@ -17,6 +17,7 @@ import {
 import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import RelatedCatalog from "@/components/organisms/RelatedCatalog";
 import RegisterModal from "@/components/molecules/RegisterModal";
+import ScheduleCalendar from "@/components/organisms/ScheduleCalendar";
 import { handleImageError } from "@/utils/helper";
 import { useCatalogDetail } from "@/services/course-catalog/hook";
 
@@ -276,6 +277,9 @@ export default function CourseCatalogDetail() {
               </div>
             </div>
           </div>
+
+          {/* CLASS SCHEDULE (kalender) */}
+          <ScheduleCalendar type="COURSE" id={product._id} />
 
           {/* MORE */}
           <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">

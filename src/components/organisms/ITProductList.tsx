@@ -8,6 +8,7 @@ import ProductCard from "../molecules/card/Product";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import { useITProductFiltered } from "@/services/it-product/hook";
 import type { ITProductProps } from "@/services/it-product/types";
 
@@ -18,15 +19,11 @@ export default function ITProductList({
   tech,
 }: Readonly<{ search: string; tech?: string }>) {
   const [page, setPage] = useState(1);
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
+    setPage(1);
+  }, [debouncedSearch]);
 
   const { data, isLoading, isFetching } = useITProductFiltered({
     page,

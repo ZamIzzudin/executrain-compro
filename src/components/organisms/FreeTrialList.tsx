@@ -8,6 +8,7 @@ import ProductCard from "../molecules/card/Course";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import { useFreeTrialFiltered } from "@/services/free-trial/hook";
 import { type FreeTrialProductProps } from "@/utils/types/free-trial";
 
@@ -28,17 +29,13 @@ const PER_PAGE = 6;
 
 export default function FreeTrialList() {
   const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
+    setPage(1);
+  }, [debouncedSearch]);
 
   const { data, isLoading, isFetching } = useFreeTrialFiltered({
     page,

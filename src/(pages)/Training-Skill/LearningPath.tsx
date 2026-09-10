@@ -1,16 +1,17 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CTA from "@/components/organisms/CTA";
 import { ChevronDown, ChevronUp, CornerDownRight } from "lucide-react";
-
-type SectionKey =
-  | "fundamental"
-  | "roleBased"
-  | "speciality"
-  | "business"
-  | "outsidePath";
+import { useLearningPathPublicList } from "@/services/learning-path/hook";
+import { FRAMEWORK_SCOPES } from "@/lib/frameworkScopes";
+import type {
+  LearningPathItem,
+  LearningPathStage,
+  LearningPathCourse,
+} from "@/services/learning-path/types";
 
 type CourseVariant =
   | "normal"
@@ -20,215 +21,13 @@ type CourseVariant =
   | "activeContinuation";
 
 type CourseItem = {
+  id?: string;
   title: string;
   code: string;
   familyId?: string;
   variant: CourseVariant;
   continuationText?: string;
 };
-
-const sections: {
-  key: SectionKey;
-  title: string;
-  subtitle?: string;
-  dashed?: boolean;
-}[] = [
-  {
-    key: "fundamental",
-    title: "Fundamentals",
-    subtitle: "Master the basics",
-  },
-  {
-    key: "roleBased",
-    title: "Role-Based",
-    subtitle: "Expand your technical skill set",
-  },
-  {
-    key: "speciality",
-    title: "Speciality",
-    subtitle: "Deepen your technical skills and manage industry solutions",
-  },
-  {
-    key: "business",
-    title: "Business",
-    subtitle: "Expand your AI skills for business roles",
-  },
-  {
-    key: "outsidePath",
-    title: "Class Outside of Learning Path",
-    dashed: true,
-  },
-];
-
-// Dummy courses with familyId for inheritance relation highlighting on hover
-const dummyCourses: Record<SectionKey, CourseItem[]> = {
-  fundamental: [
-    {
-      title: "Azure Data Fundamentals",
-      code: "DP-900",
-      familyId: "dp900",
-      variant: "dashed",
-    },
-    {
-      title: "Azure AI Fundamentals",
-      code: "AI-900",
-      familyId: "ai-family",
-      variant: "dashed",
-    },
-    {
-      title: "Azure Fundamentals",
-      code: "AZ-900",
-      familyId: "az-family",
-      variant: "active",
-    },
-  ],
-  roleBased: [
-    {
-      title: "Azure AI Cloud Developer Associate C...",
-      code: "AI-908",
-      familyId: "ai-family",
-      variant: "normal",
-    },
-    {
-      title: "Multi-Agent AI Solutions Expert Certi...",
-      code: "AI-901",
-      familyId: "ai-family",
-      variant: "normal",
-    },
-    {
-      title: "Azure Network Engineer Associate",
-      code: "NE-900",
-      familyId: "ne900",
-      variant: "normal",
-    },
-    {
-      title: "Azure AI Manager Associate",
-      code: "AI-902",
-      familyId: "ai-family",
-      variant: "continuation",
-      continuationText: "Azure AI Fundamentals",
-    },
-    {
-      title: "Azure Administrator Associate",
-      code: "AZ-902",
-      familyId: "az-family",
-      variant: "activeContinuation",
-      continuationText: "Azure Fundamentals",
-    },
-    {
-      title: "Azure Administrator Associate",
-      code: "AZ-104",
-      familyId: "az-family",
-      variant: "normal",
-    },
-    {
-      title: "Windows Server Administrator Associate",
-      code: "AI-901",
-      familyId: "win-family",
-      variant: "normal",
-    },
-    {
-      title: "Machine Learning Operations Engineer...",
-      code: "AI-300",
-      familyId: "ai-family",
-      variant: "normal",
-    },
-    {
-      title: "Azure Databricks Data Engineer",
-      code: "DP-750",
-      familyId: "dp900",
-      variant: "normal",
-    },
-    {
-      title: "SQL AI Developer Associate",
-      code: "DA-206",
-      familyId: "ai-family",
-      variant: "normal",
-    },
-  ],
-  speciality: [
-    {
-      title: "Azure Solutions Architect Expert",
-      code: "AZ-305",
-      familyId: "az-family",
-      variant: "normal",
-    },
-    {
-      title: "Azure Security Engineer Associate",
-      code: "AZ-500",
-      familyId: "az-family",
-      variant: "normal",
-    },
-    {
-      title: "Azure DevOps Engineer Expert",
-      code: "AZ-400",
-      familyId: "az-family",
-      variant: "normal",
-    },
-  ],
-  business: [
-    {
-      title: "AI Business Fundamentals",
-      code: "AI-B01",
-      familyId: "ai-family",
-      variant: "dashed",
-    },
-    {
-      title: "Power Platform Fundamentals",
-      code: "PL-900",
-      familyId: "power-family",
-      variant: "normal",
-    },
-    {
-      title: "Dynamics 365 Fundamentals",
-      code: "MB-901",
-      familyId: "dyn-family",
-      variant: "normal",
-    },
-  ],
-  outsidePath: [
-    {
-      title: "Azure Administrator Associate",
-      code: "AZ-104",
-      familyId: "az-family",
-      variant: "normal",
-    },
-    {
-      title: "Windows Server Administrator Associate",
-      code: "AI-901",
-      familyId: "win-family",
-      variant: "normal",
-    },
-    {
-      title: "Machine Learning Operations Engineer...",
-      code: "AI-300",
-      familyId: "ai-family",
-      variant: "normal",
-    },
-    {
-      title: "Azure Databricks Data Engineer",
-      code: "DP-750",
-      familyId: "dp900",
-      variant: "normal",
-    },
-    {
-      title: "SQL AI Developer Associate",
-      code: "DA-206",
-      familyId: "ai-family",
-      variant: "normal",
-    },
-  ],
-};
-
-// Dummy capsule filters — replace with real taxonomy from API/CMS
-const capsuleFilters = ["Azure 2026 LP", "Azure 2026 LP", "Azure 2026 LP"];
-
-const dropdownOptions = [
-  "Cloud & Platforms",
-  "AI & Data",
-  "Business Applications",
-  "Security",
-];
 
 function CourseCard({
   course,
@@ -241,13 +40,19 @@ function CourseCard({
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }) {
+  const navigate = useNavigate();
   const isDashed = course.variant === "dashed";
   const hasContinuation = Boolean(course.continuationText);
+
+  const handleClick = () => {
+    if (course.id) navigate(`/course-catalog/${course.id}`);
+  };
 
   return (
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={handleClick}
       className={`relative rounded-[20px] transition-all duration-300 cursor-pointer group flex flex-col justify-between overflow-hidden shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] z-20 h-fit self-start ${
         isHoveredFamily
           ? "bg-gradient-to-b from-white to-pink-50 outline outline-2 outline-offset-[-1px] outline-rose-700 scale-[1.02] shadow-xl"
@@ -268,10 +73,11 @@ function CourseCard({
             {course.title}
           </h4>
         </div>
-        <span className="text-xs font-normal text-neutral-400">
-          {course.code}
-        </span>
-      </div>
+        {course.code && (
+          <span className="text-xs font-normal text-neutral-400">
+            {course.code}
+          </span>
+        )}      </div>
 
       {hasContinuation && (
         <div
@@ -301,9 +107,11 @@ function CourseCard({
 }
 
 function FilterDropdown({
+  options,
   value,
   onChange,
 }: {
+  options: string[];
   value: string;
   onChange: (option: string) => void;
 }) {
@@ -378,7 +186,7 @@ function FilterDropdown({
           role="listbox"
           className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden"
         >
-          {dropdownOptions.map((option) => (
+          {options.map((option) => (
             <button
               key={option}
               type="button"
@@ -405,15 +213,17 @@ function FilterDropdown({
 }
 
 function CapsuleFilters({
+  items,
   activeIndex,
   onChange,
 }: {
+  items: string[];
   activeIndex: number;
   onChange: (index: number) => void;
 }) {
   return (
     <div className="flex flex-wrap gap-2 z-20">
-      {capsuleFilters.map((label, i) => (
+      {items.map((label, i) => (
         <button
           key={`${label}-${i}`}
           type="button"
@@ -432,15 +242,10 @@ function CapsuleFilters({
 }
 
 export default function LearningPath() {
-  const [expanded, setExpanded] = useState<Record<SectionKey, boolean>>({
-    fundamental: true,
-    roleBased: true,
-    speciality: false,
-    business: false,
-    outsidePath: true,
-  });
-
-  const [activeFilter, setActiveFilter] = useState(dropdownOptions[0]);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [activeFramework, setActiveFramework] = useState<string | undefined>(
+    undefined,
+  );
   const [activeCapsule, setActiveCapsule] = useState(0);
   const [hoveredTarget, setHoveredTarget] = useState<{
     familyId?: string;
@@ -448,8 +253,59 @@ export default function LearningPath() {
     continuationText?: string;
   } | null>(null);
 
-  const toggle = (key: SectionKey) => {
+  const { data: lpResponse, isLoading } = useLearningPathPublicList();
+  const allPaths: LearningPathItem[] = lpResponse?.data ?? [];
+
+  // Dropdown framework: selalu menampilkan 9 scope.
+  const dropdownOptions = useMemo(
+    () => FRAMEWORK_SCOPES.map((s) => s.label),
+    [],
+  );
+
+  // Pilih framework pertama otomatis bila belum ada pilihan.
+  useEffect(() => {
+    if (activeFramework === undefined && dropdownOptions.length > 0) {
+      setActiveFramework(FRAMEWORK_SCOPES[0]?.id);
+    }
+  }, [activeFramework, dropdownOptions]);
+
+  const activeFilter = useMemo(() => {
+    if (!activeFramework) return "";
+    return (
+      FRAMEWORK_SCOPES.find((s) => s.id === activeFramework)?.label ?? activeFramework
+    );
+  }, [activeFramework]);
+
+  // Learning path milik framework terpilih → dijadikan pill capsule.
+  const capsuleItems = useMemo(
+    () =>
+      allPaths
+        .filter((p) => p.framework === activeFramework)
+        .map((p) => p.title),
+    [allPaths, activeFramework],
+  );
+
+  const selectedPath = useMemo(
+    () =>
+      allPaths.filter((p) => p.framework === activeFramework)[activeCapsule] ??
+      null,
+    [allPaths, activeFramework, activeCapsule],
+  ) as LearningPathItem | null;
+
+  const toggle = (key: string) => {
     setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleFilterChange = (option: string) => {
+    const scope = FRAMEWORK_SCOPES.find((s) => s.label === option);
+    setActiveFramework(scope?.id);
+    setActiveCapsule(0);
+    setExpanded({});
+  };
+
+  const handleCapsuleChange = (index: number) => {
+    setActiveCapsule(index);
+    setExpanded({});
   };
 
   return (
@@ -474,121 +330,156 @@ export default function LearningPath() {
           <h2 className="text-neutral-800 text-2xl font-semibold">
             Learning Path According To Framework
           </h2>
-          <FilterDropdown value={activeFilter} onChange={setActiveFilter} />
+          <FilterDropdown
+            options={dropdownOptions}
+            value={activeFilter}
+            onChange={handleFilterChange}
+          />
         </div>
 
         <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-zinc-200" />
 
         {/* Capsule Pill Filters */}
         <CapsuleFilters
+          items={capsuleItems}
           activeIndex={activeCapsule}
-          onChange={setActiveCapsule}
+          onChange={handleCapsuleChange}
         />
 
         {/* Sections */}
         <div className="self-stretch flex flex-col gap-6 relative">
-          {sections.map(({ key, title, subtitle, dashed }) => (
-            <div
-              key={key}
-              className={`self-stretch px-6 py-5 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] flex flex-col justify-start items-center gap-6 overflow-hidden transition-all duration-300 relative z-20 ${
-                dashed
-                  ? "bg-white outline outline-1 outline-offset-[-1px] outline-neutral-300"
-                  : "bg-stone-50 outline outline-1 outline-offset-[-1px] outline-gray-200"
-              }`}
-            >
-              {/* Section Header */}
-              <button
-                type="button"
-                onClick={() => toggle(key)}
-                className="self-stretch inline-flex justify-between items-center cursor-pointer text-left"
-              >
-                <div className="flex flex-col justify-start items-start">
-                  <h3 className="text-neutral-800 text-2xl font-semibold">
-                    {title}
-                  </h3>
-                  {subtitle && (
-                    <span className="text-neutral-400 text-base font-normal">
-                      {subtitle}
-                    </span>
-                  )}
-                </div>
-                <div className="p-2.5 bg-rose-700 hover:bg-rose-800 text-white rounded-lg flex justify-center items-center transition-colors duration-300">
-                  {expanded[key] ? (
-                    <ChevronUp className="w-5 h-5" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5" />
-                  )}
-                </div>
-              </button>
+          {isLoading && (
+            <div className="self-stretch text-center text-neutral-400 text-sm py-10">
+              Memuat learning path…
+            </div>
+          )}
 
-              {/* Accordion Content Grid */}
-              <div
-                className={`w-full grid transition-[grid-template-rows] duration-300 ease-in-out ${
-                  expanded[key] ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <div className="relative p-4 rounded-3xl bg-transparent">
-                    {/* SVG container for clean 12px dashed border with long dashes */}
-                    <svg
-                      className="absolute inset-0 w-full h-full pointer-events-none rounded-3xl"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="1"
-                        y="1"
-                        width="99.8%"
-                        height="99.5%"
-                        rx="24"
-                        ry="24"
-                        fill="none"
-                        stroke="#D4D4D4"
-                        strokeWidth="2"
-                        strokeDasharray="14 8"
-                      />
-                    </svg>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full items-start relative z-20">
-                      {dummyCourses[key].map((course, i) => {
-                        const isHoveredFamily = Boolean(
-                          hoveredTarget &&
-                          ((hoveredTarget?.familyId &&
-                            course.familyId === hoveredTarget.familyId) ||
-                            (hoveredTarget?.continuationText &&
-                              course.title
-                                .toLowerCase()
-                                .includes(
-                                  hoveredTarget.continuationText.toLowerCase(),
-                                )) ||
-                            (course.continuationText &&
-                              hoveredTarget?.title
-                                .toLowerCase()
-                                .includes(
-                                  course.continuationText.toLowerCase(),
-                                ))),
-                        );
+          {!isLoading && !activeFilter && (
+            <div className="self-stretch text-center text-neutral-400 text-sm py-10">
+              Learning path belum tersedia.
+            </div>
+          )}
 
-                        return (
-                          <CourseCard
-                            key={`${key}-${i}`}
-                            course={course}
-                            isHoveredFamily={isHoveredFamily}
-                            onMouseEnter={() =>
-                              setHoveredTarget({
-                                familyId: course.familyId,
-                                title: course.title,
-                                continuationText: course.continuationText,
-                              })
-                            }
-                            onMouseLeave={() => setHoveredTarget(null)}
+          {!isLoading && activeFilter && capsuleItems.length === 0 && (
+            <div className="self-stretch text-center text-neutral-400 text-sm py-10">
+              Learning path belum tersedia untuk framework ini.
+            </div>
+          )}
+
+          {!isLoading && selectedPath &&
+            selectedPath.stages.map((stage: LearningPathStage, idx: number) => {
+              const key = stage.id || String(idx);
+              const isOpen = expanded[key] ?? idx === 0;
+              const courses: CourseItem[] = (stage.courses || []).map(
+                (c: LearningPathCourse) => ({
+                  id: c.id,
+                  title: c.title,
+                  code: c.code ?? "",
+                  familyId: c.family_id,
+                  variant: c.continuation_title ? "continuation" : "normal",
+                  continuationText: c.continuation_title,
+                }),
+              );
+
+              return (
+                <div
+                  key={key}
+                  className={`self-stretch px-6 py-5 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] flex flex-col justify-start items-center gap-6 overflow-hidden transition-all duration-300 relative z-20 bg-stone-50 outline outline-1 outline-offset-[-1px] outline-gray-200`}
+                >
+                  {/* Section Header */}
+                  <button
+                    type="button"
+                    onClick={() => toggle(key)}
+                    className="self-stretch inline-flex justify-between items-center cursor-pointer text-left"
+                  >
+                    <div className="flex flex-col justify-start items-start">
+                      <h3 className="text-neutral-800 text-2xl font-semibold">
+                        {stage.name || "Scope"}
+                      </h3>
+                      {stage.description && (
+                        <span className="text-neutral-400 text-base font-normal">
+                          {stage.description}
+                        </span>
+                      )}
+                    </div>
+                    <div className="p-2.5 bg-rose-700 hover:bg-rose-800 text-white rounded-lg flex justify-center items-center transition-colors duration-300">
+                      {isOpen ? (
+                        <ChevronUp className="w-5 h-5" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Accordion Content Grid */}
+                  <div
+                    className={`w-full grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="relative p-4 rounded-3xl bg-transparent">
+                        {/* SVG container for clean 12px dashed border with long dashes */}
+                        <svg
+                          className="absolute inset-0 w-full h-full pointer-events-none rounded-3xl"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            x="1"
+                            y="1"
+                            width="99.8%"
+                            height="99.5%"
+                            rx="24"
+                            ry="24"
+                            fill="none"
+                            stroke="#D4D4D4"
+                            strokeWidth="2"
+                            strokeDasharray="14 8"
                           />
-                        );
-                      })}
+                        </svg>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full items-start relative z-20">
+                          {courses.map((course, i) => {
+                            const isHoveredFamily = Boolean(
+                              hoveredTarget &&
+                              ((hoveredTarget?.familyId &&
+                                course.familyId === hoveredTarget.familyId) ||
+                                (hoveredTarget?.continuationText &&
+                                  course.title
+                                    .toLowerCase()
+                                    .includes(
+                                      hoveredTarget.continuationText.toLowerCase(),
+                                    )) ||
+                                (course.continuationText &&
+                                  hoveredTarget?.title
+                                    .toLowerCase()
+                                    .includes(
+                                      course.continuationText.toLowerCase(),
+                                    ))),
+                            );
+
+                            return (
+                              <CourseCard
+                                key={`${key}-${i}`}
+                                course={course}
+                                isHoveredFamily={isHoveredFamily}
+                                onMouseEnter={() =>
+                                  setHoveredTarget({
+                                    familyId: course.familyId,
+                                    title: course.title,
+                                    continuationText: course.continuationText,
+                                  })
+                                }
+                                onMouseLeave={() => setHoveredTarget(null)}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
         </div>
       </section>
 

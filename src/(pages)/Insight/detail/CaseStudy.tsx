@@ -16,7 +16,7 @@ import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import { useCaseStudyDetail } from "@/services/case-study/hook";
 import { useCaseStudyFilters } from "@/services/case-study/filters";
 import { useCaseStudyFiltered } from "@/services/case-study/hook";
-import { formatDate } from "@/utils/helper";
+import { formatDate, handleImageError } from "@/utils/helper";
 import { LordIcons } from "@/components/atoms";
 import InquiryModal from "@/components/molecules/InquiryModal";
 
@@ -131,7 +131,16 @@ export default function CaseStudyDetail() {
         <div className="flex flex-col gap-6 lg:col-span-3">
           {/* Banner */}
           <div className="w-full h-80 md:h-96 relative bg-gradient-to-br from-rose-700 to-rose-900 rounded-3xl border-2 border-gray-200 overflow-hidden flex items-center justify-center">
-            <Boxes className="w-24 h-24 text-white/70" />
+            {study.banner?.url ? (
+              <img
+                src={study.banner.url}
+                alt={study.title}
+                onError={handleImageError}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Boxes className="w-24 h-24 text-white/70" />
+            )}
           </div>
 
           {/* RELATED INDUSTRY */}

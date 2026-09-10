@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import CustomHero from "@/components/organisms/hero/CustomHero";
 import CourseCatalogList from "@/components/organisms/CourseCatalogList";
 import CTA from "@/components/organisms/CTA";
@@ -20,9 +21,12 @@ const FALLBACK = {
 };
 
 export default function CourseCatalog() {
+  // URL adalah sumber kebenaran tunggal utk filter framework & category.
+  // Dengan begini tidak ada state ganda yang bisa bertabrakan (stale closure).
+  const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<string | undefined>(undefined);
-  const [framework, setFramework] = useState<string | undefined>(undefined);
+  const framework = searchParams.get("framework") || undefined;
+  const category = searchParams.get("category") || undefined;
   const { data: filterOpts } = useCatalogFilters();
   const { data: pageContent } = useCourseCatalogPage();
 
@@ -30,6 +34,31 @@ export default function CourseCatalog() {
     ...FALLBACK,
     ...(pageContent?.content || {}),
     cta: { ...FALLBACK.cta, ...(pageContent?.content?.cta || {}) },
+  };
+
+  const handleSearchChange = (value: string) => setSearch(value);
+
+  // Gunakan functional updater supaya dua perubahan berurutan dalam satu
+  // event (CatalogFilter menelepon framework lalu category) tidak saling
+  // menimpa hasil dari snapshot URL yang basi.
+  const handleFrameworkChange = (value: string | undefined) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (value) next.set("framework", value);
+      else next.delete("framework");
+      // Ganti framework → kategori ikut direset.
+      next.delete("category");
+      return next;
+    });
+  };
+
+  const handleCategoryChange = (value: string | undefined) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (value) next.set("category", value);
+      else next.delete("category");
+      return next;
+    });
   };
 
   return (
@@ -47,9 +76,9 @@ export default function CourseCatalog() {
           frameworkValue={framework}
           categories={filterOpts?.categories}
           frameworks={filterOpts?.framework_types}
-          onSearchChange={setSearch}
-          onCategoryChange={setCategory}
-          onFrameworkChange={setFramework}
+          onSearchChange={handleSearchChange}
+          onCategoryChange={handleCategoryChange}
+          onFrameworkChange={handleFrameworkChange}
         />
         <CourseCatalogList
           search={search}

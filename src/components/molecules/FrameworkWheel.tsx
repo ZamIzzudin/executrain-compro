@@ -399,7 +399,9 @@ export default function FrameworkWheel({
                 <div className="self-stretch flex flex-col justify-start items-start gap-3">
                   {active.items.map((item) => (
                     <Link
-                      to="/course-catalog"
+                      to={`/course-catalog?framework=${encodeURIComponent(
+                        active.id,
+                      )}&category=${encodeURIComponent(item)}`}
                       key={item}
                       className="self-stretch px-4 py-3 rounded-[100px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] bg-white outline outline-1 outline-offset-[-1px] outline-gray-200 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 hover:outline-rose-700 inline-flex justify-start items-center gap-3 transition-all duration-300 cursor-pointer group"
                     >

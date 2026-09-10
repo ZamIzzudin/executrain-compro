@@ -4,6 +4,7 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import CourseCard from "../molecules/card/Course";
 import { ProductCardSkeleton } from "./Skeleton";
 import { FadeInUp, StaggerContainer, StaggerItem } from "../atoms/Motion";
@@ -19,15 +20,15 @@ export default function CourseCatalogList({
   framework,
 }: Readonly<{ search: string; category?: string; framework?: string }>) {
   const [page, setPage] = useState(1);
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(search);
-      setPage(1);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [search]);
+    setPage(1);
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [category, framework]);
 
   const { data, isLoading, isFetching } = useCatalogFiltered({
     page,

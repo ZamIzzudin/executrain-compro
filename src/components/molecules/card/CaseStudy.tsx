@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 
 import { ArrowRightIcon, ClockIcon, Boxes } from "lucide-react";
-import { formatDate } from "@/utils/helper";
+import { formatDate, handleImageError } from "@/utils/helper";
 
 import type { CaseStudyProps } from "@/services/case-study/types";
 
@@ -29,7 +29,14 @@ export default function CaseStudyCard({
       className="rounded-[32px] overflow-hidden shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 bg-white hover:bg-gradient-to-b hover:from-white hover:to-pink-50 transition-all duration-300 cursor-pointer group flex flex-col justify-start items-start"
     >
       <div className="w-full h-52 bg-slate-100 overflow-hidden rounded-[32px] border-2 border-gray-200 group-hover:border-rose-700 transition-colors duration-300 relative">
-        {data.category ? (
+        {data.banner?.url ? (
+          <img
+            src={data.banner.url}
+            alt={data.banner.public_id || data.title}
+            onError={handleImageError}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : data.category ? (
           <div className="w-full h-full bg-gradient-to-br from-rose-700 to-rose-900 flex items-center justify-center">
             <Boxes className="w-14 h-14 text-white/70 group-hover:scale-110 transition-transform duration-500" />
           </div>

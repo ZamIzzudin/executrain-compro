@@ -4,12 +4,15 @@ import CustomHero from "@/components/organisms/hero/CustomHero";
 import ArticleFilter from "@/components/molecules/filter/ArticleFilter";
 import ArticleList from "@/components/organisms/ArticleList";
 
+import { useArticleFilters } from "@/services/article/filters";
+
 import { useHeroPage } from "@/services/hero-page/hook";
 
 export default function Article() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [sort, setSort] = useState<string | undefined>(undefined);
+  const { data: filterOpts } = useArticleFilters();
   const { data: heroPage } = useHeroPage("article-page");
 
   const hero = {
@@ -32,11 +35,17 @@ export default function Article() {
           searchValue={search}
           categoryValue={category}
           sortValue={sort}
+          categoryOptions={filterOpts?.categories}
           onSearchChange={setSearch}
           onCategoryChange={setCategory}
           onSortChange={setSort}
         />
-        <ArticleList name="Showing Newest Article" type={"it_training"} />
+        <ArticleList
+          name="Showing Newest Article"
+          search={search}
+          category={category}
+          sort={sort}
+        />
       </section>
     </section>
   );

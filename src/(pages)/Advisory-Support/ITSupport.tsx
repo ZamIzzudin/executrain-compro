@@ -12,6 +12,9 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { handleImageError } from "@/utils/helper";
+import { buildWhatsAppLink, WHATSAPP_TEMPLATES } from "@/utils/helper";
+import { type SocmedDataProps } from "@/utils/types/socmed";
+import { useSocmed } from "@/services/socmed/hook";
 
 import { useImplementationSupportPage } from "@/services/implementation-support-page/hook";
 
@@ -61,7 +64,7 @@ const FALLBACK = {
           "Monthly health report",
         ],
         thumbnail: { url: "./statHero.jpg", public_id: "support-1" },
-        link: "",
+        wa_message: "",
       },
       {
         title: "Incident response & on-call",
@@ -73,7 +76,7 @@ const FALLBACK = {
           "Post-incident write-up, every time",
         ],
         thumbnail: { url: "./statHero.jpg", public_id: "support-2" },
-        link: "",
+        wa_message: "",
       },
       {
         title: "Performance & scaling",
@@ -85,7 +88,7 @@ const FALLBACK = {
           "Capacity planning ahead of growth",
         ],
         thumbnail: { url: "./statHero.jpg", public_id: "support-3" },
-        link: "",
+        wa_message: "",
       },
     ],
   },
@@ -94,12 +97,18 @@ const FALLBACK = {
     description:
       "Get the full proposal and training details by clicking the button below.",
     label: "Consult Now!",
-    link: "",
+    wa_message: "",
   },
 };
 
 export default function ITSupport() {
   const { data: pageContent } = useImplementationSupportPage();
+  const { data: socmedData = [] } = useSocmed();
+
+  const waNumber = socmedData.find(
+    (item: SocmedDataProps) =>
+      item.socmed_link && ["WHATSAPP"].includes(item.socmed_name),
+  )?.socmed_link;
 
   const content = {
     ...FALLBACK,
@@ -112,13 +121,12 @@ export default function ITSupport() {
   const workflowSteps = content.workflow.steps;
   const supportItems = content.support.items;
 
-  const handleItemLink = (link?: string) => {
-    const target = link?.trim();
-    if (!target) return;
-    if (/^(https?:|mailto:|tel:)/i.test(target)) {
-      window.open(target, "_blank", "noopener,noreferrer");
-    } else if (target.startsWith("/")) {
-      window.open(target, "_self", "noopener,noreferrer");
+  const openWhatsApp = (message?: string) => {
+    if (!waNumber) return;
+    const msg = message?.trim();
+    const link = buildWhatsAppLink(waNumber, msg || WHATSAPP_TEMPLATES.general);
+    if (/^https?:\/\//i.test(link)) {
+      window.open(link, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -195,8 +203,8 @@ export default function ITSupport() {
             {supportItems.map((each: any, index: number) => (
               <StaggerItem key={each.title || index} direction="up" className="h-full">
                 <div
-                  onClick={() => handleItemLink(each.link)}
-                  className={`group w-full bg-white rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 flex flex-col justify-start items-start transition-all duration-300 h-full ${each.link ? "cursor-pointer" : "cursor-default"}`}
+                  onClick={() => openWhatsApp(each.wa_message)}
+                  className="group w-full bg-white rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-2 outline-offset-[-2px] outline-gray-200 hover:outline-rose-700 hover:bg-gradient-to-b hover:from-white hover:to-pink-50 flex flex-col justify-start items-start transition-all duration-300 h-full cursor-pointer"
                 >
                   <div className="self-stretch h-52 relative bg-gradient-to-b from-neutral-800/0 to-neutral-800/40 rounded-3xl border-2 border-gray-200 group-hover:border-rose-700 transition-colors duration-300 overflow-hidden">
                     <img
@@ -221,14 +229,12 @@ export default function ITSupport() {
                       </div>
                     </div>
                     <div className="self-stretch h-0 outline outline-1 outline-offset-[-0.50px] outline-gray-200 mt-auto"></div>
-                    {each.link ? (
-                      <div className="inline-flex justify-start items-center gap-2.5">
-                        <span className="text-rose-700 text-base font-medium">
-                          {each.link.startsWith("/") ? "View Detail" : "I Need This Support"}
-                        </span>
-                        <ArrowRight className="w-5 h-5 text-rose-700 group-hover:translate-x-1.5 transition-transform duration-300" />
-                      </div>
-                    ) : null}
+                    <div className="inline-flex justify-start items-center gap-2.5">
+                      <span className="text-rose-700 text-base font-medium">
+                        I Need This Support
+                      </span>
+                      <ArrowRight className="w-5 h-5 text-rose-700 group-hover:translate-x-1.5 transition-transform duration-300" />
+                    </div>
                   </div>
                 </div>
               </StaggerItem>
@@ -240,7 +246,7 @@ export default function ITSupport() {
         title={content.cta.title}
         description={content.cta.description}
         cta={content.cta.label}
-        link={content.cta.link}
+        waMessage={content.cta.wa_message}
       />
     </section>
   );

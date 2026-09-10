@@ -16,6 +16,7 @@ export interface AppDevelopmentProps {
   title: string;
   tech_stack: string[];
   description: string;
+  banner?: { url: string; public_id?: string } | null;
   challenge?: string;
   team_size: AppDevelopmentTeamSize[];
   timeline: number;

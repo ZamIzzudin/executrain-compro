@@ -19,14 +19,14 @@ export interface TalentRoleItem {
   title: string;
   points?: string[];
   thumbnail?: MatrixImage | null;
-  link?: string;
+  wa_message?: string;
 }
 
 export interface TalentPlacementCta {
   title: string;
   description: string;
   label: string;
-  link: string;
+  wa_message?: string;
 }
 
 export interface TalentPlacementPageDataProps {
