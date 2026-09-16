@@ -15,6 +15,7 @@ export function mapAppDevelopmentToProps(item: any): AppDevelopmentProps {
   return {
     _id: item.id,
     title: item.title,
+    banner: item.banner || null,
     tech_stack: Array.isArray(item.tech_stack) ? item.tech_stack : [],
     description: item.description || "",
     challenge: item.challenge || undefined,
