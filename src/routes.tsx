@@ -7,6 +7,7 @@ import FreeTrialDetail from "./(pages)/Training-Skill/detail/FreeTrial";
 import LearningPath from "./(pages)/Training-Skill/LearningPath";
 import CourseCatalog from "./(pages)/Training-Skill/CourseCatalog";
 import CourseCatalogDetail from "./(pages)/Training-Skill/detail/CourseCatalog";
+import Schedule from "./(pages)/Training-Skill/Schedule";
 import Product from "./(pages)/Tech-Solution/Product";
 import ProductDetail from "./(pages)/Tech-Solution/detail/Product";
 import CustomApp from "./(pages)/Tech-Solution/CustomApp";
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
       { path: "learning-path", element: <LearningPath /> },
       { path: "course-catalog", element: <CourseCatalog /> },
       { path: "course-catalog/:id", element: <CourseCatalogDetail /> },
+      { path: "schedule", element: <Schedule /> },
       { path: "it-product", element: <Product /> },
       { path: "it-product/:id", element: <ProductDetail /> },
       { path: "app-development", element: <CustomApp /> },

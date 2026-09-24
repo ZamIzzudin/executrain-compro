@@ -2,7 +2,12 @@
 
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { PublicScheduleData } from "./handler";
-import { PublicScheduleService } from "./handler";
+import {
+  PublicScheduleListService,
+  PublicScheduleService,
+  type PublicScheduleListParams,
+  type PublicScheduleListResponse,
+} from "./handler";
 
 /** Jadwal publik utk satu program (diisi `enabled` ketika id tersedia). */
 export const usePublicSchedule = (params: {
@@ -17,6 +22,17 @@ export const usePublicSchedule = (params: {
       return response.data;
     },
     enabled: !!params.id,
+    refetchOnWindowFocus: false,
+  });
+};
+
+/** Daftar program berjadwal utk halaman Schedule (hook/params menjadi query key). */
+export const usePublicScheduleList = (
+  params: PublicScheduleListParams,
+): UseQueryResult<PublicScheduleListResponse> => {
+  return useQuery({
+    queryKey: ["public-schedule-list", params],
+    queryFn: () => PublicScheduleListService(params),
     refetchOnWindowFocus: false,
   });
 };

@@ -18,8 +18,8 @@ import { HeroProductDetailSkeleton } from "@/components/organisms/Skeleton";
 import { useSkillAcceleratorDetail } from "@/services/skill-accelerator/hook";
 import RelatedCatalog from "@/components/organisms/RelatedCatalog";
 import RegisterModal from "@/components/molecules/RegisterModal";
-import ScheduleCalendar from "@/components/organisms/ScheduleCalendar";
 import { handleImageError } from "@/utils/helper";
+import { usePublicSchedule } from "@/services/schedule/hook";
 
 const CATEGORY_LABEL: Record<string, string> = {
   DATA_ANALYTICS: "Data Analytics",
@@ -37,6 +37,10 @@ export default function FreeTrialDetail() {
   const { id } = useParams<{ id: string }>();
   const { data: product, isLoading } = useSkillAcceleratorDetail({ id: id! });
   const [registerOpen, setRegisterOpen] = useState(false);
+  const { data: schedule } = usePublicSchedule({
+    type: "SKILL_ACCELERATOR",
+    id: product?._id,
+  });
 
   if (isLoading || !product) {
     return <HeroProductDetailSkeleton />;
@@ -275,12 +279,6 @@ export default function FreeTrialDetail() {
             </div>
           </div>
 
-          {/* CLASS SCHEDULE (kalender) */}
-          <ScheduleCalendar
-            type="SKILL_ACCELERATOR"
-            id={product._id}
-          />
-
           {/* MORE */}
           <div className="self-stretch p-6 bg-stone-50 rounded-[32px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-start gap-3 overflow-hidden">
             <span className="text-zinc-500 text-sm font-normal">
@@ -316,6 +314,8 @@ export default function FreeTrialDetail() {
         open={registerOpen}
         onClose={() => setRegisterOpen(false)}
         productName={product.product_name}
+        scheduleType="SKILL_ACCELERATOR"
+        availableDates={schedule?.schedule_dates}
       />
     </section>
   );
