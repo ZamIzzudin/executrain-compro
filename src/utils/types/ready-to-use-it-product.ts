@@ -9,7 +9,7 @@ export interface ReadyToUseITProductCta {
   title: string;
   description: string;
   label: string;
-  link: string;
+  wa_message?: string;
 }
 
 export interface ReadyToUseITProductPageDataProps {

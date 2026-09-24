@@ -96,7 +96,7 @@ const FALLBACK = {
     description:
       "Get the full proposal and training details by clicking the button below.",
     label: "Contact Now!",
-    link: "",
+    wa_message: "",
   },
 };
 
@@ -321,7 +321,7 @@ export default function TechAdvisory() {
         title={content.cta.title}
         description={content.cta.description}
         cta={content.cta.label}
-        link={content.cta.link}
+        waMessage={content.cta.wa_message}
         bgGradient="bg-gradient-to-b from-[#FCFCFC] to-[#E0E0E0]"
       />
     </section>

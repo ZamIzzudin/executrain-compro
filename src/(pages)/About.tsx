@@ -35,7 +35,7 @@ const FALLBACK = {
     title: "Ready to Work With Us?",
     description: "Chat our sales for detailed information",
     label: "Request Proposal",
-    link: "",
+    wa_message: "",
   },
 };
 
@@ -80,7 +80,7 @@ export default function About() {
         title={content.cta.title}
         description={content.cta.description}
         cta={content.cta.label}
-        link={content.cta.link}
+        waMessage={content.cta.wa_message}
       />
     </section>
   );

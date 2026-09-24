@@ -4,7 +4,7 @@ export interface HomePageCta {
   title: string;
   description: string;
   label: string;
-  link: string;
+  wa_message?: string;
 }
 
 export interface HomePageServiceItem {
