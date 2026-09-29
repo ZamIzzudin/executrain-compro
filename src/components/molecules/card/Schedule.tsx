@@ -5,8 +5,6 @@
 import { useNavigate } from "react-router-dom";
 import { CalendarDays, ArrowRight, Award } from "lucide-react";
 
-import HeroBG from "@/assets/banner.jpg";
-import { handleImageError } from "@/utils/helper";
 import type { PublicScheduleProgram } from "@/services/schedule/handler";
 
 const MONTHS = [
@@ -56,17 +54,8 @@ export default function ScheduleCard({
   return (
     <div
       onClick={() => navigate(detailUrl)}
-      className="rounded-[20px] bg-white border border-gray-200 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.04)] hover:shadow-[0px_4px_16px_0px_rgba(0,0,0,0.08)] hover:border-rose-200 transition-all duration-300 p-2 flex gap-4 items-center cursor-pointer"
+      className="rounded-[20px] bg-white border border-gray-200 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.04)] hover:shadow-[0px_4px_16px_0px_rgba(0,0,0,0.08)] hover:border-rose-200 transition-all duration-300 p-4 flex gap-4 items-center cursor-pointer"
     >
-      <div className="shrink-0 w-[25%] min-h-[110px] self-stretch rounded-2xl bg-slate-100 overflow-hidden">
-        <img
-          src={data?.banner?.url || HeroBG}
-          alt={data?.program_name || ""}
-          onError={handleImageError}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-
       {/* MAIN */}
       <div className="flex-1 min-w-0 flex flex-col gap-2">
         <div className="flex items-start gap-3">
