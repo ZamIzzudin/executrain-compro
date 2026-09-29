@@ -42,7 +42,7 @@ export interface TechnologyCloudLicensingPageDataProps {
       title?: string;
       description?: string;
       label?: string;
-      link?: string;
+      wa_message?: string;
     };
   };
   is_active?: boolean;

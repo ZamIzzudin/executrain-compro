@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from "react";
-import { X, ArrowRight } from "lucide-react";
+import { useState, useEffect, type FormEvent } from "react";
+import { X, ArrowRight, CalendarDays } from "lucide-react";
 
 import { ScheduleRegistrationSubmitService } from "@/services/schedule-registration/handler";
 
@@ -8,6 +8,19 @@ interface RegisterModalProps {
   onClose: () => void;
   productName: string;
   scheduleType?: string;
+  /** Tanggal tersedia ("YYYY-MM-DD") utk dipilih user. Kosong = input tanggal bebas. */
+  availableDates?: string[];
+}
+
+function formatDate(value: string) {
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(date);
 }
 
 export default function RegisterModal({
@@ -15,6 +28,7 @@ export default function RegisterModal({
   onClose,
   productName,
   scheduleType,
+  availableDates,
 }: RegisterModalProps) {
   const [form, setForm] = useState({
     full_name: "",
@@ -24,12 +38,24 @@ export default function RegisterModal({
     schedule_date: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [customDate, setCustomDate] = useState(false);
   const [status, setStatus] = useState<{
     type: "success" | "error";
     message: string;
   } | null>(null);
 
+  useEffect(() => {
+    if (!open) {
+      setCustomDate(false);
+      setStatus(null);
+    }
+  }, [open]);
+
   if (!open) return null;
+
+  const hasDates = Boolean(availableDates && availableDates.length > 0);
+  const dateOptions = availableDates ?? [];
+  const showDateInput = !hasDates || customDate;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -176,15 +202,56 @@ export default function RegisterModal({
               <label htmlFor="schedule_date" className={labelClass}>
                 Preferred Schedule Date
               </label>
-              <input
-                id="schedule_date"
-                name="schedule_date"
-                type="date"
-                required
-                value={form.schedule_date}
-                onChange={handleChange}
-                className={`${inputClass} max-w-full`}
-              />
+
+              {hasDates && (
+                <select
+                  id="schedule_date"
+                  name="schedule_date"
+                  value={customDate ? "__custom__" : form.schedule_date}
+                  onChange={(e) => {
+                    if (e.target.value === "__custom__") {
+                      setCustomDate(true);
+                      setForm((prev) => ({ ...prev, schedule_date: "" }));
+                    } else {
+                      setCustomDate(false);
+                      setForm((prev) => ({
+                        ...prev,
+                        schedule_date: e.target.value,
+                      }));
+                    }
+                  }}
+                  required={!showDateInput}
+                  className={`${inputClass} max-w-full cursor-pointer`}
+                >
+                  <option value="">Select an available date...</option>
+                  {dateOptions.map((date) => (
+                    <option key={date} value={date}>
+                      {formatDate(date)}
+                    </option>
+                  ))}
+                  <option value="__custom__">Other date (pick manually)</option>
+                </select>
+              )}
+
+              {showDateInput && (
+                <input
+                  id={hasDates ? "schedule_custom_date" : "schedule_date"}
+                  name="schedule_date"
+                  type="date"
+                  required
+                  value={form.schedule_date}
+                  onChange={handleChange}
+                  className={`${inputClass} max-w-full`}
+                />
+              )}
+
+              {hasDates && (
+                <p className="text-zinc-500 text-xs font-normal inline-flex items-center gap-1.5">
+                  <CalendarDays size={12} className="text-rose-700 shrink-0" />
+                  Pilih tanggal yang tersedia, atau pilih "Other date" untuk
+                  menentukan tanggal sendiri.
+                </p>
+              )}
             </div>
           </div>
 

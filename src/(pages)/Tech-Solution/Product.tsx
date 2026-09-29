@@ -61,7 +61,7 @@ const FALLBACK = {
     description:
       "Get the full proposal and training details by clicking the button below.",
     label: "Consult Now!",
-    link: "",
+    wa_message: "",
   },
 };
 
@@ -184,7 +184,7 @@ export default function Product() {
         title={content.cta.title}
         description={content.cta.description}
         cta={content.cta.label}
-        link={content.cta.link}
+        waMessage={content.cta.wa_message}
       />
     </section>
   );

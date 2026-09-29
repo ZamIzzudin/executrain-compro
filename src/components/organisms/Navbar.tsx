@@ -67,6 +67,7 @@ export default function Navbar() {
         { label: "Skill Accelerator ", path: "/skill-accelerator" },
         { label: "Learning Paths", path: "/learning-path" },
         { label: "Course Catalog", path: "/course-catalog" },
+        { label: "Schedule", path: "/schedule" },
       ],
     },
     {
