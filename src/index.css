@@ -235,3 +235,56 @@ body {
   font-weight: 600;
   background-color: #fbe6ea !important;
 }
+
+/* Halaman Simulasi CAPM (/capm) */
+.capm-sim .card {
+  margin-bottom: 18px;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 28px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+}
+
+.capm-sim .rv-body p {
+  margin: 6px 0;
+}
+
+.capm-sim .rv-body > div p {
+  margin: 6px 0 0;
+}
+
+@media print {
+  .capm-sim {
+    background: #ffffff;
+    font-size: 12px;
+  }
+
+  .capm-sim header {
+    border-bottom: 2px solid #9b1b30;
+  }
+
+  .capm-sim .noprint {
+    display: none !important;
+  }
+
+  .capm-sim .card {
+    box-shadow: none;
+    padding: 10px 0;
+    margin: 0 0 8px;
+  }
+
+  .capm-sim .rv {
+    break-inside: avoid;
+  }
+
+  .capm-sim .rv-body {
+    display: block !important;
+  }
+
+  .capm-sim th,
+  .capm-sim table,
+  .capm-sim .rv summary > span:first-child {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
