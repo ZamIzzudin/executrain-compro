@@ -22,9 +22,14 @@ import TechAdvisory from "./(pages)/Advisory-Support/TechAdvisory";
 import TalentPlacement from "./(pages)/Advisory-Support/TalentPlacement";
 import ITSupport from "./(pages)/Advisory-Support/ITSupport";
 import Contact from "./(pages)/Contact";
+import Capm from "@/(pages)/Capm";
 import NotFound from "@/(pages)/NotFound";
 
 export const router = createBrowserRouter([
+  {
+    path: "/capm",
+    element: <Capm />,
+  },
   {
     path: "/",
     element: <RootLayout />,
