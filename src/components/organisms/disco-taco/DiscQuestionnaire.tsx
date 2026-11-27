@@ -201,9 +201,9 @@ export default function DiscQuestionnaire() {
   ${refBox("Karakter Utama", dom.karakter)}
   ${refBox("Kekuatan dalam Consultative Selling", dom.kekuatan)}
   ${refBox("Yang Perlu Diwaspadai", dom.waspada)}
-  ${refBox("Paling Cocok Menghadapi Tipe Customer", dom.cocok)}
+  <!-- ${refBox("Paling Cocok Menghadapi Tipe Customer", dom.cocok)} -->
   ${refBox("Tips Menghadapi Objection", dom.tips)}
-  <div class="r-foot"><span>Kuesioner Profil Perilaku DISC \u2014 TACO</span>
+  <div class="r-foot"><span>Kuesioner Profil Perilaku DISC</span>
   <span>Dibuat ${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}</span></div>
 </div>`;
 
@@ -225,7 +225,7 @@ export default function DiscQuestionnaire() {
           .replace(/[^\w\- ]+/g, "")
           .trim()
           .replace(/\s+/g, "_") || "Peserta";
-      const filename = `Hasil_DISC_TACO_${safeName}.pdf`;
+      const filename = `Hasil_DISC_${safeName}.pdf`;
 
       const blob: Blob = await html2pdf()
         .set({
@@ -507,7 +507,7 @@ export default function DiscQuestionnaire() {
                 const boxes: [string, string, boolean][] = [
                   ["Kekuatan dalam Consultative Selling", dom.kekuatan, false],
                   ["Yang Perlu Diwaspadai", dom.waspada, false],
-                  ["Paling Cocok Menghadapi Tipe Customer", dom.cocok, false],
+                  // ["Paling Cocok Menghadapi Tipe Customer", dom.cocok, false],
                   ["Tips Menghadapi Objection", dom.tips, true],
                 ];
                 return (
