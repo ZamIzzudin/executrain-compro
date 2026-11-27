@@ -23,6 +23,7 @@ import TalentPlacement from "./(pages)/Advisory-Support/TalentPlacement";
 import ITSupport from "./(pages)/Advisory-Support/ITSupport";
 import Contact from "./(pages)/Contact";
 import Capm from "@/(pages)/Capm";
+import DISC from "./(pages)/DISC/page";
 import NotFound from "@/(pages)/NotFound";
 
 export const router = createBrowserRouter([
@@ -56,6 +57,7 @@ export const router = createBrowserRouter([
       { path: "implementation-support", element: <ITSupport /> },
       { path: "talent-placement", element: <TalentPlacement /> },
       { path: "contact", element: <Contact /> },
+      { path: "DISC", element: <DISC /> },
       { path: "*", element: <NotFound /> },
     ],
   },
